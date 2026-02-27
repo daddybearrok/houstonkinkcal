@@ -17,6 +17,10 @@
   --panelHover: rgba(255,255,255,0.08);
   --text: #f2f2f2;
   --muted:#a9a9a9;
+  --btnA:#4A0E0E;
+  --btnB:#1A0404;
+  --btnBorder: rgba(255,255,255,0.18);
+  --shadow: rgba(0,0,0,0.45);
 }
 
 body{
@@ -35,9 +39,106 @@ body{
   padding:70px 20px 60px;
 }
 
-/* ---------- FORM STYLING ---------- */
+h1{
+  font-size:3rem;
+  font-weight:700;
+  margin:0 0 10px;
+}
 
-.form{ display:grid; gap:18px; margin-top:20px; }
+.subtitle{
+  color:var(--muted);
+  font-weight:300;
+  margin-bottom:42px;
+  font-size:1.1rem;
+  line-height:1.55;
+}
+
+/* Top Buttons */
+.subscribe-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+  margin-bottom:44px;
+}
+
+@media (min-width:900px){
+  .subscribe-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+.sub-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:16px 14px;
+  border-radius:14px;
+  text-decoration:none;
+  font-weight:700;
+  font-size:1.02rem;
+  color:#fff;
+  border:1px solid var(--btnBorder);
+  background: linear-gradient(135deg,var(--btnA),var(--btnB));
+  transition:0.25s ease;
+  min-height:58px;
+}
+
+.sub-btn:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 25px var(--shadow);
+  filter:brightness(1.05);
+}
+
+/* Accordion Sections */
+.section{
+  background:var(--panel);
+  border-radius:14px;
+  margin-bottom:15px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.06);
+}
+
+.section-header{
+  padding:18px 20px;
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-weight:600;
+}
+
+.section-header:hover{
+  background:var(--panelHover);
+}
+
+.chev{
+  width:18px;
+  height:18px;
+  transition:transform 0.25s ease;
+}
+
+.section.active .chev{
+  transform:rotate(180deg);
+}
+
+.section-content{
+  max-height:0;
+  overflow:hidden;
+  padding:0 20px;
+  transition:max-height 0.4s ease, padding 0.4s ease;
+  color:#ccc;
+  line-height:1.6;
+}
+
+.section.active .section-content{
+  max-height:1200px;
+  padding:20px;
+}
+
+/* ---------- FORM ---------- */
+
+.form{ display:grid; gap:18px; margin-top:10px; }
 
 .field label{
   display:block;
@@ -45,7 +146,7 @@ body{
   margin-bottom:8px;
 }
 
-/* Normal text inputs */
+/* text inputs */
 .field input:not([type="radio"]),
 .field textarea{
   width:100%;
@@ -56,6 +157,16 @@ body{
   background: rgba(0,0,0,0.35);
   color:#fff;
   outline:none;
+}
+
+.two-col{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+
+@media (max-width:720px){
+  .two-col{ grid-template-columns:1fr; }
 }
 
 /* ---------- SEGMENTED RADIO PILLS ---------- */
@@ -69,8 +180,8 @@ body{
 .seg{
   display:flex;
   align-items:center;
-  gap:12px;              /* space between radio + text */
-  padding:8px 16px;      /* slimmer pill */
+  gap:12px;
+  padding:8px 16px;
   border-radius:999px;
   border:1px solid rgba(255,255,255,0.15);
   background: rgba(0,0,0,0.25);
@@ -83,7 +194,7 @@ body{
   border-color: rgba(255,255,255,0.35);
 }
 
-/* Custom radio */
+/* custom radio */
 .seg input[type="radio"]{
   -webkit-appearance:none;
   appearance:none;
@@ -104,7 +215,7 @@ body{
   width:8px;
   height:8px;
   border-radius:50%;
-  background:#fff;      /* white dot */
+  background:#fff;
   transform:scale(0);
   transition:transform 0.15s ease;
 }
@@ -112,13 +223,6 @@ body{
 .seg input[type="radio"]:checked::before{
   transform:scale(1);
 }
-
-/* Optional: highlight selected pill subtly */
-.seg input[type="radio"]:checked + span{
-  font-weight:600;
-}
-
-/* ---------- BUTTON ---------- */
 
 .btn.primary{
   padding:12px 16px;
@@ -134,13 +238,47 @@ body{
   background: rgba(255,255,255,0.18);
 }
 
-.muted{ opacity:0.85; font-size:14px; }
+.muted{ opacity:0.85; }
+.tiny{ font-size:12px; }
+
+.footer{
+  margin-top:60px;
+  font-size:0.85rem;
+  color:#777;
+  text-align:center;
+}
 
 </style>
 </head>
 
 <body>
 <div class="container">
+
+<h1>Houston Kink Calendar</h1>
+<div class="subtitle">
+Live leather, pup, bear & community events across Houston.
+Subscribe once. Stay updated automatically.
+</div>
+
+<div class="subscribe-grid">
+<a class="sub-btn" href="#">Mac / iPhone</a>
+<a class="sub-btn" href="#">Google / Android</a>
+<a class="sub-btn" href="#">Outlook</a>
+</div>
+
+<div class="section">
+<div class="section-header">
+<span>Submit to us!</span>
+<svg class="chev" viewBox="0 0 24 24">
+<path fill="currentColor" d="M7 10l5 5 5-5z"/>
+</svg>
+</div>
+
+<div class="section-content">
+<p class="muted">
+Got a Houston event or Facebook page with events that should be included?
+Drop it here.
+</p>
 
 <form class="form">
 
@@ -163,10 +301,24 @@ body{
 </div>
 
 <button type="submit" class="btn primary">Send Request</button>
-<p class="muted">This sends an email request to the calendar admin.</p>
 
 </form>
+</div>
+</div>
+
+<div class="footer">
+Built for the Houston community • Live • Automatic • Always evolving
+</div>
 
 </div>
+
+<script>
+document.querySelectorAll('.section-header').forEach(header=>{
+  header.addEventListener('click',()=>{
+    header.parentElement.classList.toggle('active');
+  });
+});
+</script>
+
 </body>
 </html>
