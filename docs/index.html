@@ -126,6 +126,40 @@ code {
     text-align: center;
     letter-spacing: 0.3px;
 }
+.form { display: grid; gap: 14px; margin-top: 10px; }
+.field label { display:block; font-weight:600; margin-bottom:6px; }
+.field input, .field textarea {
+  width:100%;
+  padding:12px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.35);
+  color: #fff;
+  outline: none;
+}
+.field input:focus, .field textarea:focus { border-color: rgba(255,255,255,0.35); }
+.hint { font-size: 12px; opacity: 0.75; margin-top: 6px; }
+
+.two-col { display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } }
+
+.segmented { display:flex; gap:10px; flex-wrap:wrap; }
+.seg { display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:999px;
+  border:1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.25); cursor:pointer; }
+.seg input { accent-color: #fff; }
+
+.btn.primary {
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  font-weight: 700;
+  cursor:pointer;
+}
+.btn.primary:hover { background: rgba(255,255,255,0.18); }
+.muted { opacity: 0.8; }
+.tiny { font-size: 12px; }
 </style>
 </head>
 
@@ -188,6 +222,91 @@ code {
     </div>
 
 </div>
+<section class="card" id="submit">
+  <h2>Submit an Event or Page</h2>
+  <p class="muted">
+    Got a Houston kink/leather/pup/bear/community event (or a Facebook page with events) that should be included?
+    Drop it here. If it’s a good fit, I’ll add it.
+  </p>
+
+  <form
+    action="YOUR_FORMSPREE_ENDPOINT"
+    method="POST"
+    class="form"
+  >
+    <!-- Helps reduce bot spam -->
+    <input type="text" name="_gotcha" style="display:none" autocomplete="off">
+
+    <div class="field">
+      <label for="type">What are you submitting?</label>
+      <div class="segmented">
+        <label class="seg">
+          <input type="radio" name="submission_type" value="single_event" checked>
+          <span>Single Facebook Event</span>
+        </label>
+        <label class="seg">
+          <input type="radio" name="submission_type" value="facebook_page">
+          <span>Facebook Page with Events</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="url">Facebook URL</label>
+      <input
+        id="url"
+        name="facebook_url"
+        type="url"
+        placeholder="https://www.facebook.com/events/123...  OR  https://www.facebook.com/profile.php?id=..."
+        required
+      >
+      <div class="hint">Tip: paste the full URL from your browser.</div>
+    </div>
+
+    <div class="field two-col">
+      <div>
+        <label for="name">Your name (optional)</label>
+        <input id="name" name="submitter_name" type="text" placeholder="Name">
+      </div>
+      <div>
+        <label for="email">Your email (optional)</label>
+        <input id="email" name="submitter_email" type="email" placeholder="you@email.com">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="notes">Notes (optional)</label>
+      <textarea
+        id="notes"
+        name="notes"
+        rows="4"
+        placeholder="Anything I should know? Frequency, venue, organizer, recurring events, etc."
+      ></textarea>
+    </div>
+
+    <!-- Optional: customize subject line -->
+    <input type="hidden" name="_subject" value="Houston Kink Cal submission">
+
+    <!-- Optional: redirect to a thank-you anchor after submit -->
+    <input type="hidden" name="_next" value="https://daddybearrok.github.io/houstonkinkcal/#thanks">
+
+    <button type="submit" class="btn primary">Send Request</button>
+    <p class="muted tiny">This sends an email request to the calendar admin. No guarantees, but I do review them.</p>
+  </form>
+</section>
+
+<section class="card" id="thanks" style="display:none;">
+  <h2>Got it.</h2>
+  <p class="muted">Thanks — your submission was sent. If it’s a fit, it’ll show up in the calendar soon.</p>
+</section>
+
+<script>
+  // If redirected back with #thanks, show the thank-you section
+  if (window.location.hash === "#thanks") {
+    const thanks = document.getElementById("thanks");
+    if (thanks) thanks.style.display = "block";
+  }
+</script>
 
 <script>
 document.querySelectorAll('.section-header').forEach(header => {
