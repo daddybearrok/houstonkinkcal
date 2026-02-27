@@ -24,6 +24,13 @@
       --btnB:#1A0404;     /* darker */
       --btnBorder: rgba(255,255,255,0.18);
       --shadow: rgba(0,0,0,0.45);
+
+      --ok: rgba(80, 200, 120, 0.25);
+      --okBorder: rgba(80, 200, 120, 0.45);
+      --warn: rgba(255, 180, 60, 0.18);
+      --warnBorder: rgba(255, 180, 60, 0.35);
+      --err: rgba(255, 80, 80, 0.18);
+      --errBorder: rgba(255, 80, 80, 0.35);
     }
 
     body {
@@ -147,7 +154,7 @@
     }
 
     .section.active .section-content {
-      max-height: 1200px;
+      max-height: 1400px;
       padding: 20px;
     }
 
@@ -208,7 +215,7 @@
       min-width: 240px;
     }
 
-    /* Custom radios: hollow unchecked, white dot checked (Chrome + Safari consistent) */
+    /* Custom radios: hollow unchecked, white dot checked */
     .seg input[type="radio"]{
       -webkit-appearance:none;
       appearance:none;
@@ -229,7 +236,7 @@
       width:8px;
       height:8px;
       border-radius:50%;
-      background:#fff;      /* white dot */
+      background:#fff;
       transform:scale(0);
       transition:transform 0.15s ease;
     }
@@ -248,11 +255,43 @@
       color: #fff;
       font-weight: 800;
       cursor:pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 46px;
     }
     .btn.primary:hover { background: rgba(255,255,255,0.18); }
+    .btn.primary:disabled { opacity: 0.65; cursor: not-allowed; }
 
     .muted { opacity: 0.85; }
     .tiny { font-size: 12px; }
+
+    /* Inline status messages */
+    .status {
+      border-radius: 14px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.25);
+      color: #ddd;
+      display: none;
+    }
+    .status.show { display: block; }
+    .status.ok { background: var(--ok); border-color: var(--okBorder); }
+    .status.warn { background: var(--warn); border-color: var(--warnBorder); }
+    .status.err { background: var(--err); border-color: var(--errBorder); }
+
+    /* Small spinner */
+    .spinner {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.35);
+      border-top-color: rgba(255,255,255,0.95);
+      animation: spin 0.8s linear infinite;
+      display: none;
+    }
+    .spinner.show { display: inline-block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 
@@ -376,9 +415,14 @@
           </div>
 
           <input type="hidden" name="_subject" value="Houston Kink Cal submission">
-          <input type="hidden" name="_next" value="https://daddybearrok.github.io/houstonkinkcal/#thanks">
 
-          <button type="submit" class="btn primary">Send Request</button>
+          <div id="formStatus" class="status" aria-live="polite"></div>
+
+          <button id="submitBtn" type="submit" class="btn primary">
+            <span class="spinner" id="spinner" aria-hidden="true"></span>
+            <span id="submitLabel">Send Request</span>
+          </button>
+
           <p class="muted tiny">This sends an email request to the calendar admin. No guarantees, but we do review them.</p>
         </form>
       </div>
@@ -415,16 +459,85 @@
       });
     });
 
-    // If redirected back with #thanks, hide submit and show thank-you (opened)
-    if (window.location.hash === "#thanks") {
-      const thanks = document.getElementById("thanks");
-      const submit = document.getElementById("submitSection");
-      if (submit) submit.style.display = "none";
-      if (thanks) {
-        thanks.style.display = "block";
-        thanks.classList.add("active");
+    // Custom Formspree submit (no redirect to generic thank-you page)
+    (function () {
+      const form = document.getElementById("requestForm");
+      if (!form) return;
+
+      const submitSection = document.getElementById("submitSection");
+      const thanksSection = document.getElementById("thanks");
+
+      const statusEl = document.getElementById("formStatus");
+      const submitBtn = document.getElementById("submitBtn");
+      const spinner = document.getElementById("spinner");
+      const label = document.getElementById("submitLabel");
+
+      function setStatus(kind, msg) {
+        if (!statusEl) return;
+        statusEl.className = "status show " + (kind || "");
+        statusEl.textContent = msg || "";
       }
-    }
+
+      function setLoading(isLoading) {
+        if (!submitBtn || !spinner || !label) return;
+        submitBtn.disabled = !!isLoading;
+        spinner.classList.toggle("show", !!isLoading);
+        label.textContent = isLoading ? "Sending…" : "Send Request";
+      }
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        setStatus("", "");
+        setLoading(true);
+
+        // Bot trap
+        const gotcha = form.querySelector('input[name="_gotcha"]');
+        if (gotcha && gotcha.value) {
+          setLoading(false);
+          setStatus("ok", "Submitted.");
+          return;
+        }
+
+        try {
+          const formData = new FormData(form);
+
+          const res = await fetch(form.action, {
+            method: "POST",
+            headers: { "Accept": "application/json" },
+            body: formData
+          });
+
+          if (res.ok) {
+            // success UI
+            setStatus("ok", "Sent. Thank you.");
+            form.reset();
+
+            if (submitSection) submitSection.style.display = "none";
+            if (thanksSection) {
+              thanksSection.style.display = "block";
+              thanksSection.classList.add("active");
+              // Scroll to it (nice touch)
+              thanksSection.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+            return;
+          }
+
+          // If not ok, try to read JSON for error details
+          let data = null;
+          try { data = await res.json(); } catch {}
+          const msg = (data && data.errors && data.errors.length)
+            ? data.errors.map(x => x.message).join(" ")
+            : "Something went wrong. Please try again.";
+          setStatus("err", msg);
+
+        } catch (err) {
+          setStatus("err", "Network error. Please try again.");
+        } finally {
+          setLoading(false);
+        }
+      });
+    })();
   </script>
 </body>
 </html>
