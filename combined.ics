@@ -373,4 +373,515 @@ CLASS:PUBLIC
 STATUS:CONFIRMED
 PARTSTAT:NEEDS-ACTION
 END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260219T205229Z
+LAST-MODIFIED:20260219T205229Z
+CREATED:20260219T205229Z
+SEQUENCE:0
+ORGANIZER;CN=Houston Bears:MAILTO:noreply@facebookmail.com
+DTSTART:20260308T160000Z
+DTEND:20260308T180000Z
+UID:e1243393983807897@facebook.com
+SUMMARY:Houston Bears Brunch Club--La Tapatia
+LOCATION:La Tapatia
+URL:https://www.facebook.com/events/1243393983807897/
+DESCRIPTION:Please join us for a lovely mornin
+ g of fine food\, great company\, and
+  awesome cocktails!  We'll be at t
+ he Montrose location--1749 Richmon
+ d Ave.\n\n***********\nYou MUST RSVP 
+ at https://houstonbears.org/housto
+ n-bears-brunch-club/\n***********\n\n
+ https://www.facebook.com/events/12
+ 43393983807897/
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250828T232130Z
+LAST-MODIFIED:20250828T232130Z
+CREATED:20250828T232130Z
+SEQUENCE:0
+ORGANIZER;CN=Houston Bears:MAILTO:noreply@facebookmail.com
+DTSTART:20260610T230000Z
+DTEND:20260611T010000Z
+UID:e1293562842303093@facebook.com
+SUMMARY:Houston Bears General Meeting-Don Jose
+LOCATION:Don Jose Mexican Restaurant
+URL:https://www.facebook.com/events/1293562838969760/?event_time_id=1293562842303093
+DESCRIPTION:Join us for our monthly meeting of
+  the Houston Bears.  Enjoy some gr
+ eat food\, good friends\, and keep u
+ p to date on all the latest happen
+ ings with the Houston Bears.\n\nhttp
+ s://www.facebook.com/events/129356
+ 2838969760/?event_time_id=12935628
+ 42303093
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250828T232130Z
+LAST-MODIFIED:20250828T232130Z
+CREATED:20250828T232130Z
+SEQUENCE:0
+ORGANIZER;CN=Houston Bears:MAILTO:noreply@facebookmail.com
+DTSTART:20260311T230000Z
+DTEND:20260312T010000Z
+UID:e1293562855636425@facebook.com
+SUMMARY:Houston Bears General Meeting-Don Jose
+LOCATION:Don Jose Mexican Restaurant
+URL:https://www.facebook.com/events/1293562838969760/?event_time_id=1293562855636425
+DESCRIPTION:Join us for our monthly meeting of
+  the Houston Bears.  Enjoy some gr
+ eat food\, good friends\, and keep u
+ p to date on all the latest happen
+ ings with the Houston Bears.\n\nhttp
+ s://www.facebook.com/events/129356
+ 2838969760/?event_time_id=12935628
+ 55636425
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260118T022110Z
+LAST-MODIFIED:20260118T022110Z
+CREATED:20250722T005002Z
+SEQUENCE:15557468
+ORGANIZER;CN=Houston Bears:MAILTO:noreply@facebookmail.com
+DTSTART:20260621T030000Z
+DTEND:20260621T070000Z
+UID:e1404568780625072@facebook.com
+SUMMARY:The Houston Bears Go WILD at the RIPCORD
+LOCATION:RIPCORD
+URL:https://www.facebook.com/events/1404568777291739/?event_time_id=1404568780625072
+DESCRIPTION:Come join the Houston Bears as we 
+ get a little WILD at the RIPCORD w
+ ith our monthly Jell-O shots for o
+ ur charities: Tony's Place\, Law Ha
+ rrington Senior Living Center\, and
+  Heart of Leather Foundation!\n\nRem
+ ember\, you can help make and sell 
+ the Jell-O shots only if you are T
+ ABC certified.\n\nHowever\, you do NO
+ T need a license to come visit and
+  enjoy them. You can find us back 
+ by the pool table for some fun\, fe
+ llowship\, and lasting friendships!
+ \n\nhttps://www.facebook.com/events/
+ 1404568777291739/?event_time_id=14
+ 04568780625072
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260118T022110Z
+LAST-MODIFIED:20260118T022110Z
+CREATED:20250722T005002Z
+SEQUENCE:15557468
+ORGANIZER;CN=Houston Bears:MAILTO:noreply@facebookmail.com
+DTSTART:20260517T030000Z
+DTEND:20260517T070000Z
+UID:e1404568783958405@facebook.com
+SUMMARY:The Houston Bears Go WILD at the RIPCORD
+LOCATION:RIPCORD
+URL:https://www.facebook.com/events/1404568777291739/?event_time_id=1404568783958405
+DESCRIPTION:Come join the Houston Bears as we 
+ get a little WILD at the RIPCORD w
+ ith our monthly Jell-O shots for o
+ ur charities: Tony's Place\, Law Ha
+ rrington Senior Living Center\, and
+  Heart of Leather Foundation!\n\nRem
+ ember\, you can help make and sell 
+ the Jell-O shots only if you are T
+ ABC certified.\n\nHowever\, you do NO
+ T need a license to come visit and
+  enjoy them. You can find us back 
+ by the pool table for some fun\, fe
+ llowship\, and lasting friendships!
+ \n\nhttps://www.facebook.com/events/
+ 1404568777291739/?event_time_id=14
+ 04568783958405
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260118T022110Z
+LAST-MODIFIED:20260118T022110Z
+CREATED:20250722T005002Z
+SEQUENCE:15557468
+ORGANIZER;CN=Houston Bears:MAILTO:noreply@facebookmail.com
+DTSTART:20251116T040000Z
+DTEND:20251116T080000Z
+UID:e1404568800625070@facebook.com
+SUMMARY:The Houston Bears Go WILD at the RIPCORD
+LOCATION:RIPCORD
+URL:https://www.facebook.com/events/1404568777291739/?event_time_id=1404568800625070
+DESCRIPTION:Come join the Houston Bears as we 
+ get a little WILD at the RIPCORD w
+ ith our monthly Jell-O shots for o
+ ur charities: Tony's Place\, Law Ha
+ rrington Senior Living Center\, and
+  Heart of Leather Foundation!\n\nRem
+ ember\, you can help make and sell 
+ the Jell-O shots only if you are T
+ ABC certified.\n\nHowever\, you do NO
+ T need a license to come visit and
+  enjoy them. You can find us back 
+ by the pool table for some fun\, fe
+ llowship\, and lasting friendships!
+ \n\nhttps://www.facebook.com/events/
+ 1404568777291739/?event_time_id=14
+ 04568800625070
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260118T022110Z
+LAST-MODIFIED:20260118T022110Z
+CREATED:20250722T005002Z
+SEQUENCE:15557468
+ORGANIZER;CN=Houston Bears:MAILTO:noreply@facebookmail.com
+DTSTART:20260419T030000Z
+DTEND:20260419T070000Z
+UID:e1404568810625069@facebook.com
+SUMMARY:The Houston Bears Go WILD at the RIPCORD
+LOCATION:RIPCORD
+URL:https://www.facebook.com/events/1404568777291739/?event_time_id=1404568810625069
+DESCRIPTION:Come join the Houston Bears as we 
+ get a little WILD at the RIPCORD w
+ ith our monthly Jell-O shots for o
+ ur charities: Tony's Place\, Law Ha
+ rrington Senior Living Center\, and
+  Heart of Leather Foundation!\n\nRem
+ ember\, you can help make and sell 
+ the Jell-O shots only if you are T
+ ABC certified.\n\nHowever\, you do NO
+ T need a license to come visit and
+  enjoy them. You can find us back 
+ by the pool table for some fun\, fe
+ llowship\, and lasting friendships!
+ \n\nhttps://www.facebook.com/events/
+ 1404568777291739/?event_time_id=14
+ 04568810625069
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260118T022110Z
+LAST-MODIFIED:20260118T022110Z
+CREATED:20250722T005002Z
+SEQUENCE:15557468
+ORGANIZER;CN=Houston Bears:MAILTO:noreply@facebookmail.com
+DTSTART:20260322T030000Z
+DTEND:20260322T070000Z
+UID:e1404568813958402@facebook.com
+SUMMARY:The Houston Bears Go WILD at the RIPCORD
+LOCATION:RIPCORD
+URL:https://www.facebook.com/events/1404568777291739/?event_time_id=1404568813958402
+DESCRIPTION:Come join the Houston Bears as we 
+ get a little WILD at the RIPCORD w
+ ith our monthly Jell-O shots for o
+ ur charities: Tony's Place\, Law Ha
+ rrington Senior Living Center\, and
+  Heart of Leather Foundation!\n\nRem
+ ember\, you can help make and sell 
+ the Jell-O shots only if you are T
+ ABC certified.\n\nHowever\, you do NO
+ T need a license to come visit and
+  enjoy them. You can find us back 
+ by the pool table for some fun\, fe
+ llowship\, and lasting friendships!
+ \n\nhttps://www.facebook.com/events/
+ 1404568777291739/?event_time_id=14
+ 04568813958402
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260206T093400Z
+LAST-MODIFIED:20260206T093400Z
+CREATED:20250829T014709Z
+SEQUENCE:13938411
+ORGANIZER;CN=Houston Bears:MAILTO:noreply@facebookmail.com
+DTSTART:20260513T230000Z
+DTEND:20260514T010000Z
+UID:e1713980562591890@facebook.com
+SUMMARY:Houston Bears General Meeting--Don Jose
+LOCATION:DON JOSE Mexican Restaurant
+URL:https://www.facebook.com/events/1713980552591891/?event_time_id=1713980562591890
+DESCRIPTION:We moved to Don Jose for February.
+ \n\nhttps://www.facebook.com/events/
+ 1713980552591891/?event_time_id=17
+ 13980562591890
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20251129T231245Z
+LAST-MODIFIED:20251129T231245Z
+CREATED:20250916T184547Z
+SEQUENCE:6409618
+ORGANIZER;CN=Houston Bears:MAILTO:noreply@facebookmail.com
+DTSTART:20260627T230000Z
+DTEND:20260628T020000Z
+UID:e1727853084581110@facebook.com
+SUMMARY:Bear Bust @ Pause/Play
+LOCATION:2409 Grant St\, Houston\, TX 77006-2
+ 858\, United States
+URL:https://www.facebook.com/events/1727853071247778/?event_time_id=1727853084581110
+DESCRIPTION:Come on out for our monthly Bear B
+ ust at our new home bar-Pause/Play
+ .  Each month will have a theme\, s
+ o watch for monthly updates as the
+  theme is announced.  A Houston Be
+ ars tradition returns better than 
+ ever!\n\nhttps://www.facebook.com/ev
+ ents/1727853071247778/?event_time_
+ id=1727853084581110
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20251129T231245Z
+LAST-MODIFIED:20251129T231245Z
+CREATED:20250916T184547Z
+SEQUENCE:6409618
+ORGANIZER;CN=Houston Bears:MAILTO:noreply@facebookmail.com
+DTSTART:20260301T000000Z
+DTEND:20260301T030000Z
+UID:e1727853087914443@facebook.com
+SUMMARY:Bear Bust @ Pause/Play
+LOCATION:2409 Grant St\, Houston\, TX 77006-2
+ 858\, United States
+URL:https://www.facebook.com/events/1727853071247778/?event_time_id=1727853087914443
+DESCRIPTION:Come on out for our monthly Bear B
+ ust at our new home bar-Pause/Play
+ .  Each month will have a theme\, s
+ o watch for monthly updates as the
+  theme is announced.  A Houston Be
+ ars tradition returns better than 
+ ever!\n\nhttps://www.facebook.com/ev
+ ents/1727853071247778/?event_time_
+ id=1727853087914443
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20251129T231245Z
+LAST-MODIFIED:20251129T231245Z
+CREATED:20250916T184547Z
+SEQUENCE:6409618
+ORGANIZER;CN=Houston Bears:MAILTO:noreply@facebookmail.com
+DTSTART:20260328T230000Z
+DTEND:20260329T020000Z
+UID:e1727853091247776@facebook.com
+SUMMARY:Bear Bust @ Pause/Play
+LOCATION:2409 Grant St\, Houston\, TX 77006-2
+ 858\, United States
+URL:https://www.facebook.com/events/1727853071247778/?event_time_id=1727853091247776
+DESCRIPTION:Come on out for our monthly Bear B
+ ust at our new home bar-Pause/Play
+ .  Each month will have a theme\, s
+ o watch for monthly updates as the
+  theme is announced.  A Houston Be
+ ars tradition returns better than 
+ ever!\n\nhttps://www.facebook.com/ev
+ ents/1727853071247778/?event_time_
+ id=1727853091247776
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20251129T231245Z
+LAST-MODIFIED:20251129T231245Z
+CREATED:20250916T184547Z
+SEQUENCE:6409618
+ORGANIZER;CN=Houston Bears:MAILTO:noreply@facebookmail.com
+DTSTART:20260530T230000Z
+DTEND:20260531T020000Z
+UID:e1727853097914442@facebook.com
+SUMMARY:Bear Bust @ Pause/Play
+LOCATION:2409 Grant St\, Houston\, TX 77006-2
+ 858\, United States
+URL:https://www.facebook.com/events/1727853071247778/?event_time_id=1727853097914442
+DESCRIPTION:Come on out for our monthly Bear B
+ ust at our new home bar-Pause/Play
+ .  Each month will have a theme\, s
+ o watch for monthly updates as the
+  theme is announced.  A Houston Be
+ ars tradition returns better than 
+ ever!\n\nhttps://www.facebook.com/ev
+ ents/1727853071247778/?event_time_
+ id=1727853097914442
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20251129T231245Z
+LAST-MODIFIED:20251129T231245Z
+CREATED:20250916T184547Z
+SEQUENCE:6409618
+ORGANIZER;CN=Houston Bears:MAILTO:noreply@facebookmail.com
+DTSTART:20260425T230000Z
+DTEND:20260426T020000Z
+UID:e1727853101247775@facebook.com
+SUMMARY:Bear Bust @ Pause/Play
+LOCATION:2409 Grant St\, Houston\, TX 77006-2
+ 858\, United States
+URL:https://www.facebook.com/events/1727853071247778/?event_time_id=1727853101247775
+DESCRIPTION:Come on out for our monthly Bear B
+ ust at our new home bar-Pause/Play
+ .  Each month will have a theme\, s
+ o watch for monthly updates as the
+  theme is announced.  A Houston Be
+ ars tradition returns better than 
+ ever!\n\nhttps://www.facebook.com/ev
+ ents/1727853071247778/?event_time_
+ id=1727853101247775
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260105T221238Z
+LAST-MODIFIED:20260105T221238Z
+CREATED:20250804T015841Z
+SEQUENCE:13378437
+ORGANIZER;CN=Houston Bears:MAILTO:noreply@facebookmail.com
+DTSTART:20260415T230000Z
+DTEND:20260416T020000Z
+UID:e1964567574356407@facebook.com
+SUMMARY:Houston Bears General Meeting January--Spaghetti Western
+LOCATION:Spaghetti Western Italian Cafe
+URL:https://www.facebook.com/events/1943847146428450/?event_time_id=1964567574356407
+DESCRIPTION:Come enjoy a fine plate of pasta a
+ t our October General Meeting.  We
+ 'll be at Spaghetti Western Italia
+ n Cafe at 1608 Shepherd Dr.  The r
+ estaurant just celebrated its 25th
+  anniversary\, so you know the plac
+ e is great.  Come and hear about u
+ pcoming HB events and get in on th
+ e action!\n\nhttps://www.facebook.co
+ m/events/1943847146428450/?event_t
+ ime_id=1964567574356407
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260105T221238Z
+LAST-MODIFIED:20260105T221238Z
+CREATED:20250804T015841Z
+SEQUENCE:13378437
+ORGANIZER;CN=Houston Bears:MAILTO:noreply@facebookmail.com
+DTSTART:20260708T230000Z
+DTEND:20260709T020000Z
+UID:e1964567577689740@facebook.com
+SUMMARY:Houston Bears General Meeting January--Spaghetti Western
+LOCATION:Spaghetti Western Italian Cafe
+URL:https://www.facebook.com/events/1943847146428450/?event_time_id=1964567577689740
+DESCRIPTION:Come enjoy a fine plate of pasta a
+ t our October General Meeting.  We
+ 'll be at Spaghetti Western Italia
+ n Cafe at 1608 Shepherd Dr.  The r
+ estaurant just celebrated its 25th
+  anniversary\, so you know the plac
+ e is great.  Come and hear about u
+ pcoming HB events and get in on th
+ e action!\n\nhttps://www.facebook.co
+ m/events/1943847146428450/?event_t
+ ime_id=1964567577689740
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260202T003017Z
+LAST-MODIFIED:20260202T003017Z
+CREATED:20260202T003017Z
+SEQUENCE:0
+ORGANIZER;CN=National Leather Association - Houston:MAILTO:noreply@facebookmail.com
+DTSTART:20260308T013000Z
+DTEND:20260308T043000Z
+UID:e1199917535689717@facebook.com
+SUMMARY:NLA HOUSTON BI MONTHLY COMMUNITY DINNER
+LOCATION:FM Kitchen and Bar
+URL:https://www.facebook.com/events/1199917535689717/
+DESCRIPTION:Please join the membership of NLA 
+ Houston for our bi-monthly Communi
+ ty Dinner. For this Community Dinn
+ er\, the membership has chosen FM K
+ itchen and Bar\, located at 1112 Sh
+ epherd Drive\, Houston\, TX 77007\, a
+ t 7:30 p.m\n\nAll are welcome\, and l
+ ooking forward to having you join 
+ us for a nice meal and some commun
+ ity fellowship.\n\nhttps://www.faceb
+ ook.com/events/1199917535689717/
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260125T033848Z
+LAST-MODIFIED:20260125T033848Z
+CREATED:20260125T033708Z
+SEQUENCE:100
+ORGANIZER;CN=Leather boys of Houston:MAILTO:noreply@facebookmail.com
+DTSTART:20260301T040000Z
+DTEND:20260301T060000Z
+UID:e1114534620681278@facebook.com
+SUMMARY:Leather Weather
+LOCATION:Varsity Bar Houston
+URL:https://www.facebook.com/events/1114534620681278/
+DESCRIPTION:Join the Leather boys of Houston a
+ t our first bar night of 2026. Dre
+ ss  up & show off\, from head to to
+ e\, in your favorite leather gear. 
+ We’ll have yummy Jell-O shots & 
+ hankies for sales going towards ou
+ r 2026 beneficiary\, Covenant House
+  Texas.\n\nhttps://www.facebook.com/
+ events/1114534620681278/
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260125T034235Z
+LAST-MODIFIED:20260125T034235Z
+CREATED:20260125T034235Z
+SEQUENCE:0
+ORGANIZER;CN=Leather boys of Houston:MAILTO:noreply@facebookmail.com
+DTSTART:20260301T020000Z
+DTEND:20260301T030000Z
+UID:e1225930118926825@facebook.com
+SUMMARY:Monthly Membership Meeting
+LOCATION:Sir Rat Leather & Gear - Houston
+URL:https://www.facebook.com/events/1225930118926825/
+DESCRIPTION:Join the Leather boys of Houston f
+ or our monthly meeting\, where we d
+ iscuss our latest club business & 
+ plan our future events. Open to al
+ l.\n\nhttps://www.facebook.com/event
+ s/1225930118926825/
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
 END:VCALENDAR
