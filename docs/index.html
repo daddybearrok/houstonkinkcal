@@ -1,385 +1,363 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Houston Kink Calendar</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Houston Kink Calendar</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<style>
-body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: radial-gradient(circle at top, #1c1c1c, #0d0d0d 70%);
-    color: #f2f2f2;
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
-}
+  <style>
+    /* Fix width/padding/border math everywhere */
+    *, *::before, *::after { box-sizing: border-box; }
 
-.container {
-    max-width: 900px;
-    width: 100%;
-    padding: 70px 20px 60px;
-}
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top, #1c1c1c, #0d0d0d 70%);
+      color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
 
-h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-}
+    .container {
+      max-width: 900px;
+      width: 100%;
+      padding: 70px 20px 60px;
+    }
 
-.subtitle {
-    color: #aaa;
-    font-weight: 300;
-    margin-bottom: 50px;
-    font-size: 1.1rem;
-}
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
 
-.subscribe-grid {
-    display: grid;
-    gap: 20px;
-    margin-bottom: 60px;
-}
+    .subtitle {
+      color: #aaa;
+      font-weight: 300;
+      margin-bottom: 50px;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
 
-.sub-btn {
-    display: block;
-    text-align: center;
-    padding: 18px;
-    border-radius: 14px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.05rem;
-    transition: all 0.25s ease;
-    letter-spacing: 0.4px;
-}
+    .subscribe-grid {
+      display: grid;
+      gap: 20px;
+      margin-bottom: 60px;
+    }
 
-.sub-btn.apple {
-    background: linear-gradient(135deg, #2e2e2e, #1a1a1a);
-    border: 1px solid #444;
-    color: white;
-}
+    .sub-btn {
+      display: block;
+      text-align: center;
+      padding: 18px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: all 0.25s ease;
+      letter-spacing: 0.4px;
+    }
 
-.sub-btn.google {
-    background: linear-gradient(135deg, #1a73e8, #1558b0);
-    color: white;
-}
+    .sub-btn.apple {
+      background: linear-gradient(135deg, #2e2e2e, #1a1a1a);
+      border: 1px solid #444;
+      color: white;
+    }
 
-.sub-btn.outlook {
-    background: linear-gradient(135deg, #0078d4, #005a9e);
-    color: white;
-}
+    .sub-btn.google {
+      background: linear-gradient(135deg, #1a73e8, #1558b0);
+      color: white;
+    }
 
-.sub-btn:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.45);
-}
+    .sub-btn.outlook {
+      background: linear-gradient(135deg, #0078d4, #005a9e);
+      color: white;
+    }
 
-.section {
-    background: rgba(255,255,255,0.05);
-    border-radius: 14px;
-    margin-bottom: 15px;
-    overflow: hidden;
-    transition: 0.3s ease;
-}
+    .sub-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.45);
+    }
 
-.section-header {
-    padding: 18px 20px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: 500;
-}
+    .section {
+      background: rgba(255,255,255,0.05);
+      border-radius: 14px;
+      margin-bottom: 15px;
+      overflow: hidden;
+      transition: 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
 
-.section-header:hover {
-    background: rgba(255,255,255,0.08);
-}
+    .section-header {
+      padding: 18px 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+      user-select: none;
+    }
 
-.section-content {
-    max-height: 0;
-    overflow: hidden;
-    padding: 0 20px;
-    transition: max-height 0.4s ease, padding 0.4s ease;
-    color: #ccc;
-    line-height: 1.6;
-}
+    .section-header:hover {
+      background: rgba(255,255,255,0.08);
+    }
 
-.section.active .section-content {
-    max-height: 600px;
-    padding: 20px;
-}
+    .section-content {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 20px;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      color: #ccc;
+      line-height: 1.6;
+    }
 
-code {
-    background: rgba(255,255,255,0.08);
-    padding: 4px 6px;
-    border-radius: 6px;
-    font-size: 0.9rem;
-}
+    /* Increased max-height so forms don't get clipped */
+    .section.active .section-content {
+      max-height: 1200px;
+      padding: 20px;
+    }
 
-/* Card styling for the form + thanks */
-.card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 14px;
-    padding: 22px;
-    margin-top: 40px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-}
+    code {
+      background: rgba(255,255,255,0.08);
+      padding: 4px 6px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      word-break: break-word;
+    }
 
-.card h2 {
-    margin: 0 0 10px 0;
-    font-size: 1.4rem;
-    letter-spacing: 0.2px;
-}
+    .footer {
+      margin-top: 70px;
+      font-size: 0.85rem;
+      color: #777;
+      text-align: center;
+      letter-spacing: 0.3px;
+    }
 
-.footer {
-    margin-top: 70px;
-    font-size: 0.85rem;
-    color: #777;
-    text-align: center;
-    letter-spacing: 0.3px;
-}
+    /* Form styling */
+    .form { display: grid; gap: 14px; margin-top: 10px; }
+    .field label { display:block; font-weight:600; margin-bottom:6px; }
 
-.form { display: grid; gap: 14px; margin-top: 10px; }
-.field label { display:block; font-weight:600; margin-bottom:6px; }
-.field input, .field textarea {
-  width:100%;
-  padding:12px 12px;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,0.12);
-  background: rgba(0,0,0,0.35);
-  color: #fff;
-  outline: none;
-}
-.field input:focus, .field textarea:focus { border-color: rgba(255,255,255,0.35); }
-.hint { font-size: 12px; opacity: 0.75; margin-top: 6px; }
+    .field input, .field textarea {
+      width:100%;
+      display:block;
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.35);
+      color: #fff;
+      outline: none;
+    }
+    .field input:focus, .field textarea:focus { border-color: rgba(255,255,255,0.35); }
 
-.two-col { display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-@media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } }
+    .hint { font-size: 12px; opacity: 0.75; margin-top: 6px; }
 
-.segmented { display:flex; gap:10px; flex-wrap:wrap; }
-.seg { display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:999px;
-  border:1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.25); cursor:pointer; }
-.seg input { accent-color: #fff; }
+    .two-col {
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+    @media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } }
 
-.btn.primary {
-  padding: 12px 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.18);
-  background: rgba(255,255,255,0.12);
-  color: #fff;
-  font-weight: 700;
-  cursor:pointer;
-}
-.btn.primary:hover { background: rgba(255,255,255,0.18); }
+    .segmented { display:flex; gap:12px; flex-wrap:wrap; }
+    .seg {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.25);
+      cursor:pointer;
+      flex: 0 1 auto;
+      min-width: 240px;
+    }
+    .seg input { accent-color: #fff; }
+    @media (max-width: 720px) { .seg { min-width: 100%; } }
 
-.muted { opacity: 0.8; }
-.tiny { font-size: 12px; }
+    .btn.primary {
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      font-weight: 700;
+      cursor:pointer;
+    }
+    .btn.primary:hover { background: rgba(255,255,255,0.18); }
 
-#formStatus {
-  margin: 6px 0 0;
-  font-size: 0.95rem;
-}
-</style>
+    .muted { opacity: 0.8; }
+    .tiny { font-size: 12px; }
+  </style>
 </head>
 
 <body>
-
-<div class="container">
+  <div class="container">
 
     <h1>Houston Kink Calendar</h1>
     <div class="subtitle">
-        Live leather, pup, bear & community events across Houston.
-        Subscribe once. Stay updated automatically.
+      Live leather, pup, bear &amp; community events across Houston.
+      Subscribe once. Stay updated automatically.
     </div>
 
     <div class="subscribe-grid">
+      <a class="sub-btn apple" href="webcal://daddybearrok.github.io/houstonkinkcal/houston-kink-cal.ics">
+        🍎 Subscribe on Mac / iPhone
+      </a>
 
-        <a class="sub-btn apple" href="webcal://daddybearrok.github.io/houstonkinkcal/houston-kink-cal.ics">
-            🍎 Subscribe on Mac / iPhone
-        </a>
+      <a class="sub-btn google" href="https://www.google.com/calendar/render?cid=https%3A%2F%2Fdaddybearrok.github.io%2Fhoustonkinkcal%2Fhouston-kink-cal.ics" target="_blank" rel="noopener">
+        📅 Add to Google Calendar
+      </a>
 
-        <a class="sub-btn google" href="https://www.google.com/calendar/render?cid=https%3A%2F%2Fdaddybearrok.github.io%2Fhoustonkinkcal%2Fhouston-kink-cal.ics" target="_blank" rel="noopener">
-            📅 Add to Google Calendar
-        </a>
-
-        <a class="sub-btn outlook" href="https://outlook.live.com/calendar/addfromweb?url=https://daddybearrok.github.io/houstonkinkcal/houston-kink-cal.ics&name=Houston%20Kink%20Cal&mkt=en-001" target="_blank" rel="noopener">
-            💼 Add to Outlook
-        </a>
-
+      <a class="sub-btn outlook" href="https://outlook.live.com/calendar/addfromweb?url=https://daddybearrok.github.io/houstonkinkcal/houston-kink-cal.ics&name=Houston%20Kink%20Cal&mkt=en-001" target="_blank" rel="noopener">
+        💼 Add to Outlook
+      </a>
     </div>
 
     <div class="section">
-        <div class="section-header">
-            📱 Manual Subscription Instructions
-            <span>+</span>
-        </div>
-        <div class="section-content">
-            <p>If the buttons above don’t work for your device, you can manually subscribe using this URL:</p>
-            <p><code>https://daddybearrok.github.io/houstonkinkcal/houston-kink-cal.ics</code></p>
-            <p>Add it using your calendar app’s “Subscribe from Web” or “Add by URL” feature.</p>
-        </div>
+      <div class="section-header">
+        📱 Manual Subscription Instructions
+        <span>+</span>
+      </div>
+      <div class="section-content">
+        <p>If the buttons above don’t work for your device, you can manually subscribe using this URL:</p>
+        <p><code>https://daddybearrok.github.io/houstonkinkcal/houston-kink-cal.ics</code></p>
+        <p>Add it using your calendar app’s “Subscribe from Web” or “Add by URL” feature.</p>
+      </div>
     </div>
 
     <div class="section">
-        <div class="section-header">
-            🔁 Refresh & Updates
-            <span>+</span>
-        </div>
-        <div class="section-content">
-            <p>
-                This is a live subscription calendar. Events update automatically.
-                Some platforms (especially Google and Outlook) may take a few hours to refresh.
-            </p>
-            <p>
-                Apple Calendar can be set to refresh hourly.
-            </p>
-        </div>
+      <div class="section-header">
+        🔁 Refresh &amp; Updates
+        <span>+</span>
+      </div>
+      <div class="section-content">
+        <p>
+          This is a live subscription calendar. Events update automatically.
+          Some platforms (especially Google and Outlook) may take a few hours to refresh.
+        </p>
+        <p>
+          Apple Calendar can be set to refresh hourly.
+        </p>
+      </div>
     </div>
 
-    <!-- Submit Card -->
-    <section class="card" id="submit">
-      <h2>Submit an Event or Page</h2>
-      <p class="muted">
-        Got a Houston kink/leather/pup/bear/community event (or a Facebook page with events) that should be included?
-        Drop it here. If it’s a good fit, I’ll add it.
-      </p>
+    <!-- Collapsed-by-default submit section -->
+    <div class="section" id="submitSection">
+      <div class="section-header">
+        ✉️ Submit an Event or Page
+        <span>+</span>
+      </div>
 
-      <form
-        id="requestForm"
-        action="https://formspree.io/f/xzdawajg"
-        method="POST"
-        class="form"
-      >
-        <!-- Honeypot -->
-        <input type="text" name="_gotcha" style="display:none" autocomplete="off">
+      <div class="section-content">
+        <p class="muted" style="margin-top:0;">
+          Got a Houston kink/leather/pup/bear/community event (or a Facebook page with events) that should be included?
+          Drop it here. If it’s a good fit, I’ll add it.
+        </p>
 
-        <div class="field">
-          <label>What are you submitting?</label>
-          <div class="segmented">
-            <label class="seg">
-              <input type="radio" name="submission_type" value="single_event" checked>
-              <span>Single Facebook Event</span>
-            </label>
-            <label class="seg">
-              <input type="radio" name="submission_type" value="facebook_page">
-              <span>Facebook Page with Events</span>
-            </label>
+        <form
+          id="requestForm"
+          action="https://formspree.io/f/xzdawajg"
+          method="POST"
+          class="form"
+        >
+          <input type="text" name="_gotcha" style="display:none" autocomplete="off">
+
+          <div class="field">
+            <label>What are you submitting?</label>
+            <div class="segmented">
+              <label class="seg">
+                <input type="radio" name="submission_type" value="single_event" checked>
+                <span>Single Facebook Event</span>
+              </label>
+              <label class="seg">
+                <input type="radio" name="submission_type" value="facebook_page">
+                <span>Facebook Page with Events</span>
+              </label>
+            </div>
           </div>
-        </div>
 
-        <div class="field">
-          <label for="url">Facebook URL</label>
-          <input
-            id="url"
-            name="facebook_url"
-            type="url"
-            placeholder="https://www.facebook.com/events/123...  OR  https://www.facebook.com/profile.php?id=..."
-            required
-          >
-          <div class="hint">Tip: paste the full URL from your browser.</div>
-        </div>
-
-        <div class="field two-col">
-          <div>
-            <label for="name">Your name (optional)</label>
-            <input id="name" name="submitter_name" type="text" placeholder="Name">
+          <div class="field">
+            <label for="url">Facebook URL</label>
+            <input
+              id="url"
+              name="facebook_url"
+              type="url"
+              placeholder="https://www.facebook.com/events/123...  OR  https://www.facebook.com/profile.php?id=..."
+              required
+            >
+            <div class="hint">Tip: paste the full URL from your browser.</div>
           </div>
-          <div>
-            <label for="email">Your email (optional)</label>
-            <input id="email" name="submitter_email" type="email" placeholder="you@email.com">
+
+          <div class="field two-col">
+            <div>
+              <label for="name">Your name (optional)</label>
+              <input id="name" name="submitter_name" type="text" placeholder="Name">
+            </div>
+            <div>
+              <label for="email">Your email (optional)</label>
+              <input id="email" name="submitter_email" type="email" placeholder="you@email.com">
+            </div>
           </div>
-        </div>
 
-        <div class="field">
-          <label for="notes">Notes (optional)</label>
-          <textarea
-            id="notes"
-            name="notes"
-            rows="4"
-            placeholder="Anything I should know? Frequency, venue, organizer, recurring events, etc."
-          ></textarea>
-        </div>
+          <div class="field">
+            <label for="notes">Notes (optional)</label>
+            <textarea
+              id="notes"
+              name="notes"
+              rows="4"
+              placeholder="Anything I should know? Frequency, venue, organizer, recurring events, etc."
+            ></textarea>
+          </div>
 
-        <input type="hidden" name="_subject" value="Houston Kink Cal submission">
+          <input type="hidden" name="_subject" value="Houston Kink Cal submission">
+          <input type="hidden" name="_next" value="https://daddybearrok.github.io/houstonkinkcal/#thanks">
 
-        <!-- IMPORTANT: repo pages path included -->
-        <input type="hidden" name="_next" value="https://daddybearrok.github.io/houstonkinkcal/#thanks">
+          <button type="submit" class="btn primary">Send Request</button>
+          <p class="muted tiny">This sends an email request to the calendar admin. No guarantees, but I do review them.</p>
+        </form>
+      </div>
+    </div>
 
-        <button type="submit" class="btn primary">Send Request</button>
-        <p class="muted tiny">This sends an email request to the calendar admin. No guarantees, but I do review them.</p>
-        <p id="formStatus" class="muted" aria-live="polite"></p>
-      </form>
-    </section>
-
-    <!-- Thanks Card -->
-    <section class="card" id="thanks" style="display:none;">
-      <h2>Got it.</h2>
-      <p class="muted">Thanks — your submission was sent. If it’s a fit, it’ll show up in the calendar soon.</p>
-      <p class="muted tiny"><a href="#submit" style="color:#fff; opacity:.8; text-decoration:none;">Submit another</a></p>
-    </section>
+    <!-- Thank you section (shown only after redirect #thanks) -->
+    <div class="section" id="thanks" style="display:none;">
+      <div class="section-header">
+        ✅ Submitted
+        <span>+</span>
+      </div>
+      <div class="section-content">
+        <p class="muted" style="margin-top:0;">
+          Thanks — your submission was sent. If it’s a fit, it’ll show up in the calendar soon.
+        </p>
+      </div>
+    </div>
 
     <div class="footer">
-        Built for the Houston community • Live • Automatic • Always evolving
+      Built for the Houston community • Live • Automatic • Always evolving
     </div>
 
-</div>
+  </div>
 
-<script>
-  // Expand/collapse sections
-  document.querySelectorAll('.section-header').forEach(header => {
-    header.addEventListener('click', () => {
-      header.parentElement.classList.toggle('active');
+  <script>
+    // Accordion behavior
+    document.querySelectorAll('.section-header').forEach(header => {
+      header.addEventListener('click', () => {
+        header.parentElement.classList.toggle('active');
+      });
     });
-  });
 
-  // If redirected back with #thanks, show thank-you and hide the form
-  if (window.location.hash === "#thanks") {
-    const thanks = document.getElementById("thanks");
-    const submit = document.getElementById("submit");
-    if (thanks) thanks.style.display = "block";
-    if (submit) submit.style.display = "none";
-  }
-
-  // Optional: AJAX submit for a slick “sending…” experience
-  // This still works even if you keep _next; Formspree will accept JSON.
-  const form = document.getElementById("requestForm");
-  const statusEl = document.getElementById("formStatus");
-
-  if (form && statusEl) {
-    form.addEventListener("submit", async (e) => {
-      // If JS fails, the normal POST + redirect still works.
-      e.preventDefault();
-      statusEl.textContent = "Sending…";
-
-      try {
-        const formData = new FormData(form);
-        const res = await fetch(form.action, {
-          method: "POST",
-          body: formData,
-          headers: { "Accept": "application/json" }
-        });
-
-        if (res.ok) {
-          // Show thanks inline without relying on redirect
-          document.getElementById("submit").style.display = "none";
-          document.getElementById("thanks").style.display = "block";
-          statusEl.textContent = "";
-          form.reset();
-          history.replaceState(null, "", "#thanks");
-        } else {
-          const data = await res.json().catch(() => null);
-          statusEl.textContent = data?.error || "Something went wrong. Try again in a minute.";
-        }
-      } catch (err) {
-        statusEl.textContent = "Network error. Try again in a minute.";
+    // If redirected back with #thanks, hide submit and show thank-you (opened)
+    if (window.location.hash === "#thanks") {
+      const thanks = document.getElementById("thanks");
+      const submit = document.getElementById("submitSection");
+      if (submit) submit.style.display = "none";
+      if (thanks) {
+        thanks.style.display = "block";
+        thanks.classList.add("active");
       }
-    });
-  }
-</script>
-
+    }
+  </script>
 </body>
 </html>
