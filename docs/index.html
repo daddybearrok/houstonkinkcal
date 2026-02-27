@@ -15,6 +15,7 @@
   --bg1:#1c1c1c;
   --panel: rgba(255,255,255,0.05);
   --panelHover: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.10);
   --text: #f2f2f2;
   --muted:#a9a9a9;
   --btnA:#4A0E0E;
@@ -53,7 +54,8 @@ h1{
   line-height:1.55;
 }
 
-/* Top Buttons */
+/* ---------- TOP BUTTONS ---------- */
+
 .subscribe-grid{
   display:grid;
   grid-template-columns:1fr;
@@ -90,7 +92,8 @@ h1{
   filter:brightness(1.05);
 }
 
-/* Accordion Sections */
+/* ---------- ACCORDION ---------- */
+
 .section{
   background:var(--panel);
   border-radius:14px;
@@ -136,6 +139,14 @@ h1{
   padding:20px;
 }
 
+code{
+  background: rgba(255,255,255,0.08);
+  padding:4px 6px;
+  border-radius:6px;
+  font-size:0.9rem;
+  word-break:break-word;
+}
+
 /* ---------- FORM ---------- */
 
 .form{ display:grid; gap:18px; margin-top:10px; }
@@ -146,7 +157,6 @@ h1{
   margin-bottom:8px;
 }
 
-/* text inputs */
 .field input:not([type="radio"]),
 .field textarea{
   width:100%;
@@ -169,7 +179,7 @@ h1{
   .two-col{ grid-template-columns:1fr; }
 }
 
-/* ---------- SEGMENTED RADIO PILLS ---------- */
+/* ---------- SEGMENTED RADIOS ---------- */
 
 .segmented{
   display:flex;
@@ -194,7 +204,6 @@ h1{
   border-color: rgba(255,255,255,0.35);
 }
 
-/* custom radio */
 .seg input[type="radio"]{
   -webkit-appearance:none;
   appearance:none;
@@ -261,11 +270,33 @@ Subscribe once. Stay updated automatically.
 </div>
 
 <div class="subscribe-grid">
-<a class="sub-btn" href="#">Mac / iPhone</a>
-<a class="sub-btn" href="#">Google / Android</a>
-<a class="sub-btn" href="#">Outlook</a>
+<a class="sub-btn" href="webcal://daddybearrok.github.io/houstonkinkcal/houston-kink-cal.ics">Mac / iPhone</a>
+
+<a class="sub-btn" href="https://www.google.com/calendar/render?cid=https%3A%2F%2Fdaddybearrok.github.io%2Fhoustonkinkcal%2Fhouston-kink-cal.ics" target="_blank" rel="noopener">
+Google / Android
+</a>
+
+<a class="sub-btn" href="https://outlook.live.com/calendar/addfromweb?url=https://daddybearrok.github.io/houstonkinkcal/houston-kink-cal.ics&name=Houston%20Kink%20Cal&mkt=en-001" target="_blank" rel="noopener">
+Outlook
+</a>
 </div>
 
+<!-- Manual -->
+<div class="section">
+<div class="section-header">
+<span>Manual Subscription & Refresh Details</span>
+<svg class="chev" viewBox="0 0 24 24">
+<path fill="currentColor" d="M7 10l5 5 5-5z"/>
+</svg>
+</div>
+<div class="section-content">
+<p>If buttons above don’t work, use this URL:</p>
+<p><code>https://daddybearrok.github.io/houstonkinkcal/houston-kink-cal.ics</code></p>
+<p>This is a live subscription calendar. Updates may take a few hours on Google/Outlook. Apple can refresh hourly.</p>
+</div>
+</div>
+
+<!-- Submit -->
 <div class="section">
 <div class="section-header">
 <span>Submit to us!</span>
@@ -275,33 +306,23 @@ Subscribe once. Stay updated automatically.
 </div>
 
 <div class="section-content">
-<p class="muted">
-Got a Houston event or Facebook page with events that should be included?
-Drop it here.
-</p>
-
 <form class="form">
 
 <div class="field">
 <label>What are you submitting?</label>
-
 <div class="segmented">
-
 <label class="seg">
 <input type="radio" name="submission_type" value="single_event" checked>
 <span>Single Facebook Event</span>
 </label>
-
 <label class="seg">
 <input type="radio" name="submission_type" value="facebook_page">
 <span>Facebook Page with Events</span>
 </label>
-
 </div>
 </div>
 
 <button type="submit" class="btn primary">Send Request</button>
-
 </form>
 </div>
 </div>
