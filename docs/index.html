@@ -5,59 +5,81 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Houston Kink Calendar</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #0e0e0e, #1a1a1a);
-    color: #f5f5f5;
+    background: radial-gradient(circle at top, #1c1c1c, #0d0d0d 70%);
+    color: #f2f2f2;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
     min-height: 100vh;
 }
 
 .container {
     max-width: 900px;
-    padding: 60px 20px;
     width: 100%;
+    padding: 70px 20px 60px;
 }
 
 h1 {
-    font-weight: 600;
-    font-size: 2.8rem;
+    font-size: 3rem;
+    font-weight: 700;
     margin-bottom: 10px;
     letter-spacing: 1px;
 }
 
 .subtitle {
     color: #aaa;
-    margin-bottom: 40px;
     font-weight: 300;
+    margin-bottom: 50px;
+    font-size: 1.1rem;
 }
 
-.subscribe-btn {
-    display: inline-block;
-    background: #b3002d;
-    color: white;
-    padding: 14px 28px;
-    border-radius: 30px;
+.subscribe-grid {
+    display: grid;
+    gap: 20px;
+    margin-bottom: 60px;
+}
+
+.sub-btn {
+    display: block;
+    text-align: center;
+    padding: 18px;
+    border-radius: 14px;
     text-decoration: none;
     font-weight: 600;
-    margin-bottom: 50px;
-    transition: 0.3s ease;
+    font-size: 1.05rem;
+    transition: all 0.25s ease;
+    letter-spacing: 0.4px;
 }
 
-.subscribe-btn:hover {
-    background: #ff003c;
-    transform: translateY(-2px);
+.sub-btn.apple {
+    background: linear-gradient(135deg, #2e2e2e, #1a1a1a);
+    border: 1px solid #444;
+    color: white;
+}
+
+.sub-btn.google {
+    background: linear-gradient(135deg, #1a73e8, #1558b0);
+    color: white;
+}
+
+.sub-btn.outlook {
+    background: linear-gradient(135deg, #0078d4, #005a9e);
+    color: white;
+}
+
+.sub-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.45);
 }
 
 .section {
     background: rgba(255,255,255,0.05);
-    border-radius: 12px;
+    border-radius: 14px;
     margin-bottom: 15px;
     overflow: hidden;
     transition: 0.3s ease;
@@ -86,99 +108,83 @@ h1 {
 }
 
 .section.active .section-content {
-    max-height: 500px;
+    max-height: 600px;
     padding: 20px;
 }
 
-.icon {
-    font-size: 1.2rem;
-    opacity: 0.7;
+code {
+    background: rgba(255,255,255,0.08);
+    padding: 4px 6px;
+    border-radius: 6px;
+    font-size: 0.9rem;
 }
+
 .footer {
-    margin-top: 60px;
+    margin-top: 70px;
     font-size: 0.85rem;
     color: #777;
     text-align: center;
+    letter-spacing: 0.3px;
 }
 </style>
 </head>
+
 <body>
 
 <div class="container">
 
     <h1>Houston Kink Calendar</h1>
     <div class="subtitle">
-        A live subscription calendar of Houston leather, pup, bear & community events.
+        Live leather, pup, bear & community events across Houston.
+        Subscribe once. Stay updated automatically.
     </div>
 
-    <a class="subscribe-btn" href="combined.ics">
-        ➜ Subscribe to the Calendar
-    </a>
+    <div class="subscribe-grid">
+
+        <a class="sub-btn apple" href="webcal://daddybearrok.github.io/houstonkinkcal/houston-kink-cal.ics">
+            🍎 Subscribe on Mac / iPhone
+        </a>
+
+        <a class="sub-btn google" href="https://www.google.com/calendar/render?cid=https%3A%2F%2Fdaddybearrok.github.io%2Fhoustonkinkcal%2Fhouston-kink-cal.ics" target="_blank">
+            📅 Add to Google Calendar
+        </a>
+
+        <a class="sub-btn outlook" href="https://outlook.live.com/calendar/addfromweb?url=https://daddybearrok.github.io/houstonkinkcal/houston-kink-cal.ics&name=Houston%20Kink%20Cal&mkt=en-001" target="_blank">
+            💼 Add to Outlook
+        </a>
+
+    </div>
 
     <div class="section">
         <div class="section-header">
-            🍎 Apple Calendar (Mac / iPhone)
-            <span class="icon">+</span>
+            📱 Manual Subscription Instructions
+            <span>+</span>
         </div>
         <div class="section-content">
-            <ol>
-                <li>Open Calendar.</li>
-                <li>Click <strong>File → New Calendar Subscription</strong>.</li>
-                <li>Paste this URL:</li>
-                <p><code>https://daddybearrok.github.io/houstonkinkcal/combined.ics</code></p>
-                <li>Set auto-refresh to hourly.</li>
-            </ol>
+            <p>If the buttons above don’t work for your device, you can manually subscribe using this URL:</p>
+            <p><code>https://daddybearrok.github.io/houstonkinkcal/houston-kink-cal.ics</code></p>
+            <p>Add it using your calendar app’s “Subscribe from Web” or “Add by URL” feature.</p>
         </div>
     </div>
 
     <div class="section">
         <div class="section-header">
-            📱 Google Calendar
-            <span class="icon">+</span>
-        </div>
-        <div class="section-content">
-            <ol>
-                <li>Open Google Calendar on desktop.</li>
-                <li>Click the + next to <strong>Other Calendars</strong>.</li>
-                <li>Select <strong>From URL</strong>.</li>
-                <li>Paste the calendar URL.</li>
-                <li>Click Add Calendar.</li>
-            </ol>
-            <p><em>Note: Google may take a few hours to refresh updates.</em></p>
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="section-header">
-            💼 Outlook
-            <span class="icon">+</span>
-        </div>
-        <div class="section-content">
-            <ol>
-                <li>Open Outlook.</li>
-                <li>Go to <strong>Calendar</strong>.</li>
-                <li>Click <strong>Add Calendar → Subscribe from Web</strong>.</li>
-                <li>Paste the URL and save.</li>
-            </ol>
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="section-header">
-            🔁 Refresh Behavior
-            <span class="icon">+</span>
+            🔁 Refresh & Updates
+            <span>+</span>
         </div>
         <div class="section-content">
             <p>
                 This is a live subscription calendar. Events update automatically.
-                If something doesn’t appear immediately, refresh your subscription
-                or allow your calendar app time to sync.
+                Some platforms (especially Google and Outlook) may take a few hours to refresh.
+            </p>
+            <p>
+                Apple Calendar can be set to refresh hourly.
             </p>
         </div>
     </div>
 
     <div class="footer">
-        Built for the Houston community. Live. Automatic. Always evolving.
+        Built for the Houston community • Live • Automatic • Always evolving
     </div>
 
 </div>
