@@ -3,6 +3,9 @@ VERSION:2.0
 PRODID:-//fbcal bulk export//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
+X-WR-CALNAME:Houston Kink Calendar
+X-WR-CALDESC:Live Houston leather, pup, bear & community events.
+X-WR-TIMEZONE:America/Chicago
 BEGIN:VEVENT
 DTSTAMP:20260125T204422Z
 LAST-MODIFIED:20260125T204422Z
