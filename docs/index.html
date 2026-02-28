@@ -656,13 +656,11 @@
     })();
   </script>
   <script>
-    // Load sources.json and build a scrolling "marquee" list
     async function loadSourcesMarquee() {
       const track = document.getElementById("sourcesTrack");
       if (!track) return;
 
       try {
-        // Cache-bust so updates show quickly
         const res = await fetch("sources.json?v=" + Date.now(), { cache: "no-store" });
         if (!res.ok) throw new Error("sources.json not found");
 
@@ -671,26 +669,32 @@
 
         const pills = sources.map(s => {
           const name = (s.name || "Unknown").trim();
-          const url = (s.events_url || "").trim();
-          const icon = (s.icon || "").trim(); // e.g. "page_icons/leatherboys.png"
+
+          // 🔥 CHANGE IS HERE:
+          const linkUrl = (s.url || s.events_url || "#").trim();
+
+          const icon = (s.icon || "").trim();
 
           const safeName = name.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-          const safeUrl = url.replace(/"/g, "&quot;");
+          const safeUrl = linkUrl.replace(/"/g, "&quot;");
 
           const img = icon
             ? `<img class="source-icon" src="${icon}" alt="${safeName} logo" onerror="this.style.display='none'">`
             : "";
 
-          // If you don't want the pill clickable, replace <a> with <div> and remove href/target
           return `
-            <a class="source-pill" href="${safeUrl}" target="_blank" rel="noopener">
+            <a class="source-pill"
+               href="${safeUrl}"
+               target="_blank"
+               rel="noopener"
+               data-goatcounter-click="/event/source/click"
+               data-goatcounter-title="Source: ${safeName}">
               ${img}
               <span class="source-name">${safeName}</span>
             </a>
           `;
         }).join("");
 
-        // Duplicate content so it loops seamlessly
         track.innerHTML = pills + pills;
 
       } catch (err) {
