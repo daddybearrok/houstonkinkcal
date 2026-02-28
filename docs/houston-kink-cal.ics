@@ -351,6 +351,74 @@ STATUS:CONFIRMED
 PARTSTAT:NEEDS-ACTION
 END:VEVENT
 BEGIN:VEVENT
+DTSTAMP:20260227T203637Z
+LAST-MODIFIED:20260227T203637Z
+CREATED:20260226T233759Z
+SEQUENCE:75518
+ORGANIZER;CN=The Normal Anomaly Inc.:MAILTO:noreply@facebookmail.com
+DTSTART:20260307T160000Z
+DTEND:20260307T190000Z
+UID:e875564122202226@facebook.com
+SUMMARY:WHERE ARE THE BLACK QUEER WOMEN?  Vol. 2
+LOCATION:2616 South Loop W\, Ste. 435\, Houst
+ on\, TX\, United States\, Texas 77054
+URL:https://www.facebook.com/events/875564122202226/
+DESCRIPTION:Facilitated and curated by Latreva
+  Washington (Self Actualized\, Inc.
+ )\, this event will help create dia
+ logue around representation and co
+ mmunity building for Black Queer W
+ omen.  \nEvent is FREE\; RSVP to res
+ erve your ticket: https://www.even
+ tbrite.com/e/where-are-the-black-q
+ ueer-women-vol-2-tickets-198399143
+ 0777?aff=oddtdtcreator\n\nhttps://ww
+ w.facebook.com/events/875564122202
+ 226/
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260227T212216Z
+LAST-MODIFIED:20260227T212216Z
+CREATED:20260218T212620Z
+SEQUENCE:777356
+ORGANIZER;CN=Sawyer Yards:MAILTO:noreply@facebookmail.com
+DTSTART:20260307T000000Z
+DTEND:20260307T030000Z
+UID:e926007413698510@facebook.com
+SUMMARY:Spring Street Studios Opening Night
+LOCATION:Spring Street Studios
+URL:https://www.facebook.com/events/926007413698510/
+DESCRIPTION:Join Spring Street Studios for the
+  opening of two exciting exhibitio
+ ns!\n\nResonance: A Visual Symphony 
+ is not just what we see\, it’s wh
+ at lingers. The artists in this ex
+ hibition are invited from all stud
+ io buildings at Sawyer Yards\, and 
+ their work explores those reverber
+ ations through a variety of media 
+ and approaches. On view through Ma
+ y 9 in all corridors.\n\nCode of Con
+ duct\, a forthcoming exhibition pro
+ duced in conjunction with the 2026
+  FotoFest Biennial\, Sudhoff aims t
+ o humanize the impact of gun bills
+ \, call into question established s
+ chool safety protocols\, and\, throu
+ gh gallery activations\, address ou
+ r shared responsibility in creatin
+ g a safer society. On view through
+  May 9 in TANK Space.\n\n\n\nhttps://w
+ ww.facebook.com/events/92600741369
+ 8510/
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
 DTSTAMP:20260219T205229Z
 LAST-MODIFIED:20260219T205229Z
 CREATED:20260219T205229Z
