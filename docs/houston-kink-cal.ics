@@ -1,6 +1,6 @@
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//fbcal bulk export//EN
+PRODID:-//Houston Kink Cal v1.0//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-TIMEZONE:America/Chicago
