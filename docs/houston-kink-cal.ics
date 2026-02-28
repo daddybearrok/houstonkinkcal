@@ -300,35 +300,6 @@ STATUS:CONFIRMED
 PARTSTAT:NEEDS-ACTION
 END:VEVENT
 BEGIN:VEVENT
-DTSTAMP:20260125T204422Z
-LAST-MODIFIED:20260125T204422Z
-CREATED:20260124T023151Z
-SEQUENCE:151951
-ORGANIZER;CN=Bayou City Pups:MAILTO:noreply@facebookmail.com
-DTSTART:20260228T020000Z
-DTEND:20260228T040000Z
-UID:e1835928350388170@facebook.com
-SUMMARY:H-Town Puppy Mosh
-LOCATION:the Montrose Center
-URL:https://www.facebook.com/events/1834415490539456/?event_time_id=1835928350388170
-DESCRIPTION:Join us for a wagging good time wi
- th Houston Puppys enjoying a safe 
- space while exploring the pup side
-  you always wanted to experience. 
- \n\nHosted by the Bayou City Pups ev
- ery 4th Friday of the Month from 8
- pm-10pm. Always findable-just look
-  for the door with the pup flag or
-  message any member of the BCP boa
- rd\, and/or ask questions in this p
- ost! \n\nhttps://www.facebook.com/ev
- ents/1834415490539456/?event_time_
- id=1835928350388170
-CLASS:PUBLIC
-STATUS:CONFIRMED
-PARTSTAT:NEEDS-ACTION
-END:VEVENT
-BEGIN:VEVENT
 DTSTAMP:20260226T200730Z
 LAST-MODIFIED:20260226T200730Z
 CREATED:20260226T195156Z
@@ -405,16 +376,16 @@ STATUS:CONFIRMED
 PARTSTAT:NEEDS-ACTION
 END:VEVENT
 BEGIN:VEVENT
-DTSTAMP:20250828T232130Z
-LAST-MODIFIED:20250828T232130Z
+DTSTAMP:20260228T014752Z
+LAST-MODIFIED:20260228T014752Z
 CREATED:20250828T232130Z
-SEQUENCE:0
+SEQUENCE:15819982
 ORGANIZER;CN=Houston Bears:MAILTO:noreply@facebookmail.com
 DTSTART:20260610T230000Z
 DTEND:20260611T010000Z
 UID:e1293562842303093@facebook.com
-SUMMARY:Houston Bears General Meeting-Don Jose
-LOCATION:Don Jose Mexican Restaurant
+SUMMARY:Houston Bears General Meeting-Aviator Pizza
+LOCATION:Aviator Pizza & Drafthouse- MarqE
 URL:https://www.facebook.com/events/1293562838969760/?event_time_id=1293562842303093
 DESCRIPTION:Join us for our monthly meeting of
   the Houston Bears.  Enjoy some gr
@@ -429,16 +400,16 @@ STATUS:CONFIRMED
 PARTSTAT:NEEDS-ACTION
 END:VEVENT
 BEGIN:VEVENT
-DTSTAMP:20250828T232130Z
-LAST-MODIFIED:20250828T232130Z
+DTSTAMP:20260228T014752Z
+LAST-MODIFIED:20260228T014752Z
 CREATED:20250828T232130Z
-SEQUENCE:0
+SEQUENCE:15819982
 ORGANIZER;CN=Houston Bears:MAILTO:noreply@facebookmail.com
 DTSTART:20260311T230000Z
 DTEND:20260312T010000Z
 UID:e1293562855636425@facebook.com
-SUMMARY:Houston Bears General Meeting-Don Jose
-LOCATION:Don Jose Mexican Restaurant
+SUMMARY:Houston Bears General Meeting-Aviator Pizza
+LOCATION:Aviator Pizza & Drafthouse- MarqE
 URL:https://www.facebook.com/events/1293562838969760/?event_time_id=1293562855636425
 DESCRIPTION:Join us for our monthly meeting of
   the Houston Bears.  Enjoy some gr
