@@ -102,9 +102,7 @@
       filter: brightness(1.05);
     }
 
-    .sub-btn:active {
-      transform: translateY(-2px);
-    }
+    .sub-btn:active { transform: translateY(-2px); }
 
     .section {
       background: var(--panel);
@@ -125,9 +123,7 @@
       user-select: none;
     }
 
-    .section-header:hover {
-      background: var(--panelHover);
-    }
+    .section-header:hover { background: var(--panelHover); }
 
     .section-header .right {
       display: inline-flex;
@@ -205,8 +201,8 @@
     .seg {
       display:flex;
       align-items:center;
-      gap:12px; /* spacing between radio + text */
-      padding:8px 16px; /* slightly slimmer pills */
+      gap:12px;
+      padding:8px 16px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,0.12);
       background: rgba(0,0,0,0.25);
@@ -241,10 +237,7 @@
       transition:transform 0.15s ease;
     }
 
-    .seg input[type="radio"]:checked::before{
-      transform:scale(1);
-    }
-
+    .seg input[type="radio"]:checked::before{ transform:scale(1); }
     @media (max-width: 720px) { .seg { min-width: 100%; } }
 
     .btn.primary {
@@ -292,24 +285,11 @@
     }
     .spinner.show { display: inline-block; }
     @keyframes spin { to { transform: rotate(360deg); } }
-  </style>
-  <style>
+
     /* --- Sources marquee --- */
-    .sources-wrap {
-      margin-top: 34px;
-    }
-
-    .sources-title {
-      font-weight: 700;
-      margin: 0 0 10px;
-      letter-spacing: 0.2px;
-    }
-
-    .sources-subtitle {
-      margin: 0 0 14px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
+    .sources-wrap { margin-top: 34px; }
+    .sources-title { font-weight: 700; margin: 0 0 10px; letter-spacing: 0.2px; }
+    .sources-subtitle { margin: 0 0 14px; color: var(--muted); line-height: 1.5; }
 
     .marquee {
       position: relative;
@@ -320,7 +300,6 @@
       padding: 12px 0;
     }
 
-    /* subtle edge fade */
     .marquee::before,
     .marquee::after {
       content: "";
@@ -362,16 +341,22 @@
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.12);
       background: rgba(0,0,0,0.25);
-      text-decoration: none;
       color: #fff;
       white-space: nowrap;
       transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      cursor: pointer;
+      user-select: none;
+      outline: none;
     }
 
     .source-pill:hover {
       transform: translateY(-2px);
       background: rgba(255,255,255,0.08);
       border-color: rgba(255,255,255,0.22);
+    }
+
+    .source-pill:focus-visible {
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.18);
     }
 
     .source-icon {
@@ -393,8 +378,7 @@
     @media (prefers-reduced-motion: reduce) {
       .track { animation: none; }
     }
-  </style>
-  <style>
+
     /* Modal */
     .modal-backdrop {
       position: fixed;
@@ -474,10 +458,7 @@
       font-size: 0.98rem;
     }
 
-    .linktree {
-      display: grid;
-      gap: 10px;
-    }
+    .linktree { display: grid; gap: 10px; }
 
     .linktree a {
       display:flex;
@@ -501,11 +482,9 @@
     .linktree .label { font-weight: 800; letter-spacing: 0.2px; }
     .linktree .urlhint { opacity: 0.75; font-size: 12px; overflow:hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-    .linktree .right {
-      opacity: 0.9;
-      flex: 0 0 auto;
-    }
+    .linktree .right { opacity: 0.9; flex: 0 0 auto; }
   </style>
+
   <script data-goatcounter="https://houstonkinkcal.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 
@@ -519,15 +498,29 @@
     </div>
 
     <div class="subscribe-grid">
-      <a class="sub-btn" href="webcal://daddybearrok.github.io/houstonkinkcal/houston-kink-cal.ics" aria-label="Subscribe on Apple Calendar (Mac and iPhone)" data-goatcounter-click="/event/subscribe/apple" data-goatcounter-title="Subscribe: Apple">
+      <a class="sub-btn"
+         href="webcal://daddybearrok.github.io/houstonkinkcal/houston-kink-cal.ics"
+         aria-label="Subscribe on Apple Calendar (Mac and iPhone)"
+         data-goatcounter-click="/event/subscribe/apple"
+         data-goatcounter-title="Subscribe: Apple">
         <span>Mac / iPhone</span>
       </a>
 
-      <a class="sub-btn" href="https://www.google.com/calendar/render?cid=http%3A%2F%2Fdaddybearrok.github.io%2Fhoustonkinkcal%2Fhouston-kink-cal.ics" target="_blank" rel="noopener" aria-label="Add to Google Calendar" data-goatcounter-click="/event/subscribe/google" data-goatcounter-title="Subscribe: Google">
+      <a class="sub-btn"
+         href="https://www.google.com/calendar/render?cid=https%3A%2F%2Fdaddybearrok.github.io%2Fhoustonkinkcal%2Fhouston-kink-cal.ics"
+         target="_blank" rel="noopener"
+         aria-label="Add to Google Calendar"
+         data-goatcounter-click="/event/subscribe/google"
+         data-goatcounter-title="Subscribe: Google">
         <span>Google / Android</span>
       </a>
 
-      <a class="sub-btn" href="https://outlook.live.com/calendar/addfromweb?url=https://daddybearrok.github.io/houstonkinkcal/houston-kink-cal.ics&name=Houston%20Kink%20Cal&mkt=en-001" target="_blank" rel="noopener" aria-label="Add to Outlook Calendar" data-goatcounter-click="/event/subscribe/outlook" data-goatcounter-title="Subscribe: Outlook">
+      <a class="sub-btn"
+         href="https://outlook.live.com/calendar/addfromweb?url=https://daddybearrok.github.io/houstonkinkcal/houston-kink-cal.ics&name=Houston%20Kink%20Cal&mkt=en-001"
+         target="_blank" rel="noopener"
+         aria-label="Add to Outlook Calendar"
+         data-goatcounter-click="/event/subscribe/outlook"
+         data-goatcounter-title="Subscribe: Outlook">
         <span>Outlook</span>
       </a>
     </div>
@@ -536,9 +529,7 @@
       <div class="section-header">
         <span>Manual Subscription Instructions &amp; Refresh/Update Details</span>
         <span class="right" aria-hidden="true">
-          <svg class="chev" viewBox="0 0 24 24">
-            <path fill="currentColor" d="M7 10l5 5 5-5z"/>
-          </svg>
+          <svg class="chev" viewBox="0 0 24 24"><path fill="currentColor" d="M7 10l5 5 5-5z"/></svg>
         </span>
       </div>
       <div class="section-content">
@@ -549,9 +540,7 @@
           This is a live subscription calendar. Events update automatically.
           Some platforms (such as Google and Outlook) may take a few hours to refresh.
         </p>
-        <p>
-          Apple Calendar can be set to refresh hourly.
-        </p>
+        <p>Apple Calendar can be set to refresh hourly.</p>
       </div>
     </div>
 
@@ -560,9 +549,7 @@
       <div class="section-header">
         <span>Submit an Event or Page</span>
         <span class="right" aria-hidden="true">
-          <svg class="chev" viewBox="0 0 24 24">
-            <path fill="currentColor" d="M7 10l5 5 5-5z"/>
-          </svg>
+          <svg class="chev" viewBox="0 0 24 24"><path fill="currentColor" d="M7 10l5 5 5-5z"/></svg>
         </span>
       </div>
 
@@ -647,9 +634,7 @@
       <div class="section-header">
         <span>✅ Submitted</span>
         <span class="right" aria-hidden="true">
-          <svg class="chev" viewBox="0 0 24 24">
-            <path fill="currentColor" d="M7 10l5 5 5-5z"/>
-          </svg>
+          <svg class="chev" viewBox="0 0 24 24"><path fill="currentColor" d="M7 10l5 5 5-5z"/></svg>
         </span>
       </div>
       <div class="section-content">
@@ -678,6 +663,8 @@
     </div>
 
   </div>
+
+  <!-- Org modal -->
   <div class="modal-backdrop" id="orgModalBackdrop" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="orgModalTitle">
       <div class="modal-header">
@@ -695,6 +682,7 @@
       </div>
     </div>
   </div>
+
   <script>
     // Accordion behavior
     document.querySelectorAll('.section-header').forEach(header => {
@@ -753,7 +741,6 @@
           });
 
           if (res.ok) {
-            // success UI
             setStatus("ok", "Sent. Thank you.");
             form.reset();
 
@@ -761,13 +748,11 @@
             if (thanksSection) {
               thanksSection.style.display = "block";
               thanksSection.classList.add("active");
-              // Scroll to it (nice touch)
               thanksSection.scrollIntoView({ behavior: "smooth", block: "start" });
             }
             return;
           }
 
-          // If not ok, try to read JSON for error details
           let data = null;
           try { data = await res.json(); } catch {}
           const msg = (data && data.errors && data.errors.length)
@@ -783,63 +768,13 @@
       });
     })();
   </script>
+
   <script>
-    async function loadSourcesMarquee() {
-      const track = document.getElementById("sourcesTrack");
-      if (!track) return;
-
-      try {
-        const res = await fetch("sources.json?v=" + Date.now(), { cache: "no-store" });
-        if (!res.ok) throw new Error("sources.json not found");
-
-        const sources = await res.json();
-        if (!Array.isArray(sources) || sources.length === 0) return;
-
-        const pills = sources.map(s => {
-          const name = (s.name || "Unknown").trim();
-
-          // 🔥 CHANGE IS HERE:
-          const linkUrl = (s.url || s.events_url || "#").trim();
-
-          const icon = (s.icon || "").trim();
-
-          const safeName = name.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-          const safeUrl = linkUrl.replace(/"/g, "&quot;");
-
-          const img = icon
-            ? `<img class="source-icon" src="${icon}" alt="${safeName} logo" onerror="this.style.display='none'">`
-            : "";
-
-          return `
-            <div class="source-pill org-banner" data-org-index="${index}">
-              ${img}
-              <span class="source-name">${safeName}</span>
-            </div>
-          `;
-        }).join("");
-
-        track.innerHTML = pills + pills;
-
-        document.querySelectorAll(".org-banner").forEach(el => {
-            el.addEventListener("click", () => {
-              const idx = Number(el.dataset.orgIndex);
-              const org = ORG_DATA[idx];
-              if (org) openOrgModal(org);
-            });
-          });
-
-      } catch (err) {
-        console.warn("Could not load sources.json", err);
-      }
-    }
-
-    loadSourcesMarquee();
-  </script>
-  <script>
+    // Modal helpers
     let ORG_DATA = [];
 
-    function shortHost(u) {
-      try { return new URL(u).host.replace(/^www\./,''); } catch { return ''; }
+    function safeHost(u) {
+      try { return new URL(u).host.replace(/^www\./,''); } catch { return ""; }
     }
 
     function openOrgModal(org) {
@@ -851,8 +786,9 @@
 
       title.textContent = org.name || "Organization";
 
-      icon.src = org.icon || "";
-      icon.style.display = org.icon ? "block" : "none";
+      const iconUrl = (org.icon || "").trim();
+      icon.src = iconUrl;
+      icon.style.display = iconUrl ? "block" : "none";
 
       const d = (org.description || "").trim();
       if (d) {
@@ -865,22 +801,29 @@
       links.innerHTML = "";
 
       const items = Array.isArray(org.links) ? org.links : [];
+      const usable = items.filter(x => x && x.url);
 
-      for (const l of items) {
-        if (!l || !l.url) continue;
-
+      if (usable.length === 0) {
         links.insertAdjacentHTML("beforeend", `
-          <a href="${l.url}" target="_blank" rel="noopener">
-            <div>
-              <div class="label">${l.label || "Link"}</div>
-              <div class="urlhint">${new URL(l.url).host.replace(/^www\./,'')}</div>
-            </div>
-            <div class="right">↗</div>
-          </a>
+          <div class="status show warn">No links provided yet for this org.</div>
         `);
+      } else {
+        for (const l of usable) {
+          const label = (l.label || "Link").trim();
+          links.insertAdjacentHTML("beforeend", `
+            <a href="${l.url}" target="_blank" rel="noopener">
+              <div>
+                <div class="label">${label}</div>
+                <div class="urlhint">${safeHost(l.url)}</div>
+              </div>
+              <div class="right">↗</div>
+            </a>
+          `);
+        }
       }
 
       backdrop.classList.add("show");
+      backdrop.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
     }
 
@@ -899,25 +842,65 @@
       if (e.key === "Escape") closeOrgModal();
     });
 
-    async function loadSourcesAndWireOrgClicks() {
-      const res = await fetch("./sources.json", { cache: "no-store" });
-      ORG_DATA = await res.json();
+    // Render marquee + wire clicks (single source of truth)
+    async function initSources() {
+      const track = document.getElementById("sourcesTrack");
+      if (!track) return;
 
-      // IMPORTANT: this assumes your org banner elements have class "org-banner"
-      // and data-org-index set at render time.
-      document.querySelectorAll(".org-banner[data-org-index]").forEach(el => {
-        el.addEventListener("click", (ev) => {
-          ev.preventDefault();
-          const idx = Number(el.getAttribute("data-org-index"));
-          const org = ORG_DATA[idx];
-          if (org) openOrgModal(org);
+      try {
+        const res = await fetch("sources.json?v=" + Date.now(), { cache: "no-store" });
+        if (!res.ok) throw new Error("sources.json not found");
+
+        ORG_DATA = await res.json();
+        if (!Array.isArray(ORG_DATA) || ORG_DATA.length === 0) return;
+
+        const pills = ORG_DATA.map((s, index) => {
+          const name = (s.name || "Unknown").trim();
+          const icon = (s.icon || "").trim();
+
+          const img = icon
+            ? `<img class="source-icon" src="${icon}" alt="${name} logo" onerror="this.style.display='none'">`
+            : "";
+
+          // clickable pill opens modal (linktree)
+          return `
+            <div class="source-pill org-banner"
+                 role="button"
+                 tabindex="0"
+                 aria-label="Open links for ${name}"
+                 data-org-index="${index}">
+              ${img}
+              <span class="source-name">${name}</span>
+            </div>
+          `;
+        }).join("");
+
+        // Duplicate for seamless scroll
+        track.innerHTML = pills + pills;
+
+        // Wire click + keyboard
+        const banners = track.querySelectorAll(".org-banner[data-org-index]");
+        banners.forEach(el => {
+          const open = () => {
+            const idx = Number(el.getAttribute("data-org-index"));
+            const org = ORG_DATA[idx];
+            if (org) openOrgModal(org);
+          };
+          el.addEventListener("click", (e) => { e.preventDefault(); open(); });
+          el.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              open();
+            }
+          });
         });
-      });
+
+      } catch (err) {
+        console.warn("Could not load sources.json", err);
+      }
     }
 
-    // Call this after you render banners
-    // If you already have a function that loads/render sources.json, integrate there.
-    loadSourcesAndWireOrgClicks().catch(console.error);
+    initSources();
   </script>
 </body>
 </html>
