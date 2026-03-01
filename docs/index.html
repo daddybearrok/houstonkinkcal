@@ -412,6 +412,43 @@
       overflow: hidden;
     }
 
+    .org-tile::after {
+      content: attr(data-org-name);
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: calc(100% + 10px);
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(10,10,10,0.92);
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+      color: #fff;
+      font-weight: 900;
+      letter-spacing: 0.2px;
+      line-height: 1.2;
+      z-index: 5;
+
+      /* allow full text */
+      white-space: normal;
+      overflow: visible;
+
+      /* hidden */
+      opacity: 0;
+      transform: translateY(6px);
+      pointer-events: none;
+      transition: opacity 0.16s ease, transform 0.16s ease;
+    }
+
+    /* Show tooltip on hover (desktop) and focus (keyboard) */
+    @media (hover: hover) and (pointer: fine) {
+      .org-tile:hover::after,
+      .org-tile:focus-visible::after {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     /* ✅ FIX: Desktop hover devices — hide label until hover/focus */
     @media (hover: hover) and (pointer: fine) {
       .org-tile .label {
@@ -914,12 +951,15 @@
 
           const fallback = `<div class="fallback" style="display:${icon ? 'none' : 'grid'};">${name}</div>`;
 
+          const escapedName = name.replace(/"/g, "&quot;");
+
           return `
             <div class="org-tile org-banner"
                  role="button"
                  tabindex="0"
-                 aria-label="Open links for ${name}"
-                 data-org-index="${index}">
+                 aria-label="Open links for ${escapedName}"
+                 data-org-index="${index}"
+                 data-org-name="${escapedName}">
               ${img}
               ${fallback}
               <div class="label"><span>${name}</span></div>
