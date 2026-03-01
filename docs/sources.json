@@ -3,6 +3,7 @@
     "name": "Bayou City Pups",
     "events_url": "https://www.facebook.com/BayouCityPups/events",
     "icon": "https://daddybearrok.github.io/houstonkinkcal/page_icons/bayou_city_pups.png",
+    "description": "A non-profit organization for pups, pets, and those who love them.",
     "links": [
       { "label": "Facebook", "url": "https://www.facebook.com/BayouCityPups" }
     ]
