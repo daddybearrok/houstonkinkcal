@@ -394,6 +394,118 @@
       .track { animation: none; }
     }
   </style>
+  <style>
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 9999;
+    }
+    .modal-backdrop.show { display: flex; }
+
+    .modal {
+      width: 100%;
+      max-width: 560px;
+      border-radius: 18px;
+      background: rgba(20, 10, 10, 0.92);
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      overflow: hidden;
+    }
+
+    .modal-header {
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      padding: 16px 16px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .modal-title {
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .modal-title img {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .modal-title h3 {
+      margin: 0;
+      font-size: 1.15rem;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .modal-close {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      cursor: pointer;
+      display:grid;
+      place-items:center;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.12); }
+
+    .modal-body { padding: 14px 16px 18px; }
+
+    .modal-desc {
+      margin: 0 0 14px;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.55;
+      font-size: 0.98rem;
+    }
+
+    .linktree {
+      display: grid;
+      gap: 10px;
+    }
+
+    .linktree a {
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      text-decoration:none;
+      color:#fff;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.08);
+      transition: transform .18s ease, background .18s ease;
+    }
+
+    .linktree a:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.12);
+    }
+
+    .linktree .label { font-weight: 800; letter-spacing: 0.2px; }
+    .linktree .urlhint { opacity: 0.75; font-size: 12px; overflow:hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    .linktree .right {
+      opacity: 0.9;
+      flex: 0 0 auto;
+    }
+  </style>
   <script data-goatcounter="https://houstonkinkcal.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 
@@ -566,7 +678,23 @@
     </div>
 
   </div>
-
+  <div class="modal-backdrop" id="orgModalBackdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="orgModalTitle">
+      <div class="modal-header">
+        <div class="modal-title">
+          <img id="orgModalIcon" alt="" />
+          <div style="min-width:0;">
+            <h3 id="orgModalTitle"></h3>
+          </div>
+        </div>
+        <button class="modal-close" id="orgModalClose" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc" id="orgModalDesc" style="display:none;"></p>
+        <div class="linktree" id="orgModalLinks"></div>
+      </div>
+    </div>
+  </div>
   <script>
     // Accordion behavior
     document.querySelectorAll('.section-header').forEach(header => {
@@ -683,19 +811,22 @@
             : "";
 
           return `
-            <a class="source-pill"
-               href="${safeUrl}"
-               target="_blank"
-               rel="noopener"
-               data-goatcounter-click="/event/source/click"
-               data-goatcounter-title="Source: ${safeName}">
+            <div class="source-pill org-banner" data-org-index="${index}">
               ${img}
               <span class="source-name">${safeName}</span>
-            </a>
+            </div>
           `;
         }).join("");
 
         track.innerHTML = pills + pills;
+
+        document.querySelectorAll(".org-banner").forEach(el => {
+            el.addEventListener("click", () => {
+              const idx = Number(el.dataset.orgIndex);
+              const org = ORG_DATA[idx];
+              if (org) openOrgModal(org);
+            });
+          });
 
       } catch (err) {
         console.warn("Could not load sources.json", err);
@@ -703,6 +834,90 @@
     }
 
     loadSourcesMarquee();
+  </script>
+  <script>
+    let ORG_DATA = [];
+
+    function shortHost(u) {
+      try { return new URL(u).host.replace(/^www\./,''); } catch { return ''; }
+    }
+
+    function openOrgModal(org) {
+      const backdrop = document.getElementById("orgModalBackdrop");
+      const title = document.getElementById("orgModalTitle");
+      const icon = document.getElementById("orgModalIcon");
+      const desc = document.getElementById("orgModalDesc");
+      const links = document.getElementById("orgModalLinks");
+
+      title.textContent = org.name || "Organization";
+
+      icon.src = org.icon || "";
+      icon.style.display = org.icon ? "block" : "none";
+
+      const d = (org.description || "").trim();
+      if (d) {
+        desc.textContent = d;
+        desc.style.display = "block";
+      } else {
+        desc.style.display = "none";
+      }
+
+      links.innerHTML = "";
+
+      const items = Array.isArray(org.links) ? org.links : [];
+
+      for (const l of items) {
+        if (!l || !l.url) continue;
+
+        links.insertAdjacentHTML("beforeend", `
+          <a href="${l.url}" target="_blank" rel="noopener">
+            <div>
+              <div class="label">${l.label || "Link"}</div>
+              <div class="urlhint">${new URL(l.url).host.replace(/^www\./,'')}</div>
+            </div>
+            <div class="right">↗</div>
+          </a>
+        `);
+      }
+
+      backdrop.classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeOrgModal() {
+      const backdrop = document.getElementById("orgModalBackdrop");
+      backdrop.classList.remove("show");
+      backdrop.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    document.getElementById("orgModalClose").addEventListener("click", closeOrgModal);
+    document.getElementById("orgModalBackdrop").addEventListener("click", (e) => {
+      if (e.target.id === "orgModalBackdrop") closeOrgModal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeOrgModal();
+    });
+
+    async function loadSourcesAndWireOrgClicks() {
+      const res = await fetch("./sources.json", { cache: "no-store" });
+      ORG_DATA = await res.json();
+
+      // IMPORTANT: this assumes your org banner elements have class "org-banner"
+      // and data-org-index set at render time.
+      document.querySelectorAll(".org-banner[data-org-index]").forEach(el => {
+        el.addEventListener("click", (ev) => {
+          ev.preventDefault();
+          const idx = Number(el.getAttribute("data-org-index"));
+          const org = ORG_DATA[idx];
+          if (org) openOrgModal(org);
+        });
+      });
+    }
+
+    // Call this after you render banners
+    // If you already have a function that loads/render sources.json, integrate there.
+    loadSourcesAndWireOrgClicks().catch(console.error);
   </script>
 </body>
 </html>
