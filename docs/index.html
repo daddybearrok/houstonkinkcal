@@ -519,7 +519,7 @@
     }
 
     .linktree .label { font-weight: 800; letter-spacing: 0.2px; }
-    .linktree .urlhint { opacity: 0.75; font-size: 12px; overflow:hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .linktree .urlhint { opacity: 0.75; font-size: 12px; overflow:hidden; text-overflow: ellipsis; white-space: nowrap; word-break: break-word; overflow-wrap: anywhere; }
 
     .linktree .right { opacity: 0.9; flex: 0 0 auto; }
   </style>
@@ -685,7 +685,7 @@
     </div>
 
     <div class="sources-wrap" id="sources">
-      <div class="sources-title">Included Sources</div>
+      <div class="sources-title">Included Organizations</div>
       <div class="sources-subtitle">
         These are the organizations currently included in the calendar. Click for more information on an organization.
       </div>
@@ -812,10 +812,6 @@
     // Modal helpers
     let ORG_DATA = [];
 
-    function safeHost(u) {
-      try { return new URL(u).host.replace(/^www\./,''); } catch { return ""; }
-    }
-
     function openOrgModal(org) {
       const backdrop = document.getElementById("orgModalBackdrop");
       const title = document.getElementById("orgModalTitle");
@@ -844,7 +840,7 @@
 
       if (usable.length === 0) {
         links.insertAdjacentHTML("beforeend", `
-          <div class="status show warn">No links provided yet for this org.</div>
+          <div class="status show warn">No links have been provided for this organization.</div>
         `);
       } else {
         for (const l of usable) {
@@ -853,7 +849,7 @@
             <a href="${l.url}" target="_blank" rel="noopener">
               <div>
                 <div class="label">${label}</div>
-                <div class="urlhint">${safeHost(l.url)}</div>
+                <div class="urlhint">${l.url}</div>
               </div>
               <div class="right">↗</div>
             </a>
