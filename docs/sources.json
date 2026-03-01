@@ -2,25 +2,33 @@
   {
     "name": "Bayou City Pups",
     "events_url": "https://www.facebook.com/BayouCityPups/events",
-    "url": "https://www.facebook.com/BayouCityPups",
-    "icon": "https://daddybearrok.github.io/houstonkinkcal/page_icons/bayou_city_pups.png"
+    "icon": "https://daddybearrok.github.io/houstonkinkcal/page_icons/bayou_city_pups.png",
+    "links": [
+      { "label": "Facebook", "url": "https://www.facebook.com/BayouCityPups" }
+    ]
   },
   {
     "name": "Houston Bears",
     "events_url": "https://www.facebook.com/HoustonBears/events",
-    "url": "https://www.facebook.com/HoustonBears",
-    "icon": "https://daddybearrok.github.io/houstonkinkcal/page_icons/houston_bears.png"
+    "icon": "https://daddybearrok.github.io/houstonkinkcal/page_icons/houston_bears.png",
+    "links": [
+      { "label": "Facebook", "url": "https://www.facebook.com/HoustonBears" }
+    ]
   },
   {
     "name": "National Leather Association - Houston",  
     "events_url": "https://www.facebook.com/nlahoustontx/events",
-    "url": "https://www.facebook.com/nlahoustontx",
-    "icon": "https://daddybearrok.github.io/houstonkinkcal/page_icons/national_leather_association_houston.png"
+    "icon": "https://daddybearrok.github.io/houstonkinkcal/page_icons/national_leather_association_houston.png",
+    "links": [
+      { "label": "Facebook", "url": "https://www.facebook.com/nlahoustontx" }
+    ]
   },
   {
     "name": "Leatherboys of Houston",
     "events_url": "https://www.facebook.com/profile.php?id=61553609918708&sk=events",
-    "url": "https://www.facebook.com/profile.php?id=61553609918708",
-    "icon": "https://daddybearrok.github.io/houstonkinkcal/page_icons/leatherboys_of_houston.png"
+    "icon": "https://daddybearrok.github.io/houstonkinkcal/page_icons/leatherboys_of_houston.png",
+    "links": [
+      { "label": "Facebook", "url": "https://www.facebook.com/profile.php?id=61553609918708" }
+    ]
   }
 ]
