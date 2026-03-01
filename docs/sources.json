@@ -1,35 +1,54 @@
 [
   {
     "name": "Bayou City Pups",
-    "events_url": "https://www.facebook.com/BayouCityPups/events",
     "icon": "https://daddybearrok.github.io/houstonkinkcal/page_icons/bayou_city_pups.png",
     "description": "A non-profit organization for pups, pets, and those who love them.",
     "links": [
       { "label": "Facebook", "url": "https://www.facebook.com/BayouCityPups" }
+    ],
+    "event_sources": [
+      { "type": "facebook_events", "events_url": "https://www.facebook.com/BayouCityPups/events" },
     ]
   },
   {
     "name": "Houston Bears",
-    "events_url": "https://www.facebook.com/HoustonBears/events",
     "icon": "https://daddybearrok.github.io/houstonkinkcal/page_icons/houston_bears.png",
     "links": [
       { "label": "Facebook", "url": "https://www.facebook.com/HoustonBears" }
+    ],
+    "event_sources": [
+      { "type": "facebook_events", "events_url": "https://www.facebook.com/HoustonBears/events" },
     ]
   },
   {
     "name": "National Leather Association - Houston",  
-    "events_url": "https://www.facebook.com/nlahoustontx/events",
     "icon": "https://daddybearrok.github.io/houstonkinkcal/page_icons/national_leather_association_houston.png",
     "links": [
       { "label": "Facebook", "url": "https://www.facebook.com/nlahoustontx" }
+    ],
+    "event_sources": [
+      { "type": "facebook_events", "events_url": "https://www.facebook.com/nlahoustontx/events" },
     ]
   },
   {
     "name": "Leatherboys of Houston",
-    "events_url": "https://www.facebook.com/profile.php?id=61553609918708&sk=events",
     "icon": "https://daddybearrok.github.io/houstonkinkcal/page_icons/leatherboys_of_houston.png",
     "links": [
       { "label": "Facebook", "url": "https://www.facebook.com/profile.php?id=61553609918708" }
+    ],
+    "event_sources": [
+      { "type": "facebook_events", "events_url": "https://www.facebook.com/profile.php?id=61553609918708&sk=events" },
+    ]
+  },
+  {
+    "name": "Houston Gaymers",
+    "icon": "https://daddybearrok.github.io/houstonkinkcal/page_icons/houston_gaymers.png",
+    "links": [
+      { "label": "Facebook", "url": "https://www.facebook.com/profile.php?id=61553609918708" },
+      { "label": "Instagram", "url": "https://www.instagram.com/houstongaymers/" }
+    ],
+    "event_sources": [
+      { "type": "ics", "events_url": "https://calendar.google.com/calendar/u/1/r?cid=Y18wOWE4OWQxYTkyM2E3ZjIyZWUzNWYyZTExZGFhZTNmNjJhNDg5OThmM2NmYWYwN2Y3NjQ5NzdiMzE4YmQ2MjRmQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20" },
     ]
   }
 ]
