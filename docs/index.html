@@ -72,9 +72,7 @@
       margin-bottom: 44px;
     }
     @media (min-width: 900px) {
-      .subscribe-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
+      .subscribe-grid { grid-template-columns: repeat(3, 1fr); }
     }
 
     .sub-btn {
@@ -390,6 +388,7 @@
       text-align: center;
     }
 
+    /* Bottom text overlay inside the square */
     .org-tile .label {
       position: absolute;
       left: 0; right: 0; bottom: 0;
@@ -400,6 +399,7 @@
       min-height: 54px;
     }
 
+    /* Default: clamp to 2 lines (so tiles stay clean) */
     .org-tile .label span {
       font-weight: 900;
       letter-spacing: 0.2px;
@@ -410,46 +410,14 @@
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
+      word-break: break-word;
     }
 
-    .org-tile::after {
-      content: attr(data-org-name);
-      position: absolute;
-      left: 10px;
-      right: 10px;
-      bottom: calc(100% + 10px);
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: rgba(10,10,10,0.92);
-      border: 1px solid rgba(255,255,255,0.16);
-      box-shadow: 0 18px 40px rgba(0,0,0,0.55);
-      color: #fff;
-      font-weight: 900;
-      letter-spacing: 0.2px;
-      line-height: 1.2;
-      z-index: 5;
-
-      /* allow full text */
-      white-space: normal;
-      overflow: visible;
-
-      /* hidden */
-      opacity: 0;
-      transform: translateY(6px);
-      pointer-events: none;
-      transition: opacity 0.16s ease, transform 0.16s ease;
+    @media (prefers-reduced-motion: reduce) {
+      .track { animation: none; }
     }
 
-    /* Show tooltip on hover (desktop) and focus (keyboard) */
-    @media (hover: hover) and (pointer: fine) {
-      .org-tile:hover::after,
-      .org-tile:focus-visible::after {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* ✅ FIX: Desktop hover devices — hide label until hover/focus */
+    /* ✅ Desktop hover devices — hide label until hover/focus */
     @media (hover: hover) and (pointer: fine) {
       .org-tile .label {
         opacity: 0;
@@ -464,10 +432,24 @@
         transform: translateY(0);
         transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s;
       }
-    }
 
-    @media (prefers-reduced-motion: reduce) {
-      .track { animation: none; }
+      /* ✅ IMPORTANT: on hover/focus, remove clamping so long names show fully */
+      .org-tile:hover .label,
+      .org-tile:focus-visible .label {
+        /* let the overlay grow to fit multiple wrapped lines */
+        min-height: 0;
+        padding: 14px 12px 12px;
+      }
+      .org-tile:hover .label span,
+      .org-tile:focus-visible .label span {
+        display: block;               /* stop -webkit-box */
+        -webkit-line-clamp: unset;    /* remove clamp */
+        -webkit-box-orient: unset;
+        overflow: visible;            /* no ellipsis */
+        font-size: 0.88rem;           /* slightly smaller so long names fit better */
+        line-height: 1.15;
+        white-space: normal;
+      }
     }
 
     /* Modal */
@@ -958,8 +940,7 @@
                  role="button"
                  tabindex="0"
                  aria-label="Open links for ${escapedName}"
-                 data-org-index="${index}"
-                 data-org-name="${escapedName}">
+                 data-org-index="${index}">
               ${img}
               ${fallback}
               <div class="label"><span>${name}</span></div>
