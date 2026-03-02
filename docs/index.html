@@ -296,6 +296,13 @@
       background: rgba(255,255,255,0.04);
       overflow: hidden;
       padding: 14px 0;
+      display: flex;
+      align-items: center;
+      min-height: 178px; /* ensures visibility on mobile */
+    }
+
+    @media (max-width: 720px) {
+      .marquee { min-height: 156px; }
     }
 
     .marquee::before,
@@ -316,23 +323,38 @@
       background: linear-gradient(270deg, rgba(13,13,13,1), rgba(13,13,13,0));
     }
 
+    @media (max-width: 720px) {
+      .marquee::before, .marquee::after { width: 44px; }
+    }
+
     .track {
       display: flex;
       align-items: center;
       gap: 14px;
+      flex-wrap: nowrap;
+      width: max-content; /* important for iOS Safari */
       will-change: transform;
-      animation: scroll 28s linear infinite;
       padding: 0 14px;
+      transform: translateX(0);
+      --scroll-distance: 50%;
+      animation: scroll 28s linear infinite;
     }
 
     .marquee:hover .track { animation-play-state: paused; }
 
-    @keyframes scroll {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
+    /* If the set doesn't overflow, we disable scrolling and just show the tiles. */
+    .marquee.no-scroll { padding: 14px; }
+    .marquee.no-scroll .track {
+      animation: none;
+      padding: 0;
     }
 
-    /* square icon tiles */
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(calc(-1 * var(--scroll-distance))); }
+    }
+
+    /* NEW: square icon tiles (instead of pills) */
     .org-tile {
       position: relative;
       border-radius: 16px;
@@ -388,68 +410,45 @@
       text-align: center;
     }
 
-    /* Bottom text overlay inside the square */
+    /* Label hidden by default on desktop; revealed on hover/focus */
     .org-tile .label {
       position: absolute;
       left: 0; right: 0; bottom: 0;
       padding: 12px 12px 11px;
-      background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.78));
+      background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.84));
       display: flex;
       align-items: flex-end;
-      min-height: 54px;
+      min-height: 58px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .18s ease, transform .18s ease;
     }
 
-    /* Default: clamp to 2 lines (so tiles stay clean) */
+    .org-tile:hover .label,
+    .org-tile:focus-visible .label {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .org-tile .label span {
       font-weight: 900;
       letter-spacing: 0.2px;
       font-size: 0.95rem;
-      line-height: 1.1;
+      line-height: 1.15;
       text-shadow: 0 2px 10px rgba(0,0,0,0.75);
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      word-break: break-word;
+      display: block;
+      white-space: normal;
+      overflow: visible;
+    }
+
+    /* Mobile: always show label (no hover) */
+    @media (max-width: 720px) {
+      .org-tile .label { opacity: 1; transform: none; }
+      .org-tile .label span { font-size: 0.9rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .track { animation: none; }
-    }
-
-    /* ✅ Desktop hover devices — hide label until hover/focus */
-    @media (hover: hover) and (pointer: fine) {
-      .org-tile .label {
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(10px);
-        transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0.18s;
-      }
-      .org-tile:hover .label,
-      .org-tile:focus-visible .label {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-        transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s;
-      }
-
-      /* ✅ IMPORTANT: on hover/focus, remove clamping so long names show fully */
-      .org-tile:hover .label,
-      .org-tile:focus-visible .label {
-        /* let the overlay grow to fit multiple wrapped lines */
-        min-height: 0;
-        padding: 14px 12px 12px;
-      }
-      .org-tile:hover .label span,
-      .org-tile:focus-visible .label span {
-        display: block;               /* stop -webkit-box */
-        -webkit-line-clamp: unset;    /* remove clamp */
-        -webkit-box-orient: unset;
-        overflow: visible;            /* no ellipsis */
-        font-size: 0.88rem;           /* slightly smaller so long names fit better */
-        line-height: 1.15;
-        white-space: normal;
-      }
     }
 
     /* Modal */
@@ -911,10 +910,11 @@
       if (e.key === "Escape") closeOrgModal();
     });
 
-    // Render marquee + wire clicks
+    // Render marquee + wire clicks (single source of truth)
     async function initSources() {
       const track = document.getElementById("sourcesTrack");
-      if (!track) return;
+      const marquee = track ? track.closest(".marquee") : null;
+      if (!track || !marquee) return;
 
       try {
         const res = await fetch("sources.json?v=" + Date.now(), { cache: "no-store" });
@@ -923,7 +923,7 @@
         ORG_DATA = await res.json();
         if (!Array.isArray(ORG_DATA) || ORG_DATA.length === 0) return;
 
-        const tiles = ORG_DATA.map((s, index) => {
+        const oneSet = ORG_DATA.map((s, index) => {
           const name = (s.name || "Unknown").trim();
           const icon = (s.icon || "").trim();
 
@@ -933,13 +933,11 @@
 
           const fallback = `<div class="fallback" style="display:${icon ? 'none' : 'grid'};">${name}</div>`;
 
-          const escapedName = name.replace(/"/g, "&quot;");
-
           return `
             <div class="org-tile org-banner"
                  role="button"
                  tabindex="0"
-                 aria-label="Open links for ${escapedName}"
+                 aria-label="Open links for ${name}"
                  data-org-index="${index}">
               ${img}
               ${fallback}
@@ -948,8 +946,26 @@
           `;
         }).join("");
 
-        track.innerHTML = tiles + tiles;
+        // First, render one set so we can measure it (important for iOS Safari)
+        track.innerHTML = oneSet;
 
+        await new Promise(r => requestAnimationFrame(r));
+
+        const oneSetWidth = track.scrollWidth;
+
+        // If content doesn't overflow, don't animate (mobile often looks "blank" otherwise)
+        if (oneSetWidth <= marquee.clientWidth + 20) {
+          marquee.classList.add("no-scroll");
+          track.style.setProperty("--scroll-distance", "0px");
+          track.innerHTML = oneSet;
+        } else {
+          marquee.classList.remove("no-scroll");
+          track.style.setProperty("--scroll-distance", oneSetWidth + "px");
+          // Duplicate exactly one full set for seamless looping
+          track.innerHTML = oneSet + oneSet;
+        }
+
+        // Wire click + keyboard (works for both sets)
         const banners = track.querySelectorAll(".org-banner[data-org-index]");
         banners.forEach(el => {
           const open = () => {
@@ -970,6 +986,12 @@
         console.warn("Could not load sources.json", err);
       }
     }
+
+    // Re-measure on rotation / resize (fixes "not showing" on mobile)
+    window.addEventListener("resize", () => {
+      clearTimeout(window.__hkcResizeTimer);
+      window.__hkcResizeTimer = setTimeout(() => initSources(), 150);
+    });
 
     initSources();
   </script>
