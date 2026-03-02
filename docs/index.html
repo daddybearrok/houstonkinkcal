@@ -19,9 +19,8 @@
       --text: #f2f2f2;
       --muted:#a9a9a9;
 
-      /* One unified button color */
-      --btnA:#4A0E0E;     /* deep oxblood */
-      --btnB:#1A0404;     /* darker */
+      --btnA:#4A0E0E;
+      --btnB:#1A0404;
       --btnBorder: rgba(255,255,255,0.18);
       --shadow: rgba(0,0,0,0.45);
 
@@ -36,7 +35,7 @@
     .required-star {
       color: #ff4d4d;
       font-weight: 900;
-      margin-left: 4px;
+      margin-left: 6px;
     }
 
     body {
@@ -70,7 +69,6 @@
       line-height: 1.55;
     }
 
-    /* Desktop: single row (3 columns). Mobile: stacked. */
     .subscribe-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -178,11 +176,9 @@
       letter-spacing: 0.3px;
     }
 
-    /* Form styling */
     .form { display: grid; gap: 14px; margin-top: 10px; }
     .field label { display:block; font-weight:800; margin-bottom:6px; }
 
-    /* IMPORTANT: don't apply this to radios */
     .field input:not([type="radio"]):not([type="checkbox"]), .field textarea, .field select {
       width:100%;
       display:block;
@@ -244,7 +240,6 @@
     .muted { opacity: 0.85; }
     .tiny { font-size: 12px; }
 
-    /* Inline status messages */
     .status {
       border-radius: 14px;
       padding: 12px 14px;
@@ -258,7 +253,6 @@
     .status.warn { background: var(--warn); border-color: var(--warnBorder); }
     .status.err { background: var(--err); border-color: var(--errBorder); }
 
-    /* Small spinner */
     .spinner {
       width: 14px; height: 14px;
       border-radius: 50%;
@@ -270,7 +264,6 @@
     .spinner.show { display: inline-block; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* Request form: conditional blocks */
     .req-block {
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,0.10);
@@ -306,7 +299,7 @@
       .link-row { grid-template-columns: 1fr; }
     }
 
-    /* --- Sources marquee --- */
+    /* --- Sources marquee (unchanged) --- */
     .sources-wrap { margin-top: 34px; }
     .sources-title { font-weight: 900; margin: 0 0 10px; letter-spacing: 0.2px; }
     .sources-subtitle { margin: 0 0 14px; color: var(--muted); line-height: 1.5; }
@@ -346,7 +339,6 @@
       animation: scroll 28s linear infinite;
       padding: 0 14px;
     }
-
     .marquee:hover .track { animation-play-state: paused; }
 
     @keyframes scroll {
@@ -354,7 +346,6 @@
       to   { transform: translateX(-50%); }
     }
 
-    /* Square icon tiles */
     .org-tile {
       position: relative;
       border-radius: 16px;
@@ -370,23 +361,14 @@
       transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
       box-shadow: 0 12px 28px rgba(0,0,0,0.25);
     }
-
     @media (max-width: 720px) {
       .org-tile { width: 128px; height: 128px; border-radius: 15px; }
     }
-
     .org-tile:hover {
       transform: translateY(-3px);
       background: rgba(255,255,255,0.06);
       border-color: rgba(255,255,255,0.22);
     }
-
-    .org-tile:active { transform: translateY(-1px); }
-
-    .org-tile:focus-visible {
-      box-shadow: 0 0 0 3px rgba(255,255,255,0.18), 0 12px 28px rgba(0,0,0,0.25);
-    }
-
     .org-tile img {
       position: absolute;
       inset: 0;
@@ -396,7 +378,6 @@
       filter: saturate(1.05) contrast(1.05);
       transform: scale(1.02);
     }
-
     .org-tile .fallback {
       position: absolute;
       inset: 0;
@@ -409,15 +390,12 @@
       padding: 10px;
       text-align: center;
     }
-
-    /* Hidden until hover (desktop only) */
     .org-tile .label {
       position: absolute;
       left: 0; right: 0; bottom: 0;
       padding: 12px 12px 11px;
       background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.86));
       min-height: 58px;
-
       opacity: 0;
       transform: translateY(8px);
       transition: opacity .18s ease, transform .18s ease;
@@ -425,35 +403,23 @@
       align-items: flex-end;
       pointer-events: none;
     }
-
     .org-tile:hover .label,
-    .org-tile:focus-visible .label {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Mobile: always show label (no hover reality) */
+    .org-tile:focus-visible .label { opacity: 1; transform: translateY(0); }
     @media (max-width: 720px) {
       .org-tile .label { opacity: 1; transform: translateY(0); }
     }
-
     .org-tile .label span {
       font-weight: 900;
       letter-spacing: 0.2px;
       font-size: 0.92rem;
       line-height: 1.15;
       text-shadow: 0 2px 10px rgba(0,0,0,0.75);
-
       display: -webkit-box;
-      -webkit-line-clamp: 3;         /* <= this helps long names show more */
+      -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
       max-height: 3.5em;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .track { animation: none; }
     }
 
     /* Modal */
@@ -536,7 +502,6 @@
     }
 
     .linktree { display: grid; gap: 10px; }
-
     .linktree a {
       display:flex;
       align-items:center;
@@ -550,26 +515,15 @@
       background: rgba(255,255,255,0.08);
       transition: transform .18s ease, background .18s ease;
     }
-
     .linktree a:hover {
       transform: translateY(-2px);
       background: rgba(255,255,255,0.12);
     }
-
     .linktree .label { font-weight: 900; letter-spacing: 0.2px; }
-    .linktree .urlhint {
-      opacity: 0.8;
-      font-size: 12px;
-      overflow:hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      word-break: break-all;
-    }
-
+    .linktree .urlhint { opacity: 0.8; font-size: 12px; overflow:hidden; text-overflow: ellipsis; white-space: nowrap; word-break: break-all; }
     .linktree .right { opacity: 0.9; flex: 0 0 auto; }
   </style>
 
-  <!-- GoatCounter -->
   <script data-goatcounter="https://houstonkinkcal.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 
@@ -629,7 +583,6 @@
       </div>
     </div>
 
-    <!-- Collapsed-by-default submit section -->
     <div class="section" id="submitSection">
       <div class="section-header">
         <span>Submit an Event or Organization</span>
@@ -648,14 +601,12 @@
           action="https://formspree.io/f/xzdawajg"
           method="POST"
           class="form"
-          enctype="multipart/form-data"
         >
-          <!-- Bot trap -->
           <input type="text" name="_gotcha" style="display:none" autocomplete="off">
 
           <div class="field two-col">
             <div>
-              <label for="submitter_name">Your name (optional)</label>
+              <label for="submitter_name">Your name</label>
               <input id="submitter_name" name="submitter_name" type="text" placeholder="Name">
             </div>
             <div>
@@ -666,7 +617,7 @@
           </div>
 
           <div class="field">
-            <label for="request_type">What are you requesting?</label>
+            <label for="request_type">What are you requesting? <span class="required-star">*</span></label>
             <select id="request_type" name="request_type" required>
               <option value="" selected disabled>Select one…</option>
               <option value="fb_single">Add a single event via Facebook (link)</option>
@@ -676,7 +627,6 @@
             </select>
           </div>
 
-          <!-- Single FB event -->
           <div class="req-block" id="block_fb_single">
             <div class="field">
               <label for="fb_event_url">Facebook Event Link <span class="required-star">*</span></label>
@@ -686,155 +636,118 @@
             </div>
           </div>
 
-          <!-- Single ICS link -->
-          <div id="block_ics_single" class="req-block">
+          <div class="req-block" id="block_ics_single">
             <div class="field">
-              <label for="ics_event_url">Public ICS URL</label>
+              <label for="ics_event_url">Public ICS URL <span class="required-star">*</span></label>
               <input id="ics_event_url" name="ics_event_url" type="url"
-                     placeholder="https://calendar.google.com/calendar/ical/.../public/basic.ics"
+                     placeholder="https://example.com/calendar.ics"
                      inputmode="url" autocomplete="url">
-              <div class="hint">Tip: this must be a publicly accessible .ics URL (not a Google Calendar “web view” link).</div>
+              <div class="hint">Must be a public .ics URL (not a Google “web view” link).</div>
             </div>
           </div>
 
-          <!-- Add org -->
           <div class="req-block" id="block_add_org">
             <div class="field">
               <label for="org_name_add">Organization Name <span class="required-star">*</span></label>
               <input id="org_name_add" name="org_name" type="text" placeholder="Organization name">
             </div>
 
-            
-          <div class="field">
-            <label for="org_description_add">Description of your organization <span class="required">*</span></label>
-            <textarea
-              id="org_description_add"
-              name="org_description_add"
-              rows="3"
-              placeholder="A short public description (1–3 sentences)."
-              required
-            ></textarea>
-          </div>
-<div class="field">
-              <label>Calendar Source (minimum 1 required)</label>
+            <div class="field">
+              <label for="org_description_add">Description of your organization <span class="required-star">*</span></label>
+              <textarea
+                id="org_description_add"
+                name="org_description_add"
+                rows="3"
+                placeholder="A short public description (1–3 sentences)."
+              ></textarea>
+            </div>
+
+            <div class="field">
+              <label>Calendar Source (minimum 1 required) <span class="required-star">*</span></label>
               <div class="inline-checks">
-                <label class="check-pill">
-                  <input type="checkbox" id="src_fb" name="calendar_source_fb" value="1">
-                  Facebook Page (events)
-                </label>
-                <label class="check-pill">
-                  <input type="checkbox" id="src_ics" name="calendar_source_ics" value="1">
-                  Google/ICS link
-                </label>
-                <label class="check-pill">
-                  <input type="checkbox" id="src_other" name="calendar_source_other" value="1">
-                  Other
-                </label>
+                <label class="check-pill"><input type="checkbox" id="src_fb" name="calendar_source_fb" value="1"> Facebook Page (events)</label>
+                <label class="check-pill"><input type="checkbox" id="src_ics" name="calendar_source_ics" value="1"> Google/ICS link</label>
+                <label class="check-pill"><input type="checkbox" id="src_other" name="calendar_source_other" value="1"> Other</label>
               </div>
               <div class="hint">Pick at least one source type.</div>
             </div>
 
             <div class="field" id="fb_page_wrap" style="display:none;">
-              <label for="fb_page_url">Facebook Page URL</label>
+              <label for="fb_page_url">Facebook Page URL <span class="required-star">*</span></label>
               <input id="fb_page_url" name="fb_page_url" type="url" placeholder="https://www.facebook.com/SomeOrg">
             </div>
 
             <div class="field" id="ics_url_wrap" style="display:none;">
-              <label for="ics_url">ICS Calendar URL</label>
+              <label for="ics_url">ICS Calendar URL <span class="required-star">*</span></label>
               <input id="ics_url" name="ics_url" type="url" placeholder="https://example.com/calendar.ics">
             </div>
 
             <div class="field" id="other_desc_wrap" style="display:none;">
-              <label for="other_source_desc">Other Source Description / Notes (required if Other selected)</label>
+              <label for="other_source_desc">Other Source Description / Notes <span class="required-star">*</span></label>
               <textarea id="other_source_desc" name="other_source_desc" rows="3"
                         placeholder="Describe where the calendar is and how to access it."></textarea>
             </div>
 
             <div class="field">
-              <label>Links (minimum 1 required, up to 10)</label>
+              <label>Links (minimum 1 required, up to 10) <span class="required-star">*</span></label>
               <div class="links-wrap" id="linksWrap"></div>
-
               <button type="button" class="btn ghost" id="addLinkBtn">＋ Add link</button>
               <div class="hint">Examples: website, Instagram, Facebook, Linktree, Fetlife, etc.</div>
             </div>
           </div>
 
-          <!-- Update org -->
           <div class="req-block" id="block_update_org">
             <div class="field">
               <label for="org_name_update">Organization Name <span class="required-star">*</span></label>
               <input id="org_name_update" name="org_name_update" type="text" placeholder="Exact org name to update">
             </div>
 
-          <div class="field">
-            <label for="org_description_update">Description of your organization (optional)</label>
-            <textarea
-              id="org_description_update"
-              name="org_description_update"
-              rows="3"
-              placeholder="Optional updated public description."
-            ></textarea>
-          </div>
-          <div class="field">
-            <label>Calendar Source</label>
-            <div class="inline-checks">
-              <label class="check-pill">
-                <input type="checkbox" id="update_src_fb" name="update_calendar_source_fb" value="1">
-                Facebook Page (events)
-              </label>
-              <label class="check-pill">
-                <input type="checkbox" id="update_src_ics" name="update_calendar_source_ics" value="1">
-                Google/ICS link
-              </label>
-              <label class="check-pill">
-                <input type="checkbox" id="update_src_other" name="update_calendar_source_other" value="1">
-                Other
-              </label>
+            <div class="field">
+              <label for="org_description_update">Description of your organization</label>
+              <textarea
+                id="org_description_update"
+                name="org_description_update"
+                rows="3"
+                placeholder="Optional updated public description."
+              ></textarea>
             </div>
-          </div>
 
-          <div class="field" id="update_fb_page_wrap" style="display:none;">
-            <label for="update_fb_page_url_full">Facebook Page URL</label>
-            <input id="update_fb_page_url_full" name="update_fb_page_url_full" type="url" placeholder="https://www.facebook.com/SomeOrg">
-          </div>
-
-          <div class="field" id="update_ics_url_wrap" style="display:none;">
-            <label for="update_ics_url_full">ICS Calendar URL</label>
-            <input id="update_ics_url_full" name="update_ics_url_full" type="url" placeholder="https://example.com/calendar.ics">
-          </div>
-
-          <div class="field" id="update_other_desc_wrap" style="display:none;">
-            <label for="update_other_source_desc">Other Source Description</label>
-            <textarea id="update_other_source_desc" name="update_other_source_desc" rows="3"
-                      placeholder="Describe where the calendar is and how to access it."></textarea>
-          </div>
-          <div class="field">
-              <label class="muted" style="font-weight:800;">Optional: include replacement links/sources (same as Add)</label>
-              <div class="hint">If you include changes here, we’ll use your notes as guidance.</div>
-
-              <div class="two-col" style="margin-top:10px;">
-                <div class="field" style="margin:0;">
-                  <label for="update_fb_page_url">Facebook Page URL (optional)</label>
-                  <input id="update_fb_page_url" name="update_fb_page_url" type="url" placeholder="https://www.facebook.com/SomeOrg">
-                </div>
-                <div class="field" style="margin:0;">
-                  <label for="update_ics_url">ICS Calendar URL (optional)</label>
-                  <input id="update_ics_url" name="update_ics_url" type="url" placeholder="https://example.com/calendar.ics">
-                </div>
+            <div class="field">
+              <label>Calendar Source (optional, but supported)</label>
+              <div class="inline-checks">
+                <label class="check-pill"><input type="checkbox" id="update_src_fb" name="update_calendar_source_fb" value="1"> Facebook Page (events)</label>
+                <label class="check-pill"><input type="checkbox" id="update_src_ics" name="update_calendar_source_ics" value="1"> Google/ICS link</label>
+                <label class="check-pill"><input type="checkbox" id="update_src_other" name="update_calendar_source_other" value="1"> Other</label>
               </div>
+              <div class="hint">If you’re updating sources, check what applies and fill the fields that appear.</div>
+            </div>
 
-              <div class="field" style="margin-top:10px;">
-                <label>Optional: links (up to 10)</label>
-                <div class="links-wrap" id="linksWrapUpdate"></div>
-                <button type="button" class="btn ghost" id="addLinkBtnUpdate">＋ Add link</button>
-              </div>
+            <div class="field" id="update_fb_page_wrap" style="display:none;">
+              <label for="update_fb_page_url_full">Facebook Page URL <span class="required-star">*</span></label>
+              <input id="update_fb_page_url_full" name="update_fb_page_url_full" type="url" placeholder="https://www.facebook.com/SomeOrg">
+            </div>
+
+            <div class="field" id="update_ics_url_wrap" style="display:none;">
+              <label for="update_ics_url_full">ICS Calendar URL <span class="required-star">*</span></label>
+              <input id="update_ics_url_full" name="update_ics_url_full" type="url" placeholder="https://example.com/calendar.ics">
+            </div>
+
+            <div class="field" id="update_other_desc_wrap" style="display:none;">
+              <label for="update_other_source_desc">Other Source Description <span class="required-star">*</span></label>
+              <textarea id="update_other_source_desc" name="update_other_source_desc" rows="3"
+                        placeholder="Describe where the calendar is and how to access it."></textarea>
+            </div>
+
+            <div class="field">
+              <label>Optional: updated links (up to 10)</label>
+              <div class="links-wrap" id="linksWrapUpdate"></div>
+              <button type="button" class="btn ghost" id="addLinkBtnUpdate">＋ Add link</button>
             </div>
           </div>
 
           <div class="field">
-            <label for="notes" id="notesLabel">General notes (optional)</label>
-            <textarea id="notes" name="notes" rows="4"
-                      placeholder="Anything else we should know?"></textarea>
+            <label for="notes" id="notesLabel">General notes <span id="notesReqStar" class="required-star" style="display:none;">*</span></label>
+            <textarea id="notes" name="notes" rows="4" placeholder="Anything else we should know?"></textarea>
           </div>
 
           <input type="hidden" name="_subject" value="Houston Kink Cal submission">
@@ -851,7 +764,6 @@
       </div>
     </div>
 
-    <!-- Thank you section -->
     <div class="section" id="thanks" style="display:none;">
       <div class="section-header">
         <span>✅ Submitted</span>
@@ -860,32 +772,22 @@
         </span>
       </div>
       <div class="section-content">
-        <p class="muted" style="margin-top:0;">
-          Thanks — your submission was sent. If it’s a fit, it’ll show up in the calendar soon.
-        </p>
+        <p class="muted" style="margin-top:0;">Thanks — your submission was sent. If it’s a fit, it’ll show up in the calendar soon.</p>
       </div>
     </div>
 
     <div class="sources-wrap" id="sources">
       <div class="sources-title">Included Organizations</div>
-      <div class="sources-subtitle">
-        These are the organizations currently included in the calendar. Click for more information.
-      </div>
+      <div class="sources-subtitle">These are the organizations currently included in the calendar. Click for more information.</div>
 
       <div class="marquee" aria-label="Scrolling list of included sources">
-        <div class="track" id="sourcesTrack">
-          <!-- JS will populate -->
-        </div>
+        <div class="track" id="sourcesTrack"></div>
       </div>
     </div>
 
-    <div class="footer">
-      Built for the Houston community • Live • Automatic • Always evolving
-    </div>
-
+    <div class="footer">Built for the Houston community • Live • Automatic • Always evolving</div>
   </div>
 
-  <!-- Org modal -->
   <div class="modal-backdrop" id="orgModalBackdrop" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="orgModalTitle">
       <div class="modal-header">
@@ -905,12 +807,11 @@
   </div>
 
   <script>
-    // Accordion behavior (robust): delegate clicks, and ignore clicks on interactive children
+    // Accordion behavior (delegate clicks, ignore interactive children)
     document.addEventListener("click", (e) => {
       const header = e.target.closest(".section-header");
       if (!header) return;
 
-      // If user clicked inside form controls / links / buttons inside header, do nothing
       const interactive = e.target.closest("a, button, input, select, textarea, label");
       if (interactive) return;
 
@@ -922,7 +823,6 @@
   </script>
 
   <script>
-    // Request form: dynamic blocks + dynamic links
     (function () {
       const form = document.getElementById("requestForm");
       if (!form) return;
@@ -941,7 +841,14 @@
 
       const orgNameAdd = document.getElementById("org_name_add");
       const orgNameUpdate = document.getElementById("org_name_update");
-// Add org sources
+
+      const orgDescAdd = document.getElementById("org_description_add");
+      const orgDescUpdate = document.getElementById("org_description_update");
+
+      const notes = document.getElementById("notes");
+      const notesReqStar = document.getElementById("notesReqStar");
+
+      // Add-org sources
       const srcFb = document.getElementById("src_fb");
       const srcIcs = document.getElementById("src_ics");
       const srcOther = document.getElementById("src_other");
@@ -954,12 +861,7 @@
       const icsUrl = document.getElementById("ics_url");
       const otherDesc = document.getElementById("other_source_desc");
 
-      const notes = document.getElementById("notes");
-      const notesLabel = document.getElementById("notesLabel");
-      const orgDescAdd = document.getElementById("org_description_add");
-      const orgDescUpdate = document.getElementById("org_description_update");
-
-      // Update sources
+      // Update-org sources
       const updateSrcFb = document.getElementById("update_src_fb");
       const updateSrcIcs = document.getElementById("update_src_ics");
       const updateSrcOther = document.getElementById("update_src_other");
@@ -971,22 +873,6 @@
       const updateFbUrlFull = document.getElementById("update_fb_page_url_full");
       const updateIcsUrlFull = document.getElementById("update_ics_url_full");
       const updateOtherDesc = document.getElementById("update_other_source_desc");
-
-      function toggleUpdateSourcesUI() {
-        if (!updateSrcFb) return;
-
-        updateFbWrap.style.display = updateSrcFb.checked ? "block" : "none";
-        updateIcsWrap.style.display = updateSrcIcs.checked ? "block" : "none";
-        updateOtherWrap.style.display = updateSrcOther.checked ? "block" : "none";
-
-        setRequired(updateFbUrlFull, updateSrcFb.checked);
-        setRequired(updateIcsUrlFull, updateSrcIcs.checked);
-        setRequired(updateOtherDesc, updateSrcOther.checked);
-      }
-
-      updateSrcFb?.addEventListener("change", toggleUpdateSourcesUI);
-      updateSrcIcs?.addEventListener("change", toggleUpdateSourcesUI);
-      updateSrcOther?.addEventListener("change", toggleUpdateSourcesUI);
 
       // Links (Add org)
       const linksWrap = document.getElementById("linksWrap");
@@ -1016,9 +902,23 @@
         setRequired(otherDesc, srcOther.checked);
       }
 
+      function toggleUpdateSourcesUI() {
+        updateFbWrap.style.display = updateSrcFb.checked ? "block" : "none";
+        updateIcsWrap.style.display = updateSrcIcs.checked ? "block" : "none";
+        updateOtherWrap.style.display = updateSrcOther.checked ? "block" : "none";
+
+        setRequired(updateFbUrlFull, updateSrcFb.checked);
+        setRequired(updateIcsUrlFull, updateSrcIcs.checked);
+        setRequired(updateOtherDesc, updateSrcOther.checked);
+      }
+
       srcFb.addEventListener("change", toggleSourcesUI);
       srcIcs.addEventListener("change", toggleSourcesUI);
       srcOther.addEventListener("change", toggleSourcesUI);
+
+      updateSrcFb.addEventListener("change", toggleUpdateSourcesUI);
+      updateSrcIcs.addEventListener("change", toggleUpdateSourcesUI);
+      updateSrcOther.addEventListener("change", toggleUpdateSourcesUI);
 
       function makeLinkRow(container, idx) {
         const row = document.createElement("div");
@@ -1028,8 +928,7 @@
           <input type="url"  name="${container.id}_url_${idx}" placeholder="Full URL (https://...)" />
           <button type="button" class="btn ghost" aria-label="Remove link">Remove</button>
         `;
-        const btn = row.querySelector("button");
-        btn.addEventListener("click", () => row.remove());
+        row.querySelector("button").addEventListener("click", () => row.remove());
         return row;
       }
 
@@ -1044,57 +943,11 @@
         container.appendChild(makeLinkRow(container, count + 1));
       }
 
-      // Default: Add org has one link row ready (but only required if add_org selected)
       ensureAtLeastOneLink(linksWrap);
 
       addLinkBtn.addEventListener("click", () => addLink(linksWrap));
       addLinkBtnUpdate.addEventListener("click", () => addLink(linksWrapUpdate));
 
-      function onRequestTypeChange() {
-        hideAllBlocks();
-
-        if (notesLabel) notesLabel.textContent = "General notes (optional)";
-
-        // clear required flags everywhere (we’ll re-apply per type)
-        setRequired(fbEventUrl, false);
-        setRequired(icsEventUrl, false);
-        setRequired(orgNameAdd, false);
-        setRequired(orgNameUpdate, false);
-      setRequired(orgDescAdd, false);
-      setRequired(orgDescUpdate, false);
-        setRequired(notes, false);
-
-        // add-org sources required are handled via checkbox-driven toggles
-        setRequired(fbPageUrl, false);
-        setRequired(icsUrl, false);
-        setRequired(otherDesc, false);
-
-        const t = requestType.value;
-        if (!t || !blocks[t]) return;
-
-        blocks[t].classList.add("show");
-
-        if (t === "fb_single") {
-          setRequired(fbEventUrl, true);
-        } else if (t === "ics_single") {
-          setRequired(icsEventUrl, true);
-        } else if (t === "add_org") {
-          setRequired(orgNameAdd, true);
-          setRequired(orgDescAdd, true);
-          toggleSourcesUI();
-          // at least one link row exists; require link URL/label later via validation
-        } else if (t === "update_org") {
-          setRequired(orgNameUpdate, true);
-          setRequired(notes, true);
-
-        if (notesLabel) notesLabel.textContent = "Notes <span class="required-star">*</span>";
-        }
-      }
-
-      requestType.addEventListener("change", onRequestTypeChange);
-      onRequestTypeChange();
-
-      // Validation helpers
       function getLinks(container) {
         const rows = Array.from(container.querySelectorAll(".link-row"));
         const links = [];
@@ -1116,6 +969,54 @@
         return !!(srcFb.checked || srcIcs.checked || srcOther.checked);
       }
 
+      function onRequestTypeChange() {
+        hideAllBlocks();
+
+        // clear required flags everywhere
+        setRequired(fbEventUrl, false);
+        setRequired(icsEventUrl, false);
+        setRequired(orgNameAdd, false);
+        setRequired(orgNameUpdate, false);
+        setRequired(orgDescAdd, false);
+        setRequired(orgDescUpdate, false);
+        setRequired(notes, false);
+
+        // Add-org sources required are handled by checkbox-driven toggles
+        setRequired(fbPageUrl, false);
+        setRequired(icsUrl, false);
+        setRequired(otherDesc, false);
+
+        // Update-org sources required are handled by checkbox-driven toggles
+        setRequired(updateFbUrlFull, false);
+        setRequired(updateIcsUrlFull, false);
+        setRequired(updateOtherDesc, false);
+
+        if (notesReqStar) notesReqStar.style.display = "none";
+
+        const t = requestType.value;
+        if (!t || !blocks[t]) return;
+
+        blocks[t].classList.add("show");
+
+        if (t === "fb_single") {
+          setRequired(fbEventUrl, true);
+        } else if (t === "ics_single") {
+          setRequired(icsEventUrl, true);
+        } else if (t === "add_org") {
+          setRequired(orgNameAdd, true);
+          setRequired(orgDescAdd, true);
+          toggleSourcesUI();
+        } else if (t === "update_org") {
+          setRequired(orgNameUpdate, true);
+          setRequired(notes, true);
+          if (notesReqStar) notesReqStar.style.display = "inline";
+          toggleUpdateSourcesUI();
+        }
+      }
+
+      requestType.addEventListener("change", onRequestTypeChange);
+      onRequestTypeChange();
+
       // Formspree submit (no redirect)
       const submitSection = document.getElementById("submitSection");
       const thanksSection = document.getElementById("thanks");
@@ -1128,12 +1029,10 @@
         statusEl.className = "status show " + (kind || "");
         statusEl.textContent = msg || "";
       }
-
       function clearStatus() {
         statusEl.className = "status";
         statusEl.textContent = "";
       }
-
       function setLoading(isLoading) {
         submitBtn.disabled = !!isLoading;
         spinner.classList.toggle("show", !!isLoading);
@@ -1144,7 +1043,6 @@
         e.preventDefault();
         clearStatus();
 
-        // Bot trap
         const gotcha = form.querySelector('input[name="_gotcha"]');
         if (gotcha && gotcha.value) {
           setStatus("ok", "Submitted.");
@@ -1152,41 +1050,22 @@
         }
 
         const t = requestType.value;
-
-        // Extra validation beyond basic required attributes
-        if (!t) {
-          setStatus("warn", "Please select what you’re requesting.");
-          return;
-        }
+        if (!t) { setStatus("warn", "Please select what you’re requesting."); return; }
 
         if (t === "add_org") {
-          if (!hasMinSources()) {
-            setStatus("warn", "For Add Organization: select at least one calendar source type.");
-            return;
-          }
-          if (srcFb.checked && !(fbPageUrl.value || "").trim()) {
-            setStatus("warn", "For Add Organization: Facebook Page URL is required if Facebook Page is selected.");
-            return;
-          }
-          if (srcIcs.checked && !(icsUrl.value || "").trim()) {
-            setStatus("warn", "For Add Organization: ICS URL is required if Google/ICS link is selected.");
-            return;
-          }
-          if (srcOther.checked && !(otherDesc.value || "").trim()) {
-            setStatus("warn", "For Add Organization: Other description/notes is required if Other is selected.");
-            return;
-          }
-          if (!hasMinValidLinks(linksWrap, 1)) {
-            setStatus("warn", "For Add Organization: please provide at least one link (label + full URL).");
-            return;
-          }
+          if (!hasMinSources()) { setStatus("warn", "For Add Organization: select at least one calendar source type."); return; }
+          if (srcFb.checked && !(fbPageUrl.value || "").trim()) { setStatus("warn", "Facebook Page URL is required if Facebook Page is selected."); return; }
+          if (srcIcs.checked && !(icsUrl.value || "").trim()) { setStatus("warn", "ICS URL is required if Google/ICS link is selected."); return; }
+          if (srcOther.checked && !(otherDesc.value || "").trim()) { setStatus("warn", "Other description is required if Other is selected."); return; }
+          if (!hasMinValidLinks(linksWrap, 1)) { setStatus("warn", "Please provide at least one link (label + full URL)."); return; }
         }
 
         if (t === "update_org") {
-          if (!((updateNotes.value || "").trim())) {
-            setStatus("warn", "For Update Organization: Notes are required.");
-            return;
-          }
+          if (!((notes.value || "").trim())) { setStatus("warn", "For Update Organization: Notes are required."); return; }
+          // If they selected update sources, enforce those fields
+          if (updateSrcFb.checked && !(updateFbUrlFull.value || "").trim()) { setStatus("warn", "Facebook Page URL is required if selected."); return; }
+          if (updateSrcIcs.checked && !(updateIcsUrlFull.value || "").trim()) { setStatus("warn", "ICS URL is required if selected."); return; }
+          if (updateSrcOther.checked && !(updateOtherDesc.value || "").trim()) { setStatus("warn", "Other description is required if selected."); return; }
         }
 
         setLoading(true);
@@ -1194,7 +1073,6 @@
         try {
           const formData = new FormData(form);
 
-          // Add structured JSON payloads (for easier reading in the email)
           if (t === "add_org") {
             const sources = [];
             if (srcFb.checked) sources.push({ type: "facebook_page", url: (fbPageUrl.value || "").trim() });
@@ -1206,7 +1084,14 @@
           }
 
           if (t === "update_org") {
-            const links = getLinks(linksWrapUpdate);
+            const updateSources = [];
+            if (updateSrcFb.checked) updateSources.push({ type: "facebook_page", url: (updateFbUrlFull.value || "").trim() });
+            if (updateSrcIcs.checked) updateSources.push({ type: "ics", url: (updateIcsUrlFull.value || "").trim() });
+            if (updateSrcOther.checked) updateSources.push({ type: "other", notes: (updateOtherDesc.value || "").trim() });
+
+            if (updateSources.length) formData.append("update_calendar_sources_json", JSON.stringify(updateSources, null, 2));
+
+            const links = getLinks(linksWrapUpdate).filter(l => l.label && l.url);
             if (links.length) formData.append("update_links_json", JSON.stringify(links, null, 2));
           }
 
@@ -1219,8 +1104,8 @@
           if (res.ok) {
             setStatus("ok", "Sent. Thank you.");
             form.reset();
-            onRequestTypeChange(); // reset block visibility + requirements
-            // keep at least one link row in add-org
+            onRequestTypeChange();
+
             linksWrap.innerHTML = "";
             ensureAtLeastOneLink(linksWrap);
             linksWrapUpdate.innerHTML = "";
@@ -1251,7 +1136,7 @@
   </script>
 
   <script>
-    // Modal helpers
+    // Modal + marquee (unchanged from your working version)
     let ORG_DATA = [];
 
     function openOrgModal(org) {
@@ -1268,12 +1153,8 @@
       icon.style.display = iconUrl ? "block" : "none";
 
       const d = (org.description || "").trim();
-      if (d) {
-        desc.textContent = d;
-        desc.style.display = "block";
-      } else {
-        desc.style.display = "none";
-      }
+      if (d) { desc.textContent = d; desc.style.display = "block"; }
+      else { desc.style.display = "none"; }
 
       links.innerHTML = "";
 
@@ -1281,9 +1162,7 @@
       const usable = items.filter(x => x && x.url);
 
       if (usable.length === 0) {
-        links.insertAdjacentHTML("beforeend", `
-          <div class="status show warn">No links have been provided for this organization.</div>
-        `);
+        links.insertAdjacentHTML("beforeend", `<div class="status show warn">No links have been provided for this organization.</div>`);
       } else {
         for (const l of usable) {
           const label = (l.label || "Link").trim();
@@ -1316,11 +1195,8 @@
     document.getElementById("orgModalBackdrop").addEventListener("click", (e) => {
       if (e.target.id === "orgModalBackdrop") closeOrgModal();
     });
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeOrgModal();
-    });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeOrgModal(); });
 
-    // Render marquee + wire clicks
     async function initSources() {
       const track = document.getElementById("sourcesTrack");
       if (!track) return;
@@ -1357,7 +1233,6 @@
           `;
         }).join("");
 
-        // Duplicate for seamless scroll
         track.innerHTML = tiles + tiles;
 
         const banners = track.querySelectorAll(".org-banner[data-org-index]");
@@ -1369,10 +1244,7 @@
           };
           el.addEventListener("click", (e) => { e.preventDefault(); open(); });
           el.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              open();
-            }
+            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); }
           });
         });
 
