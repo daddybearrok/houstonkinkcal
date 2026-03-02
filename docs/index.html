@@ -33,6 +33,12 @@
       --errBorder: rgba(255, 80, 80, 0.35);
     }
 
+    .required-star {
+      color: #ff4d4d;
+      font-weight: 900;
+      margin-left: 4px;
+    }
+
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
@@ -653,7 +659,7 @@
               <input id="submitter_name" name="submitter_name" type="text" placeholder="Name">
             </div>
             <div>
-              <label for="submitter_email">Your email (required)</label>
+              <label for="submitter_email">Your email <span class="required-star">*</span></label>
               <input id="submitter_email" name="submitter_email" type="email" placeholder="you@email.com" required>
               <div class="hint">We need this for follow-up questions.</div>
             </div>
@@ -673,7 +679,7 @@
           <!-- Single FB event -->
           <div class="req-block" id="block_fb_single">
             <div class="field">
-              <label for="fb_event_url">Facebook Event Link (required)</label>
+              <label for="fb_event_url">Facebook Event Link <span class="required-star">*</span></label>
               <input id="fb_event_url" name="fb_event_url" type="url"
                      placeholder="https://www.facebook.com/events/1234567890"
                      inputmode="url">
@@ -694,7 +700,7 @@
           <!-- Add org -->
           <div class="req-block" id="block_add_org">
             <div class="field">
-              <label for="org_name_add">Organization Name (required)</label>
+              <label for="org_name_add">Organization Name <span class="required-star">*</span></label>
               <input id="org_name_add" name="org_name" type="text" placeholder="Organization name">
             </div>
 
@@ -756,7 +762,7 @@
           <!-- Update org -->
           <div class="req-block" id="block_update_org">
             <div class="field">
-              <label for="org_name_update">Organization Name (required)</label>
+              <label for="org_name_update">Organization Name <span class="required-star">*</span></label>
               <input id="org_name_update" name="org_name_update" type="text" placeholder="Exact org name to update">
             </div>
 
@@ -769,7 +775,40 @@
               placeholder="Optional updated public description."
             ></textarea>
           </div>
-<div class="field">
+          <div class="field">
+            <label>Calendar Source</label>
+            <div class="inline-checks">
+              <label class="check-pill">
+                <input type="checkbox" id="update_src_fb" name="update_calendar_source_fb" value="1">
+                Facebook Page (events)
+              </label>
+              <label class="check-pill">
+                <input type="checkbox" id="update_src_ics" name="update_calendar_source_ics" value="1">
+                Google/ICS link
+              </label>
+              <label class="check-pill">
+                <input type="checkbox" id="update_src_other" name="update_calendar_source_other" value="1">
+                Other
+              </label>
+            </div>
+          </div>
+
+          <div class="field" id="update_fb_page_wrap" style="display:none;">
+            <label for="update_fb_page_url_full">Facebook Page URL</label>
+            <input id="update_fb_page_url_full" name="update_fb_page_url_full" type="url" placeholder="https://www.facebook.com/SomeOrg">
+          </div>
+
+          <div class="field" id="update_ics_url_wrap" style="display:none;">
+            <label for="update_ics_url_full">ICS Calendar URL</label>
+            <input id="update_ics_url_full" name="update_ics_url_full" type="url" placeholder="https://example.com/calendar.ics">
+          </div>
+
+          <div class="field" id="update_other_desc_wrap" style="display:none;">
+            <label for="update_other_source_desc">Other Source Description</label>
+            <textarea id="update_other_source_desc" name="update_other_source_desc" rows="3"
+                      placeholder="Describe where the calendar is and how to access it."></textarea>
+          </div>
+          <div class="field">
               <label class="muted" style="font-weight:800;">Optional: include replacement links/sources (same as Add)</label>
               <div class="hint">If you include changes here, we’ll use your notes as guidance.</div>
 
@@ -920,6 +959,35 @@
       const orgDescAdd = document.getElementById("org_description_add");
       const orgDescUpdate = document.getElementById("org_description_update");
 
+      // Update sources
+      const updateSrcFb = document.getElementById("update_src_fb");
+      const updateSrcIcs = document.getElementById("update_src_ics");
+      const updateSrcOther = document.getElementById("update_src_other");
+
+      const updateFbWrap = document.getElementById("update_fb_page_wrap");
+      const updateIcsWrap = document.getElementById("update_ics_url_wrap");
+      const updateOtherWrap = document.getElementById("update_other_desc_wrap");
+
+      const updateFbUrlFull = document.getElementById("update_fb_page_url_full");
+      const updateIcsUrlFull = document.getElementById("update_ics_url_full");
+      const updateOtherDesc = document.getElementById("update_other_source_desc");
+
+      function toggleUpdateSourcesUI() {
+        if (!updateSrcFb) return;
+
+        updateFbWrap.style.display = updateSrcFb.checked ? "block" : "none";
+        updateIcsWrap.style.display = updateSrcIcs.checked ? "block" : "none";
+        updateOtherWrap.style.display = updateSrcOther.checked ? "block" : "none";
+
+        setRequired(updateFbUrlFull, updateSrcFb.checked);
+        setRequired(updateIcsUrlFull, updateSrcIcs.checked);
+        setRequired(updateOtherDesc, updateSrcOther.checked);
+      }
+
+      updateSrcFb?.addEventListener("change", toggleUpdateSourcesUI);
+      updateSrcIcs?.addEventListener("change", toggleUpdateSourcesUI);
+      updateSrcOther?.addEventListener("change", toggleUpdateSourcesUI);
+
       // Links (Add org)
       const linksWrap = document.getElementById("linksWrap");
       const addLinkBtn = document.getElementById("addLinkBtn");
@@ -1019,7 +1087,7 @@
           setRequired(orgNameUpdate, true);
           setRequired(notes, true);
 
-        if (notesLabel) notesLabel.textContent = "Notes (required)";
+        if (notesLabel) notesLabel.textContent = "Notes <span class="required-star">*</span>";
         }
       }
 
