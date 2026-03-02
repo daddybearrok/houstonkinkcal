@@ -44,8 +44,10 @@
     "name": "Houston Gaymers",
     "icon": "https://daddybearrok.github.io/houstonkinkcal/page_icons/houston_gaymers.png",
     "links": [
-      { "label": "Facebook", "url": "https://www.facebook.com/profile.php?id=61553609918708" },
-      { "label": "Instagram", "url": "https://www.instagram.com/houstongaymers/" }
+      { "label": "Facebook", "url": "https://www.facebook.com/houstongaymers" },
+      { "label": "Instagram", "url": "https://www.instagram.com/houstongaymers/" },
+      { "label": "Private Facebook Group", "url": "https://www.facebook.com/groups/houstongaymers/?ref=share" },
+      { "label": "Website", "url": "https://houstongaymers.com/" }
     ],
     "event_sources": [
       { "type": "ics", "url": "https://calendar.google.com/calendar/ical/c_09a89d1a923a7f22ee35f2e11daae3f62a48998f3cfaf07f764977b318bd624f%40group.calendar.google.com/public/basic.ics" }
