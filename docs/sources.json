@@ -7,7 +7,7 @@
       { "label": "Facebook", "url": "https://www.facebook.com/BayouCityPups" }
     ],
     "event_sources": [
-      { "type": "facebook_events", "events_url": "https://www.facebook.com/BayouCityPups/events" },
+      { "type": "facebook_events", "url": "https://www.facebook.com/BayouCityPups/upcoming_hosted_events" }
     ]
   },
   {
@@ -17,7 +17,7 @@
       { "label": "Facebook", "url": "https://www.facebook.com/HoustonBears" }
     ],
     "event_sources": [
-      { "type": "facebook_events", "events_url": "https://www.facebook.com/HoustonBears/events" },
+      { "type": "facebook_events", "url": "https://www.facebook.com/HoustonBears/upcoming_hosted_events" }
     ]
   },
   {
@@ -27,7 +27,7 @@
       { "label": "Facebook", "url": "https://www.facebook.com/nlahoustontx" }
     ],
     "event_sources": [
-      { "type": "facebook_events", "events_url": "https://www.facebook.com/nlahoustontx/events" },
+      { "type": "facebook_events", "url": "https://www.facebook.com/nlahoustontx/upcoming_hosted_events" }
     ]
   },
   {
@@ -37,7 +37,7 @@
       { "label": "Facebook", "url": "https://www.facebook.com/profile.php?id=61553609918708" }
     ],
     "event_sources": [
-      { "type": "facebook_events", "events_url": "https://www.facebook.com/profile.php?id=61553609918708&sk=events" },
+      { "type": "facebook_events", "url": "https://www.facebook.com/profile.php?id=61553609918708&sk=upcoming_hosted_events" }
     ]
   },
   {
@@ -48,7 +48,7 @@
       { "label": "Instagram", "url": "https://www.instagram.com/houstongaymers/" }
     ],
     "event_sources": [
-      { "type": "ics", "events_url": "https://calendar.google.com/calendar/u/1/r?cid=Y18wOWE4OWQxYTkyM2E3ZjIyZWUzNWYyZTExZGFhZTNmNjJhNDg5OThmM2NmYWYwN2Y3NjQ5NzdiMzE4YmQ2MjRmQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20" },
+      { "type": "ics", "url": "https://calendar.google.com/calendar/ical/c_09a89d1a923a7f22ee35f2e11daae3f62a48998f3cfaf07f764977b318bd624f%40group.calendar.google.com/public/basic.ics" }
     ]
   }
 ]
