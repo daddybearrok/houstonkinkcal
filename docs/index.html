@@ -664,7 +664,7 @@
             <select id="request_type" name="request_type" required>
               <option value="" selected disabled>Select one…</option>
               <option value="fb_single">Add a single event via Facebook (link)</option>
-              <option value="ics_single">Add a single event via ICS (file upload)</option>
+              <option value="ics_single">Add a single event via ICS (link)</option>
               <option value="add_org">Add an organization to the system</option>
               <option value="update_org">Update an organization in the system</option>
             </select>
@@ -680,12 +680,14 @@
             </div>
           </div>
 
-          <!-- Single ICS file -->
-          <div class="req-block" id="block_ics_single">
+          <!-- Single ICS link -->
+          <div id="block_ics_single" class="req-block">
             <div class="field">
-              <label for="ics_file">ICS File Upload (required)</label>
-              <input id="ics_file" name="ics_file" type="file" accept=".ics,text/calendar">
-              <div class="hint">If Formspree rejects the file, it may require file uploads to be enabled on your Formspree plan.</div>
+              <label for="ics_event_url">Public ICS URL</label>
+              <input id="ics_event_url" name="ics_event_url" type="url"
+                     placeholder="https://calendar.google.com/calendar/ical/.../public/basic.ics"
+                     inputmode="url" autocomplete="url">
+              <div class="hint">Tip: this must be a publicly accessible .ics URL (not a Google Calendar “web view” link).</div>
             </div>
           </div>
 
@@ -881,7 +883,7 @@
       };
 
       const fbEventUrl = document.getElementById("fb_event_url");
-      const icsFile = document.getElementById("ics_file");
+      const icsEventUrl = document.getElementById("ics_event_url");
 
       const orgNameAdd = document.getElementById("org_name_add");
       const orgNameUpdate = document.getElementById("org_name_update");
@@ -967,7 +969,7 @@
 
         // clear required flags everywhere (we’ll re-apply per type)
         setRequired(fbEventUrl, false);
-        setRequired(icsFile, false);
+        setRequired(icsEventUrl, false);
         setRequired(orgNameAdd, false);
         setRequired(orgNameUpdate, false);
         setRequired(updateNotes, false);
@@ -985,7 +987,7 @@
         if (t === "fb_single") {
           setRequired(fbEventUrl, true);
         } else if (t === "ics_single") {
-          setRequired(icsFile, true);
+          setRequired(icsEventUrl, true);
         } else if (t === "add_org") {
           setRequired(orgNameAdd, true);
           toggleSourcesUI();
