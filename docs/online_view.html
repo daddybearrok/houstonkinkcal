@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Houston Kink Calendar • Browser View</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- FullCalendar (CDN) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root{
+      --bg0:#0d0d0d;
+      --bg1:#1c1c1c;
+      --panel: rgba(255,255,255,0.05);
+      --panelHover: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.10);
+      --text: #f2f2f2;
+      --muted:#a9a9a9;
+
+      --btnA:#4A0E0E;
+      --btnB:#1A0404;
+      --btnBorder: rgba(255,255,255,0.18);
+      --shadow: rgba(0,0,0,0.45);
+
+      --ok: rgba(80, 200, 120, 0.20);
+      --okBorder: rgba(80, 200, 120, 0.45);
+      --warn: rgba(255, 180, 60, 0.18);
+      --warnBorder: rgba(255, 180, 60, 0.35);
+      --err: rgba(255, 80, 80, 0.18);
+      --errBorder: rgba(255, 80, 80, 0.35);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top, var(--bg1), var(--bg0) 70%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 16px 60px;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    h1{
+      margin:0;
+      font-size: 2.2rem;
+      letter-spacing: 0.6px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .subtitle{
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.45;
+    }
+
+    .controls{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 6px;
+    }
+
+    .chip{
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 10px 12px;
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      min-height: 42px;
+    }
+
+    label{
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.2px;
+      color: rgba(255,255,255,0.9);
+      white-space: nowrap;
+    }
+
+    select, input[type="search"]{
+      background: rgba(0,0,0,0.30);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 12px;
+      padding: 9px 10px;
+      outline: none;
+      min-width: 220px;
+    }
+
+    input[type="search"]{ min-width: 260px; }
+    @media (max-width: 720px){
+      select, input[type="search"]{ min-width: 100%; width: 100%; }
+      .chip{ width: 100%; justify-content: space-between; }
+    }
+
+    .status{
+      border-radius: 14px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.25);
+      color: #ddd;
+      margin: 14px 0;
+      display:none;
+    }
+    .status.show{ display:block; }
+    .status.ok { background: var(--ok); border-color: var(--okBorder); }
+    .status.warn{ background: var(--warn); border-color: var(--warnBorder); }
+    .status.err { background: var(--err); border-color: var(--errBorder); }
+
+    .calendar-shell{
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 18px;
+      padding: 12px;
+      box-shadow: 0 14px 38px rgba(0,0,0,0.25);
+    }
+
+    /* Make FullCalendar feel like your site */
+    .fc{
+      --fc-page-bg-color: transparent;
+      --fc-neutral-bg-color: rgba(255,255,255,0.04);
+      --fc-border-color: rgba(255,255,255,0.08);
+      --fc-button-bg-color: rgba(255,255,255,0.10);
+      --fc-button-border-color: rgba(255,255,255,0.16);
+      --fc-button-text-color: #fff;
+      --fc-button-hover-bg-color: rgba(255,255,255,0.16);
+      --fc-button-hover-border-color: rgba(255,255,255,0.22);
+      --fc-button-active-bg-color: rgba(255,255,255,0.18);
+      --fc-button-active-border-color: rgba(255,255,255,0.26);
+      --fc-today-bg-color: rgba(255,255,255,0.06);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .fc .fc-toolbar-title{
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
+
+    /* Modal */
+    .modal-backdrop{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 9999;
+    }
+    .modal-backdrop.show{ display:flex; }
+
+    .modal{
+      width: 100%;
+      max-width: 640px;
+      border-radius: 18px;
+      background: rgba(20, 10, 10, 0.92);
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      overflow: hidden;
+    }
+
+    .modal-header{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      padding: 16px 16px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      gap: 12px;
+    }
+
+    .modal-header h3{
+      margin:0;
+      font-size: 1.15rem;
+      font-weight: 900;
+      letter-spacing: 0.2px;
+      min-width: 0;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .modal-close{
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      cursor: pointer;
+      display:grid;
+      place-items:center;
+      flex: 0 0 auto;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.12); }
+
+    .modal-body{ padding: 14px 16px 18px; }
+
+    .kv{
+      display:grid;
+      gap: 10px;
+      margin-bottom: 14px;
+      color: rgba(255,255,255,0.86);
+      line-height: 1.5;
+    }
+    .kv .row{
+      display:grid;
+      grid-template-columns: 120px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+    .kv .k{
+      color: rgba(255,255,255,0.70);
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      font-size: 0.9rem;
+    }
+    .kv .v{
+      word-break: break-word;
+    }
+
+    .actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--btnBorder);
+      background: linear-gradient(135deg, var(--btnA), var(--btnB));
+      color: #fff;
+      text-decoration:none;
+      font-weight: 900;
+      cursor: pointer;
+      min-height: 44px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+    .btn:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px var(--shadow);
+      filter: brightness(1.05);
+    }
+    .btn.secondary{
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.16);
+      font-weight: 800;
+    }
+
+    .footer{
+      margin-top: 22px;
+      font-size: 0.85rem;
+      color: #777;
+      text-align: center;
+      letter-spacing: 0.3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div>
+        <h1>Houston Kink Calendar</h1>
+        <div class="subtitle">
+          Browse events in your browser. Filter by host org, search, and switch Day / Week / Month.
+        </div>
+      </div>
+
+      <div class="controls">
+        <div class="chip">
+          <label for="orgFilter">Host Org</label>
+          <select id="orgFilter">
+            <option value="">All orgs</option>
+          </select>
+        </div>
+
+        <div class="chip" style="flex:1;">
+          <label for="q">Search</label>
+          <input id="q" type="search" placeholder="Title, location, description…" />
+        </div>
+      </div>
+    </div>
+
+    <div id="status" class="status"></div>
+
+    <div class="calendar-shell">
+      <div id="calendar"></div>
+    </div>
+
+    <div class="footer">
+      <a class="btn secondary" href="./" style="margin-top:14px;">Back to Subscribe</a>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <h3 id="modalTitle">Event</h3>
+        <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="kv">
+          <div class="row"><div class="k">Host</div><div class="v" id="modalHost"></div></div>
+          <div class="row"><div class="k">When</div><div class="v" id="modalWhen"></div></div>
+          <div class="row"><div class="k">Where</div><div class="v" id="modalWhere"></div></div>
+          <div class="row"><div class="k">Link</div><div class="v" id="modalLink"></div></div>
+          <div class="row"><div class="k">Details</div><div class="v" id="modalDesc"></div></div>
+        </div>
+
+        <div class="actions">
+          <a class="btn secondary" id="modalOpenUrl" href="#" target="_blank" rel="noopener">Open source link ↗</a>
+          <button class="btn" id="modalDownloadBtn">Download this event (.ics)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FullCalendar -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+
+  <!-- ICAL.js (parse .ics) -->
+  <script src="https://cdn.jsdelivr.net/npm/ical.js@1.4.0/build/ical.min.js"></script>
+
+  <script>
+    // === Config ===
+    const ICS_URL = "./houston-kink-cal.ics"; // same folder as calendar.html (docs/)
+    // If you ever move files, update this path accordingly.
+
+    // === State ===
+    let ALL_EVENTS = [];
+    let calendar = null;
+
+    // === Helpers ===
+    function setStatus(kind, msg){
+      const el = document.getElementById("status");
+      if (!el) return;
+      el.className = "status show " + (kind || "");
+      el.textContent = msg || "";
+      if (!msg) el.classList.remove("show");
+    }
+
+    function safeText(x){ return (x ?? "").toString(); }
+
+    function parseOrganizerCN(organizerLine){
+      // ICAL.js gives organizer as a property value; easiest: read params from component
+      // We'll extract CN from params when building events.
+      return organizerLine || "";
+    }
+
+    function formatWhen(start, end, allDay){
+      try{
+        const optsDate = { year:"numeric", month:"short", day:"2-digit" };
+        const optsTime = { hour:"numeric", minute:"2-digit" };
+
+        if (allDay){
+          // full-day event: show date only
+          const d = new Date(start);
+          return d.toLocaleDateString(undefined, optsDate);
+        }
+
+        const s = new Date(start);
+        const e = end ? new Date(end) : null;
+
+        const left = s.toLocaleDateString(undefined, optsDate) + " • " + s.toLocaleTimeString(undefined, optsTime);
+        if (!e) return left;
+
+        const sameDay =
+          s.getFullYear()===e.getFullYear() &&
+          s.getMonth()===e.getMonth() &&
+          s.getDate()===e.getDate();
+
+        if (sameDay){
+          return left + " – " + e.toLocaleTimeString(undefined, optsTime);
+        }
+        return left + " → " + e.toLocaleDateString(undefined, optsDate) + " • " + e.toLocaleTimeString(undefined, optsTime);
+      }catch{
+        return "";
+      }
+    }
+
+    function downloadText(filename, text){
+      const blob = new Blob([text], { type: "text/calendar;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function buildSingleEventICS(ev){
+      // ev is our internal event object with raw VEVENT text in ev._rawVevent
+      // We'll wrap it in a VCALENDAR so calendar apps accept it.
+      const prodid = "-//Houston Kink Cal//Single Event//EN";
+      const body = [
+        "BEGIN:VCALENDAR",
+        "PRODID:" + prodid,
+        "VERSION:2.0",
+        "CALSCALE:GREGORIAN",
+        "METHOD:PUBLISH",
+        ev._rawVevent.trim(),
+        "END:VCALENDAR",
+        ""
+      ].join("\r\n");
+      return body;
+    }
+
+    // === Modal ===
+    function openModal(ev){
+      const backdrop = document.getElementById("modalBackdrop");
+      const title = document.getElementById("modalTitle");
+      const host  = document.getElementById("modalHost");
+      const when  = document.getElementById("modalWhen");
+      const where = document.getElementById("modalWhere");
+      const link  = document.getElementById("modalLink");
+      const desc  = document.getElementById("modalDesc");
+      const openUrl = document.getElementById("modalOpenUrl");
+      const dlBtn = document.getElementById("modalDownloadBtn");
+
+      title.textContent = ev.title || "Event";
+      host.textContent = ev.hostOrg || "Unknown";
+
+      when.textContent = formatWhen(ev.start, ev.end, !!ev.allDay);
+
+      where.textContent = ev.location || "—";
+
+      if (ev.url){
+        link.innerHTML = `<a href="${ev.url}" target="_blank" rel="noopener" style="color:#fff;">${ev.url}</a>`;
+        openUrl.href = ev.url;
+        openUrl.style.display = "inline-flex";
+      } else {
+        link.textContent = "—";
+        openUrl.style.display = "none";
+      }
+
+      desc.textContent = ev.description || "—";
+
+      dlBtn.onclick = () => {
+        const ics = buildSingleEventICS(ev);
+        const safe = (ev.title || "event").replace(/[^\w\- ]+/g,"").trim().slice(0,60) || "event";
+        downloadText(`${safe}.ics`, ics);
+      };
+
+      backdrop.classList.add("show");
+      backdrop.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal(){
+      const backdrop = document.getElementById("modalBackdrop");
+      backdrop.classList.remove("show");
+      backdrop.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    document.getElementById("modalClose").addEventListener("click", closeModal);
+    document.getElementById("modalBackdrop").addEventListener("click", (e) => {
+      if (e.target.id === "modalBackdrop") closeModal();
+    });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+    // === Filtering ===
+    function applyFilters(){
+      const org = document.getElementById("orgFilter").value.trim();
+      const q = document.getElementById("q").value.trim().toLowerCase();
+
+      const filtered = ALL_EVENTS.filter(ev => {
+        if (org && (ev.hostOrg || "Unknown") !== org) return false;
+        if (q){
+          const hay = (safeText(ev.title) + " " + safeText(ev.location) + " " + safeText(ev.description)).toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      });
+
+      calendar.removeAllEvents();
+      calendar.addEventSource(filtered);
+    }
+
+    // === ICS Load + Parse ===
+    async function loadICS(){
+      setStatus("warn", "Loading calendar…");
+
+      const res = await fetch(ICS_URL + "?v=" + Date.now(), { cache: "no-store" });
+      if (!res.ok) throw new Error("Could not load ICS: " + res.status);
+
+      const text = await res.text();
+
+      // Parse ICS
+      const jcal = ICAL.parse(text);
+      const comp = new ICAL.Component(jcal);
+      const vevents = comp.getAllSubcomponents("vevent");
+
+      const events = [];
+      const orgSet = new Set();
+
+      for (const vevent of vevents){
+        const e = new ICAL.Event(vevent);
+
+        // Organizer CN best-effort:
+        // ICAL.js stores properties with parameters; extract CN if present.
+        let hostOrg = "Unknown";
+        const orgProp = vevent.getFirstProperty("organizer");
+        if (orgProp){
+          const cn = orgProp.getParameter("cn");
+          if (cn) hostOrg = cn;
+        }
+
+        orgSet.add(hostOrg);
+
+        const start = e.startDate ? e.startDate.toJSDate() : null;
+        const end = e.endDate ? e.endDate.toJSDate() : null;
+
+        // FullCalendar "allDay" expects date-only strings or allDay flag.
+        // Facebook exports often use Z times; these are not all-day.
+        const allDay = e.startDate ? e.startDate.isDate : false;
+
+        // Grab raw VEVENT text for single-event download
+        // (We re-serialize JUST the VEVENT component.)
+        const rawVevent = vevent.toString(); // includes BEGIN:VEVENT/END:VEVENT
+
+        events.push({
+          id: e.uid || (e.summary + "|" + start),
+          title: e.summary || "Untitled",
+          start: start ? start.toISOString() : null,
+          end: end ? end.toISOString() : null,
+          allDay: !!allDay,
+
+          // extras for filtering/modals
+          hostOrg,
+          location: e.location || "",
+          description: e.description || "",
+          url: e.url || "",
+
+          // internal
+          _rawVevent: rawVevent
+        });
+      }
+
+      // Sort org filter
+      const orgs = Array.from(orgSet).sort((a,b) => a.localeCompare(b));
+      const orgSelect = document.getElementById("orgFilter");
+      orgSelect.innerHTML = `<option value="">All orgs</option>` + orgs.map(o =>
+        `<option value="${o.replace(/"/g,"&quot;")}">${o}</option>`
+      ).join("");
+
+      ALL_EVENTS = events;
+
+      setStatus("ok", `Loaded ${events.length} events.`);
+      setTimeout(() => setStatus("", ""), 1800);
+    }
+
+    // === Init Calendar ===
+    async function init(){
+      const calEl = document.getElementById("calendar");
+
+      calendar = new FullCalendar.Calendar(calEl, {
+        initialView: "dayGridMonth",
+        height: "auto",
+        nowIndicator: true,
+        navLinks: true,
+        dayMaxEvents: true,
+
+        headerToolbar: {
+          left: "prev,next today",
+          center: "title",
+          right: "dayGridMonth,timeGridWeek,timeGridDay"
+        },
+
+        eventClick: function(info){
+          info.jsEvent.preventDefault();
+
+          // FullCalendar stores our extra props under extendedProps
+          const ev = {
+            title: info.event.title,
+            start: info.event.start,
+            end: info.event.end,
+            allDay: info.event.allDay,
+            hostOrg: info.event.extendedProps.hostOrg,
+            location: info.event.extendedProps.location,
+            description: info.event.extendedProps.description,
+            url: info.event.extendedProps.url,
+            _rawVevent: info.event.extendedProps._rawVevent
+          };
+
+          openModal(ev);
+        }
+      });
+
+      calendar.render();
+
+      // Load ICS -> add events
+      await loadICS();
+
+      // Feed to FullCalendar
+      calendar.addEventSource(ALL_EVENTS);
+
+      // Wire filters
+      document.getElementById("orgFilter").addEventListener("change", applyFilters);
+      document.getElementById("q").addEventListener("input", () => {
+        // tiny debounce
+        clearTimeout(window.__qTimer);
+        window.__qTimer = setTimeout(applyFilters, 120);
+      });
+    }
+
+    init().catch(err => {
+      console.error(err);
+      setStatus("err", "Failed to load the calendar. " + (err.message || ""));
+    });
+  </script>
+</body>
+</html>
