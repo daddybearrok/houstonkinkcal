@@ -72,7 +72,9 @@
       margin-bottom: 44px;
     }
     @media (min-width: 900px) {
-      .subscribe-grid { grid-template-columns: repeat(3, 1fr); }
+      .subscribe-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
 
     .sub-btn {
@@ -100,7 +102,9 @@
       filter: brightness(1.05);
     }
 
-    .sub-btn:active { transform: translateY(-2px); }
+    .sub-btn:active {
+      transform: translateY(-2px);
+    }
 
     .section {
       background: var(--panel);
@@ -121,7 +125,9 @@
       user-select: none;
     }
 
-    .section-header:hover { background: var(--panelHover); }
+    .section-header:hover {
+      background: var(--panelHover);
+    }
 
     .section-header .right {
       display: inline-flex;
@@ -199,8 +205,8 @@
     .seg {
       display:flex;
       align-items:center;
-      gap:12px;
-      padding:8px 16px;
+      gap:12px; /* spacing between radio + text */
+      padding:8px 16px; /* slightly slimmer pills */
       border-radius:999px;
       border:1px solid rgba(255,255,255,0.12);
       background: rgba(0,0,0,0.25);
@@ -235,7 +241,10 @@
       transition:transform 0.15s ease;
     }
 
-    .seg input[type="radio"]:checked::before{ transform:scale(1); }
+    .seg input[type="radio"]:checked::before{
+      transform:scale(1);
+    }
+
     @media (max-width: 720px) { .seg { min-width: 100%; } }
 
     .btn.primary {
@@ -283,11 +292,24 @@
     }
     .spinner.show { display: inline-block; }
     @keyframes spin { to { transform: rotate(360deg); } }
-
+  </style>
+  <style>
     /* --- Sources marquee --- */
-    .sources-wrap { margin-top: 34px; }
-    .sources-title { font-weight: 700; margin: 0 0 10px; letter-spacing: 0.2px; }
-    .sources-subtitle { margin: 0 0 14px; color: var(--muted); line-height: 1.5; }
+    .sources-wrap {
+      margin-top: 34px;
+    }
+
+    .sources-title {
+      font-weight: 700;
+      margin: 0 0 10px;
+      letter-spacing: 0.2px;
+    }
+
+    .sources-subtitle {
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
 
     .marquee {
       position: relative;
@@ -295,16 +317,10 @@
       border: 1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.04);
       overflow: hidden;
-      padding: 14px 0;
-      display: flex;
-      align-items: center;
-      min-height: 178px; /* ensures visibility on mobile */
+      padding: 12px 0;
     }
 
-    @media (max-width: 720px) {
-      .marquee { min-height: 156px; }
-    }
-
+    /* subtle edge fade */
     .marquee::before,
     .marquee::after {
       content: "";
@@ -323,134 +339,62 @@
       background: linear-gradient(270deg, rgba(13,13,13,1), rgba(13,13,13,0));
     }
 
-    @media (max-width: 720px) {
-      .marquee::before, .marquee::after { width: 44px; }
-    }
-
     .track {
       display: flex;
       align-items: center;
       gap: 14px;
-      flex-wrap: nowrap;
-      width: max-content; /* important for iOS Safari */
       will-change: transform;
-      padding: 0 14px;
-      transform: translateX(0);
-      --scroll-distance: 50%;
       animation: scroll 28s linear infinite;
     }
 
     .marquee:hover .track { animation-play-state: paused; }
 
-    /* If the set doesn't overflow, we disable scrolling and just show the tiles. */
-    .marquee.no-scroll { padding: 14px; }
-    .marquee.no-scroll .track {
-      animation: none;
-      padding: 0;
-    }
-
     @keyframes scroll {
       from { transform: translateX(0); }
-      to   { transform: translateX(calc(-1 * var(--scroll-distance))); }
+      to   { transform: translateX(-50%); }
     }
 
-    /* NEW: square icon tiles (instead of pills) */
-    .org-tile {
-      position: relative;
-      border-radius: 16px;
+    .source-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.12);
       background: rgba(0,0,0,0.25);
-      overflow: hidden;
-      cursor: pointer;
-      user-select: none;
-      outline: none;
-      flex: 0 0 auto;
-      width: 150px;
-      height: 150px;
-      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+      text-decoration: none;
+      color: #fff;
+      white-space: nowrap;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
     }
 
-    @media (max-width: 720px) {
-      .org-tile { width: 128px; height: 128px; border-radius: 15px; }
-    }
-
-    .org-tile:hover {
-      transform: translateY(-3px);
-      background: rgba(255,255,255,0.06);
+    .source-pill:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.08);
       border-color: rgba(255,255,255,0.22);
     }
 
-    .org-tile:active { transform: translateY(-1px); }
-
-    .org-tile:focus-visible {
-      box-shadow: 0 0 0 3px rgba(255,255,255,0.18), 0 12px 28px rgba(0,0,0,0.25);
-    }
-
-    .org-tile img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
+    .source-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
       object-fit: cover;
-      filter: saturate(1.05) contrast(1.05);
-      transform: scale(1.02);
+      flex: 0 0 auto;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.06);
     }
 
-    .org-tile .fallback {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      color: rgba(255,255,255,0.7);
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      background: radial-gradient(circle at top, rgba(255,255,255,0.06), rgba(0,0,0,0.35) 70%);
-      padding: 10px;
-      text-align: center;
-    }
-
-    /* Label hidden by default on desktop; revealed on hover/focus */
-    .org-tile .label {
-      position: absolute;
-      left: 0; right: 0; bottom: 0;
-      padding: 12px 12px 11px;
-      background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.84));
-      display: flex;
-      align-items: flex-end;
-      min-height: 58px;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity .18s ease, transform .18s ease;
-    }
-
-    .org-tile:hover .label,
-    .org-tile:focus-visible .label {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .org-tile .label span {
-      font-weight: 900;
-      letter-spacing: 0.2px;
+    .source-name {
+      font-weight: 700;
       font-size: 0.95rem;
-      line-height: 1.15;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.75);
-      display: block;
-      white-space: normal;
-      overflow: visible;
-    }
-
-    /* Mobile: always show label (no hover) */
-    @media (max-width: 720px) {
-      .org-tile .label { opacity: 1; transform: none; }
-      .org-tile .label span { font-size: 0.9rem; }
+      letter-spacing: 0.2px;
     }
 
     @media (prefers-reduced-motion: reduce) {
       .track { animation: none; }
     }
-
+  </style>
+  <style>
     /* Modal */
     .modal-backdrop {
       position: fixed;
@@ -530,7 +474,10 @@
       font-size: 0.98rem;
     }
 
-    .linktree { display: grid; gap: 10px; }
+    .linktree {
+      display: grid;
+      gap: 10px;
+    }
 
     .linktree a {
       display:flex;
@@ -554,118 +501,11 @@
     .linktree .label { font-weight: 800; letter-spacing: 0.2px; }
     .linktree .urlhint { opacity: 0.75; font-size: 12px; overflow:hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-    .linktree .right { opacity: 0.9; flex: 0 0 auto; }
-  </style>
-
-  <style>
-    /* Optional: small enhancements scoped to the submit section only */
-    #submitSection .help {
-      margin: 6px 0 0;
-      font-size: 12px;
-      opacity: 0.75;
-      line-height: 1.45;
-    }
-
-    .divider {
-      height: 1px;
-      background: rgba(255,255,255,0.10);
-      margin: 14px 0;
-    }
-
-    .chips {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,0.25);
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .chip input[type="checkbox"]{
-      -webkit-appearance:none;
-      appearance:none;
-      width:16px;
-      height:16px;
-      border:2px solid rgba(255,255,255,0.8);
-      border-radius:4px;
-      background:transparent;
-      display:inline-grid;
-      place-content:center;
-      margin:0;
-      flex:0 0 auto;
-      cursor:pointer;
-    }
-
-    .chip input[type="checkbox"]::before{
-      content:"";
-      width:8px;
-      height:8px;
-      background:#fff;
-      transform:scale(0);
-      transition:transform 0.15s ease;
-    }
-    .chip input[type="checkbox"]:checked::before{ transform:scale(1); }
-
-    .req {
-      display:inline-block;
-      margin-left: 8px;
-      font-size: 12px;
-      opacity: 0.75;
-    }
-
-    .hidden { display: none !important; }
-
-    .links-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .link-row {
-      display: grid;
-      grid-template-columns: 1.1fr 2fr auto;
-      gap: 10px;
-      align-items: start;
-    }
-
-    @media (max-width: 720px) {
-      .link-row {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .btn.small {
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.16);
-      background: rgba(255,255,255,0.10);
-      color: #fff;
-      font-weight: 800;
-      cursor: pointer;
-      min-height: 44px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-    .btn.small:hover { background: rgba(255,255,255,0.14); }
-    .btn.danger { background: rgba(255,80,80,0.18); border-color: rgba(255,80,80,0.35); }
-    .btn.danger:hover { background: rgba(255,80,80,0.26); }
-
-    /* Make file input look consistent */
-    input[type="file"] {
-      padding: 10px 12px;
+    .linktree .right {
+      opacity: 0.9;
+      flex: 0 0 auto;
     }
   </style>
-
   <script data-goatcounter="https://houstonkinkcal.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 
@@ -679,29 +519,15 @@
     </div>
 
     <div class="subscribe-grid">
-      <a class="sub-btn"
-         href="webcal://daddybearrok.github.io/houstonkinkcal/houston-kink-cal.ics"
-         aria-label="Subscribe on Apple Calendar (Mac and iPhone)"
-         data-goatcounter-click="/event/subscribe/apple"
-         data-goatcounter-title="Subscribe: Apple">
+      <a class="sub-btn" href="webcal://daddybearrok.github.io/houstonkinkcal/houston-kink-cal.ics" aria-label="Subscribe on Apple Calendar (Mac and iPhone)" data-goatcounter-click="/event/subscribe/apple" data-goatcounter-title="Subscribe: Apple">
         <span>Mac / iPhone</span>
       </a>
 
-      <a class="sub-btn"
-         href="https://www.google.com/calendar/render?cid=https%3A%2F%2Fdaddybearrok.github.io%2Fhoustonkinkcal%2Fhouston-kink-cal.ics"
-         target="_blank" rel="noopener"
-         aria-label="Add to Google Calendar"
-         data-goatcounter-click="/event/subscribe/google"
-         data-goatcounter-title="Subscribe: Google">
+      <a class="sub-btn" href="https://www.google.com/calendar/render?cid=http%3A%2F%2Fdaddybearrok.github.io%2Fhoustonkinkcal%2Fhouston-kink-cal.ics" target="_blank" rel="noopener" aria-label="Add to Google Calendar" data-goatcounter-click="/event/subscribe/google" data-goatcounter-title="Subscribe: Google">
         <span>Google / Android</span>
       </a>
 
-      <a class="sub-btn"
-         href="https://outlook.live.com/calendar/addfromweb?url=https://daddybearrok.github.io/houstonkinkcal/houston-kink-cal.ics&name=Houston%20Kink%20Cal&mkt=en-001"
-         target="_blank" rel="noopener"
-         aria-label="Add to Outlook Calendar"
-         data-goatcounter-click="/event/subscribe/outlook"
-         data-goatcounter-title="Subscribe: Outlook">
+      <a class="sub-btn" href="https://outlook.live.com/calendar/addfromweb?url=https://daddybearrok.github.io/houstonkinkcal/houston-kink-cal.ics&name=Houston%20Kink%20Cal&mkt=en-001" target="_blank" rel="noopener" aria-label="Add to Outlook Calendar" data-goatcounter-click="/event/subscribe/outlook" data-goatcounter-title="Subscribe: Outlook">
         <span>Outlook</span>
       </a>
     </div>
@@ -710,7 +536,9 @@
       <div class="section-header">
         <span>Manual Subscription Instructions &amp; Refresh/Update Details</span>
         <span class="right" aria-hidden="true">
-          <svg class="chev" viewBox="0 0 24 24"><path fill="currentColor" d="M7 10l5 5 5-5z"/></svg>
+          <svg class="chev" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M7 10l5 5 5-5z"/>
+          </svg>
         </span>
       </div>
       <div class="section-content">
@@ -721,158 +549,83 @@
           This is a live subscription calendar. Events update automatically.
           Some platforms (such as Google and Outlook) may take a few hours to refresh.
         </p>
-        <p>Apple Calendar can be set to refresh hourly.</p>
+        <p>
+          Apple Calendar can be set to refresh hourly.
+        </p>
       </div>
     </div>
 
     <!-- Collapsed-by-default submit section -->
     <div class="section" id="submitSection">
       <div class="section-header">
-        <span>Submit an Event or Organization</span>
+        <span>Submit an Event or Page</span>
         <span class="right" aria-hidden="true">
-          <svg class="chev" viewBox="0 0 24 24"><path fill="currentColor" d="M7 10l5 5 5-5z"/></svg>
+          <svg class="chev" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M7 10l5 5 5-5z"/>
+          </svg>
         </span>
       </div>
 
       <div class="section-content">
         <p class="muted" style="margin-top:0;">
-          Submissions go to the calendar admin for review. Nothing personal is published — only public event details.
+          Got a Houston event or a Facebook Page that should be included?
+          Drop it here. If it’s a good fit, we’ll add it.
+          Right now, we are limited to Facebook Events and Facebook Pages.
         </p>
 
         <form
           id="requestForm"
           action="https://formspree.io/f/xzdawajg"
           method="POST"
-          enctype="multipart/form-data"
           class="form"
         >
-          <!-- bot trap -->
           <input type="text" name="_gotcha" style="display:none" autocomplete="off">
 
-          <!-- identity -->
-          <div class="field two-col">
-            <div>
-              <label for="submitter_name">Your name (optional)</label>
-              <input id="submitter_name" name="submitter_name" type="text" placeholder="Name">
-            </div>
-            <div>
-              <label for="submitter_email">Your email <span class="req">(required)</span></label>
-              <input id="submitter_email" name="submitter_email" type="email" placeholder="you@email.com" required>
-              <div class="help">We may contact you if we need clarification.</div>
-            </div>
-          </div>
-
-          <div class="divider"></div>
-
-          <!-- request type -->
           <div class="field">
-            <label>What are you requesting? <span class="req">(required)</span></label>
+            <label>What are you submitting?</label>
             <div class="segmented">
               <label class="seg">
-                <input type="radio" name="request_type" value="add_single_fb_event" checked>
-                <span>Add single event (Facebook)</span>
+                <input type="radio" name="submission_type" value="single_event" checked>
+                <span>Single Facebook Event</span>
               </label>
-
               <label class="seg">
-                <input type="radio" name="request_type" value="add_single_ics_event">
-                <span>Add single event (ICS file)</span>
-              </label>
-
-              <label class="seg">
-                <input type="radio" name="request_type" value="add_organization">
-                <span>Add organization</span>
-              </label>
-
-              <label class="seg">
-                <input type="radio" name="request_type" value="update_organization">
-                <span>Update organization</span>
+                <input type="radio" name="submission_type" value="facebook_page">
+                <span>Facebook Page with Events</span>
               </label>
             </div>
           </div>
 
-          <!-- ===== Add single FB event ===== -->
-          <div id="section_fb_single" class="">
-            <div class="field">
-              <label for="fb_event_url">Facebook Event Link <span class="req">(required)</span></label>
-              <input
-                id="fb_event_url"
-                name="fb_event_url"
-                type="url"
-                placeholder="https://www.facebook.com/events/123..."
-              >
-              <div class="help">Paste the full event URL.</div>
+          <div class="field">
+            <label for="url">Facebook URL</label>
+            <input
+              id="url"
+              name="facebook_url"
+              type="url"
+              placeholder="https://www.facebook.com/events/123...  OR  https://www.facebook.com/profile.php?id=..."
+              required
+            >
+            <div class="hint">Tip: paste the full URL from your browser.</div>
+          </div>
+
+          <div class="field two-col">
+            <div>
+              <label for="name">Your name (optional)</label>
+              <input id="name" name="submitter_name" type="text" placeholder="Name">
+            </div>
+            <div>
+              <label for="email">Your email (optional)</label>
+              <input id="email" name="submitter_email" type="email" placeholder="you@email.com">
             </div>
           </div>
 
-          <!-- ===== Add single ICS event ===== -->
-          <div id="section_ics_single" class="hidden">
-            <div class="field">
-              <label for="ics_file">ICS File <span class="req">(required)</span></label>
-              <input id="ics_file" name="ics_file" type="file" accept=".ics,text/calendar">
-              <div class="help">Upload a .ics file. (Formspree file uploads may require a paid plan.)</div>
-            </div>
-          </div>
-
-          <!-- ===== Add / Update organization ===== -->
-          <div id="section_org" class="hidden">
-            <div class="field">
-              <label for="org_name">Organization Name <span class="req" id="org_name_req">(required)</span></label>
-              <input id="org_name" name="org_name" type="text" placeholder="Organization name">
-            </div>
-
-            <div class="field" id="calendar_sources_block">
-              <label>Calendar Sources <span class="req" id="cal_sources_req">(min 1 required for Add)</span></label>
-              <div class="help">Choose at least one source so we can pull events automatically.</div>
-
-              <div class="chips" style="margin-top:10px;">
-                <label class="chip">
-                  <input type="checkbox" name="calendar_source_types[]" value="facebook_page" id="cs_fb">
-                  <span>Facebook Page</span>
-                </label>
-
-                <label class="chip">
-                  <input type="checkbox" name="calendar_source_types[]" value="ics_url" id="cs_ics">
-                  <span>Google / ICS link</span>
-                </label>
-
-                <label class="chip">
-                  <input type="checkbox" name="calendar_source_types[]" value="other" id="cs_other">
-                  <span>Other</span>
-                </label>
-              </div>
-
-              <div id="cal_fb_url_wrap" class="field hidden" style="margin-top:12px;">
-                <label for="calendar_facebook_page_url">Facebook Page URL <span class="req" id="cal_fb_req">(required)</span></label>
-                <input id="calendar_facebook_page_url" name="calendar_facebook_page_url" type="url" placeholder="https://www.facebook.com/YourPageName">
-              </div>
-
-              <div id="cal_ics_url_wrap" class="field hidden" style="margin-top:12px;">
-                <label for="calendar_ics_url">ICS Calendar URL <span class="req" id="cal_ics_req">(required)</span></label>
-                <input id="calendar_ics_url" name="calendar_ics_url" type="url" placeholder="https://.../basic.ics">
-              </div>
-
-              <div id="cal_other_wrap" class="field hidden" style="margin-top:12px;">
-                <label for="calendar_other_notes">Other calendar source details <span class="req" id="cal_other_req">(required)</span></label>
-                <textarea id="calendar_other_notes" name="calendar_other_notes" rows="3" placeholder="Tell us where the calendar lives and how to access it."></textarea>
-              </div>
-            </div>
-
-            <div class="field" id="links_block">
-              <label>Links <span class="req" id="links_req">(min 1 required for Add)</span></label>
-              <div class="help">Website / social / etc. You can add up to 10.</div>
-
-              <div class="links-list" id="linksList" style="margin-top:10px;"></div>
-
-              <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
-                <button type="button" class="btn small" id="addLinkBtn">+ Add link</button>
-                <button type="button" class="btn small danger hidden" id="clearLinksBtn">Remove extra links</button>
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="org_notes">Notes <span class="req" id="org_notes_req" style="display:none;">(required for Update)</span></label>
-              <textarea id="org_notes" name="org_notes" rows="4" placeholder="Optional notes (required for updates)"></textarea>
-            </div>
+          <div class="field">
+            <label for="notes">Notes (optional)</label>
+            <textarea
+              id="notes"
+              name="notes"
+              rows="4"
+              placeholder="Anything we should know? Frequency, venue, organizer, recurring events, etc."
+            ></textarea>
           </div>
 
           <input type="hidden" name="_subject" value="Houston Kink Cal submission">
@@ -884,7 +637,7 @@
             <span id="submitLabel">Send Request</span>
           </button>
 
-          <p class="muted tiny">This sends an email request to the calendar admin. Submissions are reviewed before inclusion.</p>
+          <p class="muted tiny">This sends an email request to the calendar admin. No guarantees, but we do review them.</p>
         </form>
       </div>
     </div>
@@ -894,21 +647,23 @@
       <div class="section-header">
         <span>✅ Submitted</span>
         <span class="right" aria-hidden="true">
-          <svg class="chev" viewBox="0 0 24 24"><path fill="currentColor" d="M7 10l5 5 5-5z"/></svg>
+          <svg class="chev" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M7 10l5 5 5-5z"/>
+          </svg>
         </span>
       </div>
       <div class="section-content">
         <p class="muted" style="margin-top:0;">
           Thanks — your submission was sent. If it’s a fit, it’ll show up in the calendar soon.
-          Refresh the page if you need to submit another request.
+          Refresh the page if you need to submit another event or page.
         </p>
       </div>
     </div>
 
     <div class="sources-wrap" id="sources">
-      <div class="sources-title">Included Organizations</div>
+      <div class="sources-title">Included Sources</div>
       <div class="sources-subtitle">
-        These are the organizations currently included in the calendar. Click for more information on an organization.
+        These are the Facebook pages currently being scraped for public events. Hover to pause.
       </div>
 
       <div class="marquee" aria-label="Scrolling list of included sources">
@@ -923,8 +678,6 @@
     </div>
 
   </div>
-
-  <!-- Org modal -->
   <div class="modal-backdrop" id="orgModalBackdrop" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="orgModalTitle">
       <div class="modal-header">
@@ -942,20 +695,29 @@
       </div>
     </div>
   </div>
-
   <script>
-    // Accordion behavior
-    document.querySelectorAll('.section-header').forEach(header => {
-      header.addEventListener('click', () => {
-        header.parentElement.classList.toggle('active');
+    // Accordion behavior (single delegated handler)
+    if (!window.__HKC_ACCORDION_WIRED__) {
+      window.__HKC_ACCORDION_WIRED__ = true;
+      document.addEventListener("click", (e) => {
+        const header = e.target.closest(".section-header");
+        if (!header) return;
+
+        // If the click started on an interactive element inside the header, let it behave normally
+        const interactive = e.target.closest("a, button, input, textarea, select, label");
+        if (interactive && interactive !== header) return;
+
+        const section = header.closest(".section");
+        if (!section) return;
+        section.classList.toggle("active");
       });
-    });
+    }
 
-    // Custom Formspree submit (no redirect to generic thank-you page)
-    (function () {
+    // Custom Formspree submit (prevents redirect to Formspree's generic thank-you page)
+    if (!window.__HKC_FORMSPREE_WIRED__) {
+      window.__HKC_FORMSPREE_WIRED__ = true;
+
       const form = document.getElementById("requestForm");
-      if (!form) return;
-
       const submitSection = document.getElementById("submitSection");
       const thanksSection = document.getElementById("thanks");
 
@@ -977,61 +739,118 @@
         label.textContent = isLoading ? "Sending…" : "Send Request";
       }
 
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
+      if (form) {
+        form.addEventListener("submit", async (e) => {
+          if (e.defaultPrevented) return;
+          e.preventDefault();
 
-        setStatus("", "");
-        setLoading(true);
+          setStatus("", "");
+          setLoading(true);
 
-        // Bot trap
-        const gotcha = form.querySelector('input[name="_gotcha"]');
-        if (gotcha && gotcha.value) {
-          setLoading(false);
-          setStatus("ok", "Submitted.");
-          return;
-        }
-
-        try {
-          const formData = new FormData(form);
-
-          const res = await fetch(form.action, {
-            method: "POST",
-            headers: { "Accept": "application/json" },
-            body: formData
-          });
-
-          if (res.ok) {
-            setStatus("ok", "Sent. Thank you.");
-            form.reset();
-
-            if (submitSection) submitSection.style.display = "none";
-            if (thanksSection) {
-              thanksSection.style.display = "block";
-              thanksSection.classList.add("active");
-              thanksSection.scrollIntoView({ behavior: "smooth", block: "start" });
-            }
+          // Bot trap
+          const gotcha = form.querySelector('input[name="_gotcha"]');
+          if (gotcha && gotcha.value) {
+            setLoading(false);
+            setStatus("ok", "Submitted.");
             return;
           }
 
-          let data = null;
-          try { data = await res.json(); } catch {}
-          const msg = (data && data.errors && data.errors.length)
-            ? data.errors.map(x => x.message).join(" ")
-            : "Something went wrong. Please try again.";
-          setStatus("err", msg);
+          try {
+            const formData = new FormData(form);
 
-        } catch (err) {
-          setStatus("err", "Network error. Please try again.");
-        } finally {
-          setLoading(false);
-        }
-      });
-    })();
+            const res = await fetch(form.action, {
+              method: "POST",
+              headers: { "Accept": "application/json" },
+              body: formData
+            });
+
+            if (res.ok) {
+              setStatus("ok", "Sent. Thank you.");
+              form.reset();
+
+              if (submitSection) submitSection.style.display = "none";
+              if (thanksSection) {
+                thanksSection.style.display = "block";
+                thanksSection.classList.add("active");
+                thanksSection.scrollIntoView({ behavior: "smooth", block: "start" });
+              }
+              return;
+            }
+
+            let data = null;
+            try { data = await res.json(); } catch {}
+            const msg = (data && data.errors && data.errors.length)
+              ? data.errors.map(x => x.message).join(" ")
+              : "Something went wrong. Please try again.";
+            setStatus("err", msg);
+
+          } catch (err) {
+            setStatus("err", "Network error. Please try again.");
+          } finally {
+            setLoading(false);
+          }
+        });
+      }
+    }
   </script>
-
   <script>
-    // Modal helpers
+    async function loadSourcesMarquee() {
+      const track = document.getElementById("sourcesTrack");
+      if (!track) return;
+
+      try {
+        const res = await fetch("sources.json?v=" + Date.now(), { cache: "no-store" });
+        if (!res.ok) throw new Error("sources.json not found");
+
+        const sources = await res.json();
+        if (!Array.isArray(sources) || sources.length === 0) return;
+
+        const pills = sources.map(s => {
+          const name = (s.name || "Unknown").trim();
+
+          // 🔥 CHANGE IS HERE:
+          const linkUrl = (s.url || s.events_url || "#").trim();
+
+          const icon = (s.icon || "").trim();
+
+          const safeName = name.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+          const safeUrl = linkUrl.replace(/"/g, "&quot;");
+
+          const img = icon
+            ? `<img class="source-icon" src="${icon}" alt="${safeName} logo" onerror="this.style.display='none'">`
+            : "";
+
+          return `
+            <div class="source-pill org-banner" data-org-index="${index}">
+              ${img}
+              <span class="source-name">${safeName}</span>
+            </div>
+          `;
+        }).join("");
+
+        track.innerHTML = pills + pills;
+
+        document.querySelectorAll(".org-banner").forEach(el => {
+            el.addEventListener("click", () => {
+              const idx = Number(el.dataset.orgIndex);
+              const org = ORG_DATA[idx];
+              if (org) openOrgModal(org);
+            });
+          });
+
+      } catch (err) {
+        console.warn("Could not load sources.json", err);
+      }
+    }
+
+    loadSourcesMarquee();
+  </script>
+  <script>
     let ORG_DATA = [];
+
+    function shortHost(u) {
+      try { return new URL(u).host.replace(/^www\./,''); } catch { return ''; }
+    }
 
     function openOrgModal(org) {
       const backdrop = document.getElementById("orgModalBackdrop");
@@ -1042,9 +861,8 @@
 
       title.textContent = org.name || "Organization";
 
-      const iconUrl = (org.icon || "").trim();
-      icon.src = iconUrl;
-      icon.style.display = iconUrl ? "block" : "none";
+      icon.src = org.icon || "";
+      icon.style.display = org.icon ? "block" : "none";
 
       const d = (org.description || "").trim();
       if (d) {
@@ -1057,29 +875,22 @@
       links.innerHTML = "";
 
       const items = Array.isArray(org.links) ? org.links : [];
-      const usable = items.filter(x => x && x.url);
 
-      if (usable.length === 0) {
+      for (const l of items) {
+        if (!l || !l.url) continue;
+
         links.insertAdjacentHTML("beforeend", `
-          <div class="status show warn">No links have been provided for this organization.</div>
+          <a href="${l.url}" target="_blank" rel="noopener">
+            <div>
+              <div class="label">${l.label || "Link"}</div>
+              <div class="urlhint">${new URL(l.url).host.replace(/^www\./,'')}</div>
+            </div>
+            <div class="right">↗</div>
+          </a>
         `);
-      } else {
-        for (const l of usable) {
-          const label = (l.label || "Link").trim();
-          links.insertAdjacentHTML("beforeend", `
-            <a href="${l.url}" target="_blank" rel="noopener">
-              <div>
-                <div class="label">${label}</div>
-                <div class="urlhint">${l.url}</div>
-              </div>
-              <div class="right">↗</div>
-            </a>
-          `);
-        }
       }
 
       backdrop.classList.add("show");
-      backdrop.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
     }
 
@@ -1098,396 +909,25 @@
       if (e.key === "Escape") closeOrgModal();
     });
 
-    // Render marquee + wire clicks (single source of truth)
-    async function initSources() {
-      const track = document.getElementById("sourcesTrack");
-      const marquee = track ? track.closest(".marquee") : null;
-      if (!track || !marquee) return;
+    async function loadSourcesAndWireOrgClicks() {
+      const res = await fetch("./sources.json", { cache: "no-store" });
+      ORG_DATA = await res.json();
 
-      try {
-        const res = await fetch("sources.json?v=" + Date.now(), { cache: "no-store" });
-        if (!res.ok) throw new Error("sources.json not found");
-
-        ORG_DATA = await res.json();
-        if (!Array.isArray(ORG_DATA) || ORG_DATA.length === 0) return;
-
-        const oneSet = ORG_DATA.map((s, index) => {
-          const name = (s.name || "Unknown").trim();
-          const icon = (s.icon || "").trim();
-
-          const img = icon
-            ? `<img src="${icon}" alt="${name} logo" onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='grid';">`
-            : "";
-
-          const fallback = `<div class="fallback" style="display:${icon ? 'none' : 'grid'};">${name}</div>`;
-
-          return `
-            <div class="org-tile org-banner"
-                 role="button"
-                 tabindex="0"
-                 aria-label="Open links for ${name}"
-                 data-org-index="${index}">
-              ${img}
-              ${fallback}
-              <div class="label"><span>${name}</span></div>
-            </div>
-          `;
-        }).join("");
-
-        // First, render one set so we can measure it (important for iOS Safari)
-        track.innerHTML = oneSet;
-
-        await new Promise(r => requestAnimationFrame(r));
-
-        const oneSetWidth = track.scrollWidth;
-
-        // If content doesn't overflow, don't animate (mobile often looks "blank" otherwise)
-        if (oneSetWidth <= marquee.clientWidth + 20) {
-          marquee.classList.add("no-scroll");
-          track.style.setProperty("--scroll-distance", "0px");
-          track.innerHTML = oneSet;
-        } else {
-          marquee.classList.remove("no-scroll");
-          track.style.setProperty("--scroll-distance", oneSetWidth + "px");
-          // Duplicate exactly one full set for seamless looping
-          track.innerHTML = oneSet + oneSet;
-        }
-
-        // Wire click + keyboard (works for both sets)
-        const banners = track.querySelectorAll(".org-banner[data-org-index]");
-        banners.forEach(el => {
-          const open = () => {
-            const idx = Number(el.getAttribute("data-org-index"));
-            const org = ORG_DATA[idx];
-            if (org) openOrgModal(org);
-          };
-          el.addEventListener("click", (e) => { e.preventDefault(); open(); });
-          el.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              open();
-            }
-          });
+      // IMPORTANT: this assumes your org banner elements have class "org-banner"
+      // and data-org-index set at render time.
+      document.querySelectorAll(".org-banner[data-org-index]").forEach(el => {
+        el.addEventListener("click", (ev) => {
+          ev.preventDefault();
+          const idx = Number(el.getAttribute("data-org-index"));
+          const org = ORG_DATA[idx];
+          if (org) openOrgModal(org);
         });
-
-      } catch (err) {
-        console.warn("Could not load sources.json", err);
-      }
+      });
     }
 
-    // Re-measure on rotation / resize (fixes "not showing" on mobile)
-    window.addEventListener("resize", () => {
-      clearTimeout(window.__hkcResizeTimer);
-      window.__hkcResizeTimer = setTimeout(() => initSources(), 150);
-    });
-
-    initSources();
+    // Call this after you render banners
+    // If you already have a function that loads/render sources.json, integrate there.
+    loadSourcesAndWireOrgClicks().catch(console.error);
   </script>
-
-  <script>
-    // Accordion behavior (keep yours if already present)
-    document.querySelectorAll('.section-header').forEach(header => {
-      header.addEventListener('click', () => {
-        header.parentElement.classList.toggle('active');
-      });
-    });
-
-    // ===== Dynamic link rows (up to 10) =====
-    (function(){
-      const linksList = document.getElementById("linksList");
-      const addBtn = document.getElementById("addLinkBtn");
-      const clearBtn = document.getElementById("clearLinksBtn");
-      if (!linksList || !addBtn) return;
-
-      const MAX = 10;
-
-      function linkRowTemplate(i) {
-        return `
-          <div class="link-row" data-link-row="${i}">
-            <div class="field" style="margin:0;">
-              <label>Label</label>
-              <input name="links[${i}][label]" type="text" placeholder="Website, Instagram, Facebook…">
-            </div>
-            <div class="field" style="margin:0;">
-              <label>URL</label>
-              <input name="links[${i}][url]" type="url" placeholder="https://...">
-            </div>
-            <div style="display:flex; align-items:end;">
-              <button type="button" class="btn small danger" aria-label="Remove link" data-remove-link="${i}">✕</button>
-            </div>
-          </div>
-        `;
-      }
-
-      function countRows() {
-        return linksList.querySelectorAll("[data-link-row]").length;
-      }
-
-      function reindexRows() {
-        const rows = Array.from(linksList.querySelectorAll("[data-link-row]"));
-        rows.forEach((row, idx) => {
-          row.setAttribute("data-link-row", idx);
-          const label = row.querySelector('input[name^="links["][name$="[label]"]');
-          const url = row.querySelector('input[name^="links["][name$="[url]"]');
-          const btn = row.querySelector("[data-remove-link]");
-          if (label) label.name = `links[${idx}][label]`;
-          if (url) url.name = `links[${idx}][url]`;
-          if (btn) btn.setAttribute("data-remove-link", idx);
-        });
-
-        clearBtn.classList.toggle("hidden", countRows() <= 1);
-        addBtn.disabled = countRows() >= MAX;
-      }
-
-      function addRow() {
-        const n = countRows();
-        if (n >= MAX) return;
-        linksList.insertAdjacentHTML("beforeend", linkRowTemplate(n));
-        reindexRows();
-      }
-
-      linksList.addEventListener("click", (e) => {
-        const btn = e.target.closest("[data-remove-link]");
-        if (!btn) return;
-        const row = btn.closest("[data-link-row]");
-        if (row) row.remove();
-        if (countRows() === 0) addRow();
-        reindexRows();
-      });
-
-      addBtn.addEventListener("click", addRow);
-
-      if (clearBtn) {
-        clearBtn.addEventListener("click", () => {
-          const rows = Array.from(linksList.querySelectorAll("[data-link-row]"));
-          rows.slice(1).forEach(r => r.remove());
-          reindexRows();
-        });
-      }
-
-      // Start with 1 link row
-      addRow();
-    })();
-
-    // ===== Conditional sections + required logic =====
-    (function(){
-      const form = document.getElementById("requestForm");
-      if (!form) return;
-
-      const typeRadios = form.querySelectorAll('input[name="request_type"]');
-
-      const fbSingle = document.getElementById("section_fb_single");
-      const icsSingle = document.getElementById("section_ics_single");
-      const orgSection = document.getElementById("section_org");
-
-      const fbEventUrl = document.getElementById("fb_event_url");
-      const icsFile = document.getElementById("ics_file");
-
-      const orgName = document.getElementById("org_name");
-      const orgNotes = document.getElementById("org_notes");
-
-      const csFb = document.getElementById("cs_fb");
-      const csIcs = document.getElementById("cs_ics");
-      const csOther = document.getElementById("cs_other");
-
-      const calFbWrap = document.getElementById("cal_fb_url_wrap");
-      const calIcsWrap = document.getElementById("cal_ics_url_wrap");
-      const calOtherWrap = document.getElementById("cal_other_wrap");
-
-      const calFbUrl = document.getElementById("calendar_facebook_page_url");
-      const calIcsUrl = document.getElementById("calendar_ics_url");
-      const calOtherNotes = document.getElementById("calendar_other_notes");
-
-      const orgNotesReq = document.getElementById("org_notes_req");
-
-      function getRequestType() {
-        const checked = form.querySelector('input[name="request_type"]:checked');
-        return checked ? checked.value : "add_single_fb_event";
-      }
-
-      function setShown(el, show) {
-        if (!el) return;
-        el.classList.toggle("hidden", !show);
-      }
-
-      function applyRequired(input, required) {
-        if (!input) return;
-        input.required = !!required;
-      }
-
-      function toggleCalendarSourceFields() {
-        const fbOn = csFb && csFb.checked;
-        const icsOn = csIcs && csIcs.checked;
-        const otherOn = csOther && csOther.checked;
-
-        setShown(calFbWrap, fbOn);
-        setShown(calIcsWrap, icsOn);
-        setShown(calOtherWrap, otherOn);
-
-        applyRequired(calFbUrl, fbOn);
-        applyRequired(calIcsUrl, icsOn);
-        applyRequired(calOtherNotes, otherOn); // “Other” requires details
-      }
-
-      function updateUI() {
-        const t = getRequestType();
-
-        // reset all requireds we manage
-        applyRequired(fbEventUrl, false);
-        applyRequired(icsFile, false);
-        applyRequired(orgName, false);
-        applyRequired(orgNotes, false);
-
-        // org calendar sub-fields
-        applyRequired(calFbUrl, false);
-        applyRequired(calIcsUrl, false);
-        applyRequired(calOtherNotes, false);
-
-        // show/hide sections
-        setShown(fbSingle, t === "add_single_fb_event");
-        setShown(icsSingle, t === "add_single_ics_event");
-        setShown(orgSection, t === "add_organization" || t === "update_organization");
-
-        // rules
-        if (t === "add_single_fb_event") {
-          applyRequired(fbEventUrl, true);
-        }
-        if (t === "add_single_ics_event") {
-          applyRequired(icsFile, true);
-        }
-
-        if (t === "add_organization") {
-          applyRequired(orgName, true);
-          // Calendar sources + Links are validated in JS at submit-time (min 1)
-          orgNotesReq.style.display = "none";
-        }
-
-        if (t === "update_organization") {
-          applyRequired(orgName, true);
-          applyRequired(orgNotes, true);
-          orgNotesReq.style.display = "inline";
-        }
-
-        // calendar sources blocks appear only in org mode, but still toggle sub-fields
-        toggleCalendarSourceFields();
-      }
-
-      // calendar source checkbox changes
-      [csFb, csIcs, csOther].forEach(x => {
-        if (!x) return;
-        x.addEventListener("change", toggleCalendarSourceFields);
-      });
-
-      typeRadios.forEach(r => r.addEventListener("change", updateUI));
-
-      updateUI();
-
-      // ===== Extra submit-time validation for "min 1 required" constraints =====
-      form.addEventListener("submit", (e) => {
-        const t = getRequestType();
-
-        // Only enforce for Add org (Update org is minimal)
-        if (t !== "add_organization") return;
-
-        // Calendar sources: at least 1
-        const anyCal = (csFb && csFb.checked) || (csIcs && csIcs.checked) || (csOther && csOther.checked);
-        if (!anyCal) {
-          e.preventDefault();
-          alert("For 'Add organization', please select at least one Calendar Source.");
-          return;
-        }
-
-        // Links: at least 1 valid URL
-        const urlInputs = Array.from(form.querySelectorAll('input[name^="links["][name$="[url]"]'));
-        const hasLink = urlInputs.some(i => (i.value || "").trim().length > 0);
-        if (!hasLink) {
-          e.preventDefault();
-          alert("For 'Add organization', please add at least one link URL (website/social).");
-          return;
-        }
-      });
-    })();
-
-    // ===== Custom Formspree submit (no redirect) =====
-    (function () {
-      const form = document.getElementById("requestForm");
-      if (!form) return;
-
-      const submitSection = document.getElementById("submitSection");
-      const thanksSection = document.getElementById("thanks");
-
-      const statusEl = document.getElementById("formStatus");
-      const submitBtn = document.getElementById("submitBtn");
-      const spinner = document.getElementById("spinner");
-      const label = document.getElementById("submitLabel");
-
-      function setStatus(kind, msg) {
-        if (!statusEl) return;
-        statusEl.className = "status show " + (kind || "");
-        statusEl.textContent = msg || "";
-      }
-
-      function setLoading(isLoading) {
-        if (!submitBtn || !spinner || !label) return;
-        submitBtn.disabled = !!isLoading;
-        spinner.classList.toggle("show", !!isLoading);
-        label.textContent = isLoading ? "Sending…" : "Send Request";
-      }
-
-      form.addEventListener("submit", async (e) => {
-        // IMPORTANT: other validation listeners may call preventDefault and return early
-        if (e.defaultPrevented) return;
-
-        e.preventDefault();
-        setStatus("", "");
-        setLoading(true);
-
-        // Bot trap
-        const gotcha = form.querySelector('input[name="_gotcha"]');
-        if (gotcha && gotcha.value) {
-          setLoading(false);
-          setStatus("ok", "Submitted.");
-          return;
-        }
-
-        try {
-          const formData = new FormData(form);
-
-          const res = await fetch(form.action, {
-            method: "POST",
-            headers: { "Accept": "application/json" },
-            body: formData
-          });
-
-          if (res.ok) {
-            setStatus("ok", "Sent. Thank you.");
-            form.reset();
-
-            // Hide submit, show thanks
-            if (submitSection) submitSection.style.display = "none";
-            if (thanksSection) {
-              thanksSection.style.display = "block";
-              thanksSection.classList.add("active");
-              thanksSection.scrollIntoView({ behavior: "smooth", block: "start" });
-            }
-            return;
-          }
-
-          let data = null;
-          try { data = await res.json(); } catch {}
-          const msg = (data && data.errors && data.errors.length)
-            ? data.errors.map(x => x.message).join(" ")
-            : "Something went wrong. Please try again.";
-          setStatus("err", msg);
-
-        } catch (err) {
-          setStatus("err", "Network error. Please try again.");
-        } finally {
-          setLoading(false);
-        }
-      });
-    })();
-  </script>
-
 </body>
 </html>
