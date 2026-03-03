@@ -548,6 +548,18 @@
       return `rgba(${r},${g},${b},${a})`;
     }
 
+    function unescapeICSText(str){
+      if (!str) return "";
+
+      return String(str)
+        // line breaks first
+        .replace(/\\n/gi, "\n")
+        // escaped commas, semicolons, backslashes
+        .replace(/\\,/g, ",")
+        .replace(/\\;/g, ";")
+        .replace(/\\\\/g, "\\");
+    }
+
     function stripHtml(s){
       // FB ICS descriptions are plain-ish, but keep safe anyway.
       return safeText(s).replace(/<[^>]*>/g, "");
@@ -771,11 +783,10 @@
         "|" +
         (rid ? ("RID:" + rid) : ("DTSTART:" + dtStartRaw));
 
-
-      const title = firstProp(e, "SUMMARY") || "Untitled";
-      const location = firstProp(e, "LOCATION") || "";
+      const title = unescapeICSText(firstProp(e, "SUMMARY") || "Untitled");
+      const location = unescapeICSText(firstProp(e, "LOCATION") || "");
       const url = firstProp(e, "URL") || "";
-      const description = firstProp(e, "DESCRIPTION") || "";
+      const description = unescapeICSText(firstProp(e, "DESCRIPTION") || "");
 
       const hostOrg = inferHostOrg(e).trim() || "Unknown";
       const orgColor = ORG_COLORS[hostOrg] || DEFAULT_COLOR;
