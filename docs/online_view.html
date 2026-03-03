@@ -12,6 +12,11 @@
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/rrule@2.7.1/dist/es5/rrule.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/rrule@6.1.15/index.global.min.js"></script>
+  <script>
+    // rrule.js ES5 build exposes window.rrule.RRule (not always window.RRule)
+    window.RRule = window.RRule || (window.rrule && window.rrule.RRule);
+  </script>
+
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     :root{
@@ -766,13 +771,13 @@
       const uid = firstProp(e, "UID") || "";
       const rid = firstProp(e, "RECURRENCE-ID") || "";
       const dtStartRaw = e["DTSTART"]?.[0]?.value || "";
+
+      const title = firstProp(e, "SUMMARY") || "Untitled";
+
       const uniqueId =
         (uid ? uid : title) +
         "|" +
         (rid ? ("RID:" + rid) : ("DTSTART:" + dtStartRaw));
-
-
-      const title = firstProp(e, "SUMMARY") || "Untitled";
       const location = firstProp(e, "LOCATION") || "";
       const url = firstProp(e, "URL") || "";
       const description = firstProp(e, "DESCRIPTION") || "";
@@ -802,7 +807,7 @@
         return {
           id: uniqueId || uid || (title + "|" + (e["DTSTART"]?.[0]?.value || "")),
           title,
-          rrule: Object.assign(RRule.parseString(rruleStr), {
+          rrule: Object.assign((window.RRule || (window.rrule && window.rrule.RRule)).parseString(rruleStr), {
             dtstart: startParsed.date || undefined
           }),
           duration: durationMs,
@@ -1184,7 +1189,7 @@
         if (status === "CANCELLED") continue;
 
         const ev = buildFullCalendarEvent(e);
-        if (!ev.start) continue;
+        if (!ev.start && !ev.rrule) continue;
         events.push(ev);
 
         // If host org isn't in sources.json but appears in ICS, keep it for dropdown
