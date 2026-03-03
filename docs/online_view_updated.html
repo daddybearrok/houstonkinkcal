@@ -404,7 +404,6 @@
         <div class="field">
           <label for="searchInput">Search</label>
           <input id="searchInput" type="text" placeholder="Search titles, location, description..." />
-          <div class="hint">Tip: search is instant (client-side). Clear to show everything.</div>
         </div>
 
         <div class="field">
@@ -412,14 +411,13 @@
           <select id="orgSelect">
             <option value="">All organizations</option>
           </select>
-          <div class="hint">Host org is inferred from the ICS.</div>
         </div>
 
         <div class="field">
           <div class="btnRow" style="margin-top:0;">
+            <label for="clearFiltersBtn"></label>
             <button class="btn secondary" id="clearFiltersBtn" type="button">Clear Filters</button>
           </div>
-          <div class="hint">Use the calendar header for day/week/month + arrows.</div>
         </div>
       </div>
 
@@ -1190,10 +1188,6 @@
         search.value = "";
         orgSel.value = "";
         refreshCalendar();
-      });
-
-      todayBtn.addEventListener("click", () => {
-        if (CAL) CAL.today();
       });
 
       // Modal close
