@@ -184,7 +184,6 @@
     .status.warn{ background: var(--warn); border-color: var(--warnBorder); }
     .status.err{ background: var(--err); border-color: var(--errBorder); }
 
-    /* Calendar panel */
     .calWrap{
       margin-top: 18px;
       background: rgba(255,255,255,0.04);
@@ -197,7 +196,6 @@
       padding: 12px 12px 16px;
     }
 
-    /* FullCalendar dark-ish tune */
     .fc{
       --fc-page-bg-color: transparent;
       --fc-border-color: rgba(255,255,255,0.08);
@@ -236,7 +234,6 @@
       letter-spacing: .2px;
     }
 
-    /* Modal */
     .modal-backdrop{
       position: fixed;
       inset: 0;
@@ -425,25 +422,6 @@
   </div>
 
   <script>
-    function scrollToNowMinusOneHour(calendar) {
-      const now = new Date();
-
-      // 1 hour before now
-      now.setHours(now.getHours() - 1);
-
-      // format HH:MM:SS
-      const hh = String(now.getHours()).padStart(2, "0");
-      const mm = String(now.getMinutes()).padStart(2, "0");
-      const timeStr = `${hh}:${mm}:00`;
-
-      // wait a tick so the scroller exists + sizing is done
-      requestAnimationFrame(() => {
-        calendar.scrollToTime(timeStr);
-      });
-    }
-  </script>
-  
-  <script>
     // CONFIG
     const ICS_URL = "./houston-kink-cal.ics";
     const SOURCES_URL = "./sources.json";
@@ -451,11 +429,10 @@
 
     // State
     let CAL = null;
-    let ALL_EVENTS = [];          // raw parsed events (JS objects)
-    let ORG_COLORS = {};          // name -> "#RRGGBB"
-    let ORG_LIST = [];            // list of org names
+    let ALL_EVENTS = [];
+    let ORG_COLORS = {};
+    let ORG_LIST = [];
 
-    // Helpers
     function setStatus(kind, msg){
       const el = document.getElementById("status");
       if (!el) return;
@@ -468,38 +445,48 @@
       el.textContent = msg;
     }
 
-    function safeText(s){
-      return (s == null) ? "" : String(s);
-    }
-
-    function stripHtml(s){
-      // FB ICS descriptions are plain-ish, but keep safe anyway.
-      return safeText(s).replace(/<[^>]*>/g, "");
-    }
+    function safeText(s){ return (s == null) ? "" : String(s); }
+    function stripHtml(s){ return safeText(s).replace(/<[^>]*>/g, ""); }
 
     function formatLocal(dt){
-      // dt is a Date
       return dt.toLocaleString(undefined, {
-        weekday: "short",
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-        hour: "numeric",
-        minute: "2-digit"
+        weekday: "short", year: "numeric", month: "short", day: "numeric",
+        hour: "numeric", minute: "2-digit"
       });
     }
-
     function formatLocalDate(dt){
       return dt.toLocaleDateString(undefined, {
-        weekday: "short",
-        year: "numeric",
-        month: "short",
-        day: "numeric"
+        weekday: "short", year: "numeric", month: "short", day: "numeric"
       });
     }
 
-    function isAllDayEvent(e){
-      return !!e.allDay;
+    function loadScrollTimeNowMinus1h(){
+      const now = new Date();
+      const h = Math.max(0, now.getHours() - 1);
+      return String(h).padStart(2, "0") + ":00:00";
+    }
+
+    // Autoscroll: run once per "date range" (so prev/next triggers it again)
+    let lastAutoScrollKey = "";
+    function autoScrollCalendar(calendar){
+      if (!calendar) return;
+
+      const v = calendar.view;
+      const key = `${v.type}|${v.currentStart?.toISOString?.() || ""}`;
+
+      // allow re-run when you move to a new range, but don't spam in the same range
+      if (key === lastAutoScrollKey) return;
+      lastAutoScrollKey = key;
+
+      const timeStr = loadScrollTimeNowMinus1h();
+
+      // Needs to happen after layout is ready
+      requestAnimationFrame(() => {
+        try { calendar.scrollToTime(timeStr); } catch {}
+      });
+      setTimeout(() => {
+        try { calendar.scrollToTime(timeStr); } catch {}
+      }, 60);
     }
 
     async function loadOrgColors(){
@@ -512,24 +499,22 @@
 
         ORG_COLORS = {};
         ORG_LIST = [];
+
         for (const org of data){
           const name = (org?.name || "").trim();
           if (!name) continue;
-          ORG_LIST.push(name);
 
+          ORG_LIST.push(name);
           const color = (org?.color || "").trim();
           if (color) ORG_COLORS[name] = color;
         }
-      } catch {
-        // ignore if missing
-      }
+      } catch {}
     }
 
     function populateOrgDropdown(){
       const sel = document.getElementById("orgSelect");
       if (!sel) return;
 
-      // Preserve "All organizations" option
       const current = sel.value;
       sel.querySelectorAll('option:not([value=""])').forEach(o => o.remove());
 
@@ -540,15 +525,11 @@
         opt.textContent = name;
         sel.appendChild(opt);
       }
-
       sel.value = current || "";
     }
 
-    // --- Minimal ICS parser (good enough for FB + basic public ICS) ---
-    // Handles folding lines (RFC5545)
-    function unfoldICS(text){
-      return text.replace(/\r?\n[ \t]/g, "");
-    }
+    // --- Minimal ICS parser ---
+    function unfoldICS(text){ return text.replace(/\r?\n[ \t]/g, ""); }
 
     function parseICS(text){
       const unfolded = unfoldICS(text);
@@ -558,15 +539,8 @@
       let cur = null;
 
       for (const line of lines){
-        if (line === "BEGIN:VEVENT"){
-          cur = {};
-          continue;
-        }
-        if (line === "END:VEVENT"){
-          if (cur) events.push(cur);
-          cur = null;
-          continue;
-        }
+        if (line === "BEGIN:VEVENT"){ cur = {}; continue; }
+        if (line === "END:VEVENT"){ if (cur) events.push(cur); cur = null; continue; }
         if (!cur) continue;
 
         const idx = line.indexOf(":");
@@ -575,7 +549,6 @@
         const left = line.slice(0, idx);
         const value = line.slice(idx + 1);
 
-        // left can include params: DTSTART;TZID=America/Chicago
         const [prop, ...paramParts] = left.split(";");
         const key = prop.toUpperCase();
 
@@ -587,7 +560,6 @@
           }
         }
 
-        // Store with params if needed
         if (!cur[key]) cur[key] = [];
         cur[key].push({ value, params });
       }
@@ -596,13 +568,9 @@
     }
 
     function parseICSTime(node){
-      // node is {value, params}
       if (!node || !node.value) return { date: null, allDay: false };
-
       const v = node.value.trim();
-      const tzid = node.params?.TZID ? node.params.TZID.trim() : null;
 
-      // All-day DATE: YYYYMMDD
       if (/^\d{8}$/.test(v)){
         const y = Number(v.slice(0,4));
         const m = Number(v.slice(4,6)) - 1;
@@ -610,9 +578,7 @@
         return { date: new Date(y, m, d), allDay: true };
       }
 
-      // DATE-TIME: 20260301T040000Z or 20260301T040000
       if (/^\d{8}T\d{6}Z$/.test(v)){
-        // UTC
         const y = Number(v.slice(0,4));
         const m = Number(v.slice(4,6)) - 1;
         const d = Number(v.slice(6,8));
@@ -623,54 +589,38 @@
       }
 
       if (/^\d{8}T\d{6}$/.test(v)){
-        // Floating/local or TZID – we treat as local time (browser)
         const y = Number(v.slice(0,4));
         const m = Number(v.slice(4,6)) - 1;
         const d = Number(v.slice(6,8));
         const hh = Number(v.slice(9,11));
         const mm = Number(v.slice(11,13));
         const ss = Number(v.slice(13,15));
-
-        // If TZID exists, we still can’t correctly shift without a tz lib.
-        // But most of your combined feed is FB Zulu, so this is mostly for external ICS.
-        // We'll interpret as local time.
         return { date: new Date(y,m,d,hh,mm,ss), allDay: false };
       }
 
-      // Fallback
       return { date: null, allDay: false };
     }
 
     function firstProp(e, key){
       const arr = e[key];
-      if (!arr || !arr.length) return null;
+      if (!arr || !arr.length) return "";
       return arr[0].value || "";
     }
 
     function inferHostOrg(e){
-      // Primary: ORGANIZER;CN=...
       const organizer = e["ORGANIZER"];
       if (organizer && organizer.length){
         const cn = organizer[0].params?.CN;
         if (cn) return cn;
       }
-
-      // Secondary: X-WR-CALNAME (rare) or other X props
       const xcal = firstProp(e, "X-WR-CALNAME");
       if (xcal) return xcal.trim();
-
-      // Otherwise unknown
       return "Unknown";
     }
 
     function buildFullCalendarEvent(e){
-      const dtStartNode = e["DTSTART"]?.[0];
-      const dtEndNode = e["DTEND"]?.[0];
-
-      const startParsed = parseICSTime(dtStartNode);
-      const endParsed = parseICSTime(dtEndNode);
-
-      const allDay = startParsed.allDay;
+      const startParsed = parseICSTime(e["DTSTART"]?.[0]);
+      const endParsed = parseICSTime(e["DTEND"]?.[0]);
 
       const uid = firstProp(e, "UID") || "";
       const title = firstProp(e, "SUMMARY") || "Untitled";
@@ -681,23 +631,14 @@
       const hostOrg = inferHostOrg(e).trim() || "Unknown";
       const orgColor = ORG_COLORS[hostOrg] || DEFAULT_COLOR;
 
-      // FullCalendar expects end date for allDay to be exclusive; many ICS already do that properly.
       return {
         id: uid || (title + "|" + (startParsed.date ? startParsed.date.toISOString() : Math.random())),
         title,
         start: startParsed.date ? startParsed.date.toISOString() : null,
         end: endParsed.date ? endParsed.date.toISOString() : null,
-        allDay: !!allDay,
+        allDay: !!startParsed.allDay,
 
-        extendedProps: {
-          hostOrg,
-          location,
-          url,
-          description,
-          uid,
-          _raw: e
-        },
-
+        extendedProps: { hostOrg, location, url, description, uid, _raw: e },
         backgroundColor: orgColor || undefined,
         borderColor: orgColor || undefined
       };
@@ -714,21 +655,19 @@
         if (org && p.hostOrg !== org) return false;
 
         if (search){
-          const hay = [
-            ev.title,
-            p.location,
-            p.description,
-            p.hostOrg
-          ].map(x => safeText(x).toLowerCase()).join(" | ");
+          const hay = [ev.title, p.location, p.description, p.hostOrg]
+            .map(x => safeText(x).toLowerCase())
+            .join(" | ");
           if (!hay.includes(search)) return false;
         }
-
         return true;
       });
 
       CAL.removeAllEvents();
       CAL.addEventSource(filtered);
     }
+
+    function isAllDayEvent(e){ return !!e.allDay; }
 
     function openEventModal(fcEvent){
       const backdrop = document.getElementById("eventModalBackdrop");
@@ -746,7 +685,6 @@
 
       titleEl.textContent = fcEvent.title || "Untitled";
 
-      // Time display
       let timeLine = "";
       if (isAllDayEvent(fcEvent)){
         const d = fcEvent.start ? formatLocalDate(fcEvent.start) : "";
@@ -760,7 +698,6 @@
       const loc = (p.location || "").trim();
       metaEl.textContent = loc ? `${timeLine} • ${loc}` : timeLine;
 
-      // Pills
       pillsEl.innerHTML = "";
       const pill = document.createElement("span");
       pill.className = "pill";
@@ -805,7 +742,6 @@
     }
 
     function icsEscapeText(s){
-      // Minimal escaping + folding later
       return safeText(s)
         .replace(/\\/g, "\\\\")
         .replace(/\n/g, "\\n")
@@ -814,7 +750,6 @@
     }
 
     function foldLine(line){
-      // RFC5545: fold at 75 octets; we’ll approximate with 73 chars to be safe
       const max = 73;
       if (line.length <= max) return line;
       let out = "";
@@ -828,7 +763,6 @@
     }
 
     function formatICSDateUTC(d){
-      // d is Date, output UTC in YYYYMMDDTHHMMSSZ
       const pad = (n) => String(n).padStart(2, "0");
       return (
         d.getUTCFullYear() +
@@ -841,7 +775,6 @@
     }
 
     function formatICSDateLocalAllDay(d){
-      // d is Date; for all-day, use local date YYYYMMDD
       const pad = (n) => String(n).padStart(2, "0");
       return (
         d.getFullYear() +
@@ -865,15 +798,12 @@
 
       if (fcEvent.allDay){
         const s = fcEvent.start ? formatICSDateLocalAllDay(fcEvent.start) : "";
-        // For all-day, FullCalendar stores end as exclusive (often next day). If missing, omit.
         const e = fcEvent.end ? formatICSDateLocalAllDay(fcEvent.end) : "";
-
         if (s) dtStartLine = `DTSTART;VALUE=DATE:${s}`;
         if (e) dtEndLine = `DTEND;VALUE=DATE:${e}`;
       } else {
         const s = fcEvent.start ? formatICSDateUTC(fcEvent.start) : "";
         const e = fcEvent.end ? formatICSDateUTC(fcEvent.end) : "";
-
         if (s) dtStartLine = `DTSTART:${s}`;
         if (e) dtEndLine = `DTEND:${e}`;
       }
@@ -928,15 +858,14 @@
 
       const events = [];
       for (const e of vevents){
-        // Skip canceled
         const status = (firstProp(e, "STATUS") || "").toUpperCase();
         if (status === "CANCELLED") continue;
 
         const ev = buildFullCalendarEvent(e);
         if (!ev.start) continue;
+
         events.push(ev);
 
-        // If host org isn't in sources.json but appears in ICS, keep it for dropdown
         const hostOrg = ev.extendedProps?.hostOrg;
         if (hostOrg && !ORG_LIST.includes(hostOrg)) ORG_LIST.push(hostOrg);
       }
@@ -948,52 +877,56 @@
 
       setStatus("ok", `Loaded ${ALL_EVENTS.length} events.`);
       setTimeout(() => setStatus("", ""), 2200);
+
+      // after events load, ensure scroll is where you expect
+      autoScrollCalendar(CAL);
     }
 
     function initCalendar(){
       const calEl = document.getElementById("calendar");
 
       CAL = new FullCalendar.Calendar(calEl, {
-        initialView: "timeGridWeek",   // ✅ default to week view
-        height: "auto",
+        initialView: "timeGridWeek",
         headerToolbar: {
-        left: "prev,next today",
-        center: "title",
-        right: "timeGridWeek,timeGridDay"  // ✅ remove month
-      },
-      navLinks: true,
-      nowIndicator: true,
-      eventDisplay: "block",
-      dayMaxEvents: true,
-      expandRows: true,
+          left: "prev,next today",
+          center: "title",
+          right: "timeGridWeek,timeGridDay"
+        },
 
-      height: 504,
-      expandRows: false,
+        navLinks: true,
+        nowIndicator: true,
+        eventDisplay: "block",
+        dayMaxEvents: true,
 
-      slotMinTime: "00:00:00",
-      slotMaxTime: "24:00:00",
-      scrollTime: () => {
-        const now = new Date();
-        const h = Math.max(0, now.getHours() - 1);
-        return String(h).padStart(2, "0") + ":00:00";
-      },
+        // Your “show ~6 hours” size: 6 hours * 2 slots/hr * 42px = 504px
+        height: 504,
+        expandRows: false,
 
-      slotDuration: "00:30:00",
-      slotLabelInterval: "01:00",
-      slotMinHeight: 42,
+        // Allow full-day scrolling (not locked to 8–22)
+        slotMinTime: "00:00:00",
+        slotMaxTime: "24:00:00",
 
-      eventClick: function(info){
-        info.jsEvent.preventDefault();
-        openEventModal(info.event);
-      }
-    });
+        // Initial scroll position (works on first render; we also force it in datesSet)
+        scrollTime: loadScrollTimeNowMinus1h,
+
+        slotDuration: "00:30:00",
+        slotLabelInterval: "01:00",
+        slotMinHeight: 42,
+
+        datesSet: function(){
+          autoScrollCalendar(CAL);
+        },
+
+        eventClick: function(info){
+          info.jsEvent.preventDefault();
+          openEventModal(info.event);
+        }
+      });
+
       CAL.render();
-      let didAutoScroll = false;
-      datesSet: function() {
-        if (didAutoScroll) return;
-        didAutoScroll = true;
-        scrollToNowMinusOneHour(CAL);
-      }
+
+      // One more nudge after render (some browsers need it)
+      setTimeout(() => autoScrollCalendar(CAL), 80);
     }
 
     function wireUI(){
@@ -1010,7 +943,6 @@
         refreshCalendar();
       });
 
-      // Modal close
       document.getElementById("eventModalClose").addEventListener("click", closeEventModal);
       document.getElementById("eventModalBackdrop").addEventListener("click", (e) => {
         if (e.target.id === "eventModalBackdrop") closeEventModal();
@@ -1025,10 +957,7 @@
         initCalendar();
         wireUI();
 
-        // Load org colors (from sources.json) before ICS parsing
         await loadOrgColors();
-
-        // Load ICS and render events
         await loadICS();
       } catch (err){
         console.error(err);
