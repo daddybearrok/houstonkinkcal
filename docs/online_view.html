@@ -407,13 +407,43 @@
         0 0 0 1px rgba(255,255,255,0.08),
         0 0 14px var(--pillGlowColor, transparent);
     }
+    /* Top nav action button */
+    .top-action {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 1000;
+    }
+
+    .top-action a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 999px;
+      text-decoration: none;
+      color: #fff;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(6px);
+      transition: all .18s ease;
+    }
+
+    .top-action a:hover {
+      background: rgba(255,255,255,0.16);
+      transform: translateY(-1px);
+    }
   </style>
 
   <script data-goatcounter="https://houstonkinkcal.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
   <div class="container">
-
+    <div class="top-action">
+      <a href="index.html">Subscribe Now</a>
+    </div>
     <div class="topbar">
       <div class="titleRow">
         <div>
@@ -424,9 +454,6 @@
           </div>
         </div>
 
-        <div class="btnRow">
-          <a class="btn secondary" href="./index.html">Back to Subscribe</a>
-        </div>
       </div>
 
       <div class="actionsRow">
