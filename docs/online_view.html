@@ -435,6 +435,34 @@
       background: rgba(255,255,255,0.16);
       transform: translateY(-1px);
     }
+
+    /* ===== Mobile Toolbar Tightening ===== */
+    @media (max-width: 640px){
+
+      .fc .fc-toolbar {
+        padding: 6px 8px;
+      }
+
+      .fc .fc-toolbar-title {
+        font-size: 16px !important;
+        font-weight: 600;
+      }
+
+      .fc .fc-button {
+        font-size: 12px !important;
+        padding: 4px 8px !important;
+        border-radius: 8px !important;
+      }
+
+      .fc .fc-button-group {
+        gap: 4px;
+      }
+
+      /* tighten header layout spacing */
+      .fc-header-toolbar {
+        margin-bottom: 8px !important;
+      }
+    }
   </style>
 
   <script data-goatcounter="https://houstonkinkcal.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
