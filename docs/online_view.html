@@ -736,7 +736,7 @@
       const organizer = e["ORGANIZER"];
       if (organizer && organizer.length){
         const cn = organizer[0].params?.CN;
-        if (cn) return cn;
+        if (cn) return String(cn).trim().replace(/^"(.*)"$/, "$1").trim();
       }
 
       // Secondary: X-WR-CALNAME (rare) or other X props
@@ -757,6 +757,14 @@
       const allDay = startParsed.allDay;
 
       const uid = firstProp(e, "UID") || "";
+      const rid = firstProp(e, "RECURRENCE-ID") || "";
+      const dtStartRaw = e["DTSTART"]?.[0]?.value || "";
+      const uniqueId =
+        (uid ? uid : title) +
+        "|" +
+        (rid ? ("RID:" + rid) : ("DTSTART:" + dtStartRaw));
+
+
       const title = firstProp(e, "SUMMARY") || "Untitled";
       const location = firstProp(e, "LOCATION") || "";
       const url = firstProp(e, "URL") || "";
@@ -767,7 +775,7 @@
 
       // FullCalendar expects end date for allDay to be exclusive; many ICS already do that properly.
       return {
-        id: uid || (title + "|" + (startParsed.date ? startParsed.date.toISOString() : Math.random())),
+        id: uniqueId || (title + "|" + (startParsed.date ? startParsed.date.toISOString() : Math.random())),
         title,
         start: startParsed.date ? startParsed.date.toISOString() : null,
         end: endParsed.date ? endParsed.date.toISOString() : null,
