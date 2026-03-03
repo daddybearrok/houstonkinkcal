@@ -368,7 +368,6 @@
         <div class="field">
           <label for="searchInput">Search</label>
           <input id="searchInput" type="text" placeholder="Search titles, location, description..." />
-          <div class="hint">Tip: search is instant (client-side). Clear to show everything.</div>
         </div>
 
         <div class="field">
@@ -376,14 +375,13 @@
           <select id="orgSelect">
             <option value="">All organizations</option>
           </select>
-          <div class="hint">Host org is inferred from the ICS.</div>
         </div>
 
         <div class="field">
+          <label for="clearFiltersBtn">Quick Actions</label>
           <div class="btnRow" style="margin-top:0;">
             <button class="btn secondary" id="clearFiltersBtn" type="button">Clear Filters</button>
           </div>
-          <div class="hint">Use the calendar header for day/week/month + arrows.</div>
         </div>
       </div>
 
@@ -950,12 +948,16 @@
       dayMaxEvents: true,
       expandRows: true,
 
-      height: "calc(100vh - 220px)",
+      height: "504",
       expandRows: false,
 
       slotMinTime: "00:00:00",
       slotMaxTime: "24:00:00",
-      scrollTime: "08:00:00",
+      scrollTime: () => {
+        const now = new Date();
+        const h = Math.max(0, now.getHours() - 1);
+        return String(h).padStart(2, "0") + ":00:00";
+      },
 
       slotDuration: "00:30:00",
       slotLabelInterval: "01:00",
