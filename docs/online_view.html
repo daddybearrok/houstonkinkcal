@@ -953,20 +953,21 @@
       dayMaxEvents: true,
       expandRows: true,
 
-      // ✅ Day/Week time window & scrolling
+      height: "calc(100vh - 220px)",
+      expandRows: false,
+
       slotMinTime: "00:00:00",
       slotMaxTime: "24:00:00",
-      scrollTime: "08:00:00",        // ✅ initial scroll position
+      scrollTime: "08:00:00",
+
       slotDuration: "00:30:00",
       slotLabelInterval: "01:00",
-      slotMinHeight: 40,              // IMPORTANT: increases vertical size of each slot
-      expandRows: true,               // fills available height nicely
-      height: "auto",                 // or a fixed number / calc below
-      contentHeight: "auto",
-      BusinessHours: {
-        daysOfWeek: [0, 1, 2, 3, 4, 5, 6],
-        startTime: "08:00:00",
-        endTime: "22:00:00"
+      slotMinHeight: 42,
+
+      businessHours: {
+        daysOfWeek: [0,1,2,3,4,5,6],
+        startTime: "08:00",
+        endTime: "22:00"
       },
 
       eventClick: function(info){
