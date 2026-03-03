@@ -378,6 +378,34 @@
     .mono{
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
+
+    /* Org modal header should match index.html (icon next to name) */
+    #orgModalBackdrop .modal-title{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+    #orgModalBackdrop .modal-title h3{
+      margin: 0;
+    }
+
+    .pillIcon{
+      width: 16px;
+      height: 16px;
+      border-radius: 6px;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.10);
+      flex: 0 0 auto;
+    }
+
+    /* Soft glow driven by --pillGlowColor set inline in JS */
+    .pill.hasGlow{
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.08),
+        0 0 14px var(--pillGlowColor, transparent);
+    }
   </style>
 
   <script data-goatcounter="https://houstonkinkcal.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -404,7 +432,6 @@
         <div class="field">
           <label for="searchInput">Search</label>
           <input id="searchInput" type="text" placeholder="Search titles, location, description..." />
-          <div class="hint">Tip: search is instant (client-side). Clear to show everything.</div>
         </div>
 
         <div class="field">
@@ -412,14 +439,13 @@
           <select id="orgSelect">
             <option value="">All organizations</option>
           </select>
-          <div class="hint">Host org is inferred from the ICS.</div>
         </div>
 
         <div class="field">
+          <label for="clearFiltersBtn"></label>
           <div class="btnRow" style="margin-top:0;">
             <button class="btn secondary" id="clearFiltersBtn" type="button">Clear Filters</button>
           </div>
-          <div class="hint">Use the calendar header for day/week/month + arrows.</div>
         </div>
       </div>
 
@@ -470,7 +496,7 @@
           <img id="orgModalIcon" alt="" style="width:44px;height:44px;border-radius:12px;object-fit:cover;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.06);display:none;" />
           <div style="min-width:0;">
             <h3 id="orgModalTitle"></h3>
-            <div class="modal-meta" id="orgModalMeta" style="opacity:0.85;"></div>
+
           </div>
         </div>
         <button class="modal-close" id="orgModalClose" aria-label="Close">✕</button>
@@ -510,6 +536,15 @@
 
     function safeText(s){
       return (s == null) ? "" : String(s);
+    }
+
+    function hexToRgba(hex, a){
+      const h = (hex || "").replace("#","").trim();
+      if (h.length !== 6) return `rgba(255,255,255,${a})`;
+      const r = parseInt(h.slice(0,2), 16);
+      const g = parseInt(h.slice(2,4), 16);
+      const b = parseInt(h.slice(4,6), 16);
+      return `rgba(${r},${g},${b},${a})`;
     }
 
     function stripHtml(s){
@@ -816,11 +851,29 @@
       pillsEl.innerHTML = "";
       const pill = document.createElement("span");
       pill.className = "pill";
-      const dot = document.createElement("span");
-      dot.className = "pillDot";
-      if (orgColor) dot.style.background = orgColor;
-      pill.appendChild(dot);
+      const orgDetails = (ORG_BY_NAME && ORG_BY_NAME[hostOrg]) ? ORG_BY_NAME[hostOrg] : null;
+      const iconUrl = (orgDetails?.icon || "").trim();
+
+      if (iconUrl){
+        const img = document.createElement("img");
+        img.className = "pillIcon";
+        img.alt = "";
+        img.src = iconUrl;
+        pill.appendChild(img);
+      } else {
+        const dot = document.createElement("span");
+        dot.className = "pillDot";
+        if (orgColor) dot.style.background = orgColor;
+        pill.appendChild(dot);
+      }
+
       pill.appendChild(document.createTextNode(hostOrg));
+
+      // Soft glow using the calendar color
+      if (orgColor){
+        pill.classList.add("hasGlow");
+        pill.style.setProperty("--pillGlowColor", hexToRgba(orgColor, 0.35));
+      }
       pillsEl.appendChild(pill);
 
       // Make the host org pill clickable if we have org details in sources.json
@@ -894,7 +947,8 @@
       const links = document.getElementById("orgModalLinks");
 
       title.textContent = org.name || "Organization";
-      meta.textContent = org.color ? ("Calendar color: " + org.color) : "";
+      meta.textContent = "";
+      meta.style.display = "none";
 
       const iconUrl = (org.icon || "").trim();
       if (iconUrl) {
@@ -1111,7 +1165,7 @@
       dayMaxEvents: true,
       expandRows: true,
 
-      height: "calc(100vh - 220px)",
+      height: 504,
       expandRows: false,
 
       slotMinTime: "00:00:00",
