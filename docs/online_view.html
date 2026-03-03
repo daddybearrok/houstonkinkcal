@@ -463,6 +463,80 @@
         margin-bottom: 8px !important;
       }
     }
+
+    /* =========================
+       Unified Filters Container
+       ========================= */
+
+    .filters-bar {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 16px;
+      padding: 18px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      margin-bottom: 20px;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .filter-group label {
+      font-size: 13px;
+      font-weight: 600;
+      opacity: 0.8;
+    }
+
+    .filter-group input,
+    .filter-group select {
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(0,0,0,0.35);
+      color: white;
+      font-size: 14px;
+    }
+
+    .filter-action {
+      display: flex;
+      align-items: end;
+    }
+
+    .filter-action button {
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.08);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .18s ease;
+    }
+
+    .filter-action button:hover {
+      background: rgba(255,255,255,0.15);
+    }
+
+    @media (max-width: 768px) {
+
+      .filters-bar {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-action {
+        align-items: stretch;
+      }
+
+      .filter-action button {
+        width: 100%;
+      }
+
+    }
   </style>
 
   <script data-goatcounter="https://houstonkinkcal.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -485,23 +559,24 @@
       </div>
 
       <div class="actionsRow">
-        <div class="field">
-          <label for="searchInput">Search</label>
-          <input id="searchInput" type="text" placeholder="Search titles, location, description..." />
-        </div>
+        <div class="filters-bar">
 
-        <div class="field">
-          <label for="orgSelect">Host Org</label>
-          <select id="orgSelect">
-            <option value="">All organizations</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="clearFiltersBtn"></label>
-          <div class="btnRow" style="margin-top:0;">
-            <button class="btn secondary" id="clearFiltersBtn" type="button">Clear Filters</button>
+          <div class="filter-group">
+            <label>Search</label>
+            <input type="text" placeholder="Search titles, location, description..." />
           </div>
+
+          <div class="filter-group">
+            <label>Host Org</label>
+            <select>
+              <option>All organizations</option>
+            </select>
+          </div>
+
+          <div class="filter-group filter-action">
+            <button id="clearFilters">Clear Filters</button>
+          </div>
+
         </div>
       </div>
 
