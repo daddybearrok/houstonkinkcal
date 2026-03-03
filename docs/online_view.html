@@ -973,7 +973,6 @@
       const search = document.getElementById("searchInput");
       const orgSel = document.getElementById("orgSelect");
       const clearBtn = document.getElementById("clearFiltersBtn");
-      const todayBtn = document.getElementById("todayBtn");
 
       search.addEventListener("input", () => refreshCalendar());
       orgSel.addEventListener("change", () => refreshCalendar());
@@ -982,10 +981,6 @@
         search.value = "";
         orgSel.value = "";
         refreshCalendar();
-      });
-
-      todayBtn.addEventListener("click", () => {
-        if (CAL) CAL.today();
       });
 
       // Modal close
