@@ -478,6 +478,8 @@
       border: 1px solid rgba(255,255,255,0.08);
       backdrop-filter: blur(8px);
       margin-bottom: 20px;
+      width: 100%;
+      max-width: none;
     }
 
     .filter-group {
@@ -562,19 +564,19 @@
         <div class="filters-bar">
 
           <div class="filter-group">
-            <label>Search</label>
-            <input type="text" placeholder="Search titles, location, description..." />
+            <label for="searchInput">Search</label>
+            <input id="searchInput" type="text" placeholder="Search titles, location, description..." />
           </div>
 
           <div class="filter-group">
-            <label>Host Org</label>
-            <select>
-              <option>All organizations</option>
+            <label for="orgSelect">Host Org</label>
+            <select id="orgSelect">
+              <option value="">All organizations</option>
             </select>
           </div>
 
           <div class="filter-group filter-action">
-            <button id="clearFilters">Clear Filters</button>
+            <button id="clearFiltersBtn" type="button">Clear Filters</button>
           </div>
 
         </div>
