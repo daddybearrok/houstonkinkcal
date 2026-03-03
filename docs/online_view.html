@@ -940,25 +940,29 @@
       const calEl = document.getElementById("calendar");
 
       CAL = new FullCalendar.Calendar(calEl, {
-        initialView: "dayGridMonth",
+        initialView: "timeGridWeek",   // ✅ default to week view
         height: "auto",
         headerToolbar: {
-          left: "prev,next today",
-          center: "title",
-          right: "dayGridMonth,timeGridWeek,timeGridDay"
-        },
-        navLinks: true,
-        nowIndicator: true,
-        eventDisplay: "block",
-        dayMaxEvents: true,
-        expandRows: true,
+        left: "prev,next today",
+        center: "title",
+        right: "timeGridWeek,timeGridDay"  // ✅ remove month
+      },
+      navLinks: true,
+      nowIndicator: true,
+      eventDisplay: "block",
+      dayMaxEvents: true,
+      expandRows: true,
 
-        eventClick: function(info){
-          info.jsEvent.preventDefault();
-          openEventModal(info.event);
-        }
-      });
+      // ✅ Day/Week time window & scrolling
+      slotMinTime: "08:00:00",
+      slotMaxTime: "22:00:00",
+      scrollTime: "08:00:00",        // ✅ initial scroll position
 
+      eventClick: function(info){
+        info.jsEvent.preventDefault();
+        openEventModal(info.event);
+      }
+    });
       CAL.render();
     }
 
