@@ -677,10 +677,6 @@
       const hostOrg = inferHostOrg(e).trim() || "Unknown";
       const orgColor = ORG_COLORS[hostOrg] || DEFAULT_COLOR;
 
-      pill.addEventListener("click", () => {
-        openOrgFromHostName(hostOrg);
-      });
-
       return {
         id: uid || (title + "|" + (startParsed.date ? startParsed.date.toISOString() : Math.random())),
         title,
