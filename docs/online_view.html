@@ -10,7 +10,8 @@
   <!-- FullCalendar -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css">
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/rrule@2.7.1/dist/es5/rrule.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/rrule@6.1.15/index.global.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     :root{
@@ -577,6 +578,12 @@
       return !!e.allDay;
     }
 
+    function getAllProps(e, key){
+      const arr = e[key];
+      if (!arr || !arr.length) return [];
+      return arr.map(x => (x.value || "")).filter(Boolean);
+    }
+
     async function loadOrgColors(){
       try{
         const res = await fetch(SOURCES_URL + "?v=" + Date.now(), { cache: "no-store" });
@@ -772,6 +779,40 @@
 
       const hostOrg = inferHostOrg(e).trim() || "Unknown";
       const orgColor = ORG_COLORS[hostOrg] || DEFAULT_COLOR;
+
+      const rruleStr = firstProp(e, "RRULE") || "";
+      if (rruleStr){
+        // duration so occurrences render with an end time
+        let durationMs = 60 * 60 * 1000; // default 1h
+        if (startParsed.date && endParsed.date){
+          durationMs = Math.max(0, endParsed.date - startParsed.date);
+        }
+
+        // EXDATE support (optional but nice)
+        const exdates = getAllProps(e, "EXDATE")
+          .flatMap(v => String(v).split(","))
+          .map(s => s.trim())
+          .filter(Boolean)
+          .map(s => {
+            const parsed = parseICSTime({ value: s, params: {} });
+            return parsed.date ? parsed.date.toISOString() : null;
+          })
+          .filter(Boolean);
+
+        return {
+          id: uniqueId || uid || (title + "|" + (e["DTSTART"]?.[0]?.value || "")),
+          title,
+          rrule: Object.assign(RRule.parseString(rruleStr), {
+            dtstart: startParsed.date || undefined
+          }),
+          duration: durationMs,
+          exdate: exdates.length ? exdates : undefined,
+          allDay: !!startParsed.allDay,
+          extendedProps: { hostOrg, location, url, description, uid, _raw: e },
+          backgroundColor: orgColor || undefined,
+          borderColor: orgColor || undefined
+        };
+      }
 
       // FullCalendar expects end date for allDay to be exclusive; many ICS already do that properly.
       return {
