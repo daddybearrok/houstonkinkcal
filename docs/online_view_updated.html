@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Houston Kink Calendar — Browser View</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- FullCalendar -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    :root{
+      --bg0:#0d0d0d;
+      --bg1:#1c1c1c;
+      --panel: rgba(255,255,255,0.06);
+      --panelHover: rgba(255,255,255,0.09);
+      --border: rgba(255,255,255,0.10);
+      --text: #f2f2f2;
+      --muted:#a9a9a9;
+
+      --btnA:#4A0E0E; /* oxblood */
+      --btnB:#1A0404;
+      --btnBorder: rgba(255,255,255,0.18);
+      --shadow: rgba(0,0,0,0.45);
+
+      --ok: rgba(80, 200, 120, 0.22);
+      --okBorder: rgba(80, 200, 120, 0.40);
+      --warn: rgba(255, 180, 60, 0.16);
+      --warnBorder: rgba(255, 180, 60, 0.30);
+      --err: rgba(255, 80, 80, 0.16);
+      --errBorder: rgba(255, 80, 80, 0.30);
+    }
+
+    body{
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(circle at top, var(--bg1), var(--bg0) 70%);
+      color: var(--text);
+      min-height: 100vh;
+      display:flex;
+      justify-content:center;
+    }
+
+    .container{
+      width: 100%;
+      max-width: 1100px;
+      padding: 44px 18px 60px;
+    }
+
+    .topbar{
+      display:flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .titleRow{
+      display:flex;
+      align-items:flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    h1{
+      margin: 0;
+      font-size: 2.25rem;
+      letter-spacing: .4px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .subtitle{
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.5;
+      max-width: 880px;
+    }
+
+    .actionsRow{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    @media (min-width: 900px){
+      .actionsRow{
+        grid-template-columns: 1.1fr 0.8fr 0.8fr;
+        align-items: end;
+      }
+    }
+
+    .field{
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 12px 12px;
+    }
+    .field label{
+      display:block;
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: .2px;
+      opacity: .9;
+      margin-bottom: 8px;
+    }
+    .field input, .field select{
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.30);
+      color: #fff;
+      outline: none;
+    }
+    .field input:focus, .field select:focus{
+      border-color: rgba(255,255,255,0.35);
+    }
+    .hint{
+      margin-top: 8px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.4;
+    }
+
+    .btnRow{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--btnBorder);
+      background: linear-gradient(135deg, var(--btnA), var(--btnB));
+      color: #fff;
+      font-weight: 800;
+      cursor:pointer;
+      text-decoration:none;
+      min-height: 44px;
+      transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+      user-select: none;
+    }
+    .btn:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px var(--shadow);
+      filter: brightness(1.04);
+    }
+    .btn:active{ transform: translateY(-1px); }
+
+    .btn.secondary{
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.16);
+    }
+    .btn.secondary:hover{
+      background: rgba(255,255,255,0.14);
+      filter: none;
+    }
+
+    .status{
+      border-radius: 14px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.25);
+      color: #ddd;
+      display:none;
+      margin-top: 12px;
+    }
+    .status.show{ display:block; }
+    .status.ok{ background: var(--ok); border-color: var(--okBorder); }
+    .status.warn{ background: var(--warn); border-color: var(--warnBorder); }
+    .status.err{ background: var(--err); border-color: var(--errBorder); }
+
+    /* Calendar panel */
+    .calWrap{
+      margin-top: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+    #calendar{
+      padding: 12px 12px 16px;
+    }
+
+    /* FullCalendar dark-ish tune */
+    .fc{
+      --fc-page-bg-color: transparent;
+      --fc-border-color: rgba(255,255,255,0.08);
+      --fc-neutral-bg-color: rgba(255,255,255,0.04);
+      --fc-neutral-text-color: rgba(255,255,255,0.70);
+      --fc-today-bg-color: rgba(255,255,255,0.04);
+      --fc-button-text-color: #fff;
+      --fc-button-bg-color: rgba(255,255,255,0.10);
+      --fc-button-border-color: rgba(255,255,255,0.14);
+      --fc-button-hover-bg-color: rgba(255,255,255,0.16);
+      --fc-button-hover-border-color: rgba(255,255,255,0.18);
+      --fc-button-active-bg-color: rgba(255,255,255,0.20);
+      --fc-button-active-border-color: rgba(255,255,255,0.24);
+      --fc-event-text-color: #fff;
+    }
+    .fc .fc-toolbar-title{
+      color: rgba(255,255,255,0.92);
+      font-weight: 800;
+      letter-spacing: .2px;
+    }
+    .fc .fc-col-header-cell-cushion,
+    .fc .fc-daygrid-day-number{
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+    }
+    .fc .fc-scrollgrid,
+    .fc .fc-scrollgrid-section table{
+      border-color: rgba(255,255,255,0.08);
+    }
+
+    .footer{
+      margin-top: 18px;
+      text-align:center;
+      color: rgba(255,255,255,0.45);
+      font-size: 12px;
+      letter-spacing: .2px;
+    }
+
+    /* Modal */
+    .modal-backdrop{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 9999;
+    }
+    .modal-backdrop.show{ display:flex; }
+
+    .modal{
+      width: 100%;
+      max-width: 680px;
+      border-radius: 18px;
+      background: rgba(20, 10, 10, 0.92);
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.60);
+      overflow:hidden;
+    }
+    .modal-header{
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 16px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .modal-title{
+      min-width: 0;
+    }
+    .modal-title h3{
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 900;
+      letter-spacing: .2px;
+      line-height: 1.2;
+      word-break: break-word;
+    }
+    .modal-meta{
+      margin-top: 8px;
+      color: rgba(255,255,255,0.76);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.07);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .2px;
+      color: rgba(255,255,255,0.9);
+      margin-right: 8px;
+      margin-top: 8px;
+    }
+    .pillDot{
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.75);
+      border: 1px solid rgba(255,255,255,0.35);
+    }
+
+    .modal-close{
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      cursor: pointer;
+      display:grid;
+      place-items:center;
+      flex: 0 0 auto;
+    }
+    .modal-close:hover{ background: rgba(255,255,255,0.12); }
+
+    .modal-body{
+      padding: 14px 16px 18px;
+    }
+    .modal-desc{
+      margin: 0 0 14px;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.6;
+      font-size: 0.98rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .modal-links{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+  
+    .modal-back{
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      margin-right: 10px;
+      flex: 0 0 auto;
+    }
+    .modal-back:hover{ background: rgba(255,255,255,0.12); }
+
+    /* Linktree panel (org view) */
+    .linktree { display: grid; gap: 10px; }
+    .linktree a{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      text-decoration:none;
+      color:#fff;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.08);
+      transition: transform .18s ease, background .18s ease;
+    }
+    .linktree a:hover{ transform: translateY(-2px); background: rgba(255,255,255,0.12); }
+    .linktree .label{ font-weight: 800; letter-spacing: 0.2px; }
+    .linktree .urlhint{ opacity: 0.75; font-size: 12px; overflow:hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 380px; }
+    .linktree .right{ opacity: 0.9; flex: 0 0 auto; }
+
+  </style>
+
+  <script data-goatcounter="https://houstonkinkcal.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+  <div class="container">
+
+    <div class="topbar">
+      <div class="titleRow">
+        <div>
+          <h1>Houston Kink Calendar</h1>
+          <div class="subtitle">
+            Browse the calendar in your browser. Filter by host org, search, and click any event for details.
+            Want it on your phone? Subscribe on the main page.
+          </div>
+        </div>
+
+        <div class="btnRow">
+          <a class="btn secondary" href="./index.html">Back to Subscribe</a>
+        </div>
+      </div>
+
+      <div class="actionsRow">
+        <div class="field">
+          <label for="searchInput">Search</label>
+          <input id="searchInput" type="text" placeholder="Search titles, location, description..." />
+          <div class="hint">Tip: search is instant (client-side). Clear to show everything.</div>
+        </div>
+
+        <div class="field">
+          <label for="orgSelect">Host Org</label>
+          <select id="orgSelect">
+            <option value="">All organizations</option>
+          </select>
+          <div class="hint">Host org is inferred from the ICS.</div>
+        </div>
+
+        <div class="field">
+          <div class="btnRow" style="margin-top:0;">
+            <button class="btn secondary" id="clearFiltersBtn" type="button">Clear Filters</button>
+          </div>
+          <div class="hint">Use the calendar header for day/week/month + arrows.</div>
+        </div>
+      </div>
+
+      <div id="status" class="status" aria-live="polite"></div>
+    </div>
+
+    <div class="calWrap">
+      <div id="calendar"></div>
+    </div>
+
+    <div class="footer">
+      Events shown are pulled from public sources. No personal data or private content is hosted here.
+    </div>
+
+  </div>
+
+  <!-- Event modal -->
+  <div class="modal-backdrop" id="eventModalBackdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="eventModalTitle">
+      <div class="modal-header">
+        <div class="modal-title">
+          <h3 id="eventModalTitle"></h3>
+          <div class="modal-meta" id="eventModalMeta"></div>
+          <div id="eventModalPills"></div>
+        </div>
+        <button class="modal-back" id="eventModalBack" type="button" aria-label="Back" style="display:none;">←</button>
+        <button class="modal-close" id="eventModalClose" aria-label="Close">✕</button>
+      </div>
+      
+      <div class="modal-body">
+        <!-- Event view -->
+        <div id="eventPanel">
+          <p class="modal-desc" id="eventModalDesc" style="display:none;"></p>
+
+          <div class="modal-links">
+            <a id="eventModalLink" href="#" target="_blank" rel="noopener">Open on Facebook</a>
+            <button id="downloadEventIcs" class="secondary" type="button">Download .ics</button>
+          </div>
+
+          <div class="small" id="eventModalUid" style="margin-top:10px; opacity:0.7;"></div>
+        </div>
+
+        <!-- Organization (linktree) view -->
+        <div id="orgPanel" style="display:none;">
+          <p class="modal-desc" id="orgPanelDesc" style="display:none;"></p>
+          <div class="linktree" id="orgPanelLinks"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script>
+    // CONFIG
+    const ICS_URL = "./houston-kink-cal.ics";
+    const SOURCES_URL = "./sources.json";
+    const DEFAULT_COLOR = ""; // allow FullCalendar default if no org color set
+
+    // State
+    let CAL = null;
+    let ALL_EVENTS = [];          // raw parsed events (JS objects)
+    let ORG_COLORS = {};          // name -> "#RRGGBB"
+    let ORG_LIST = [];            // list of org names
+
+    // Helpers
+    function setStatus(kind, msg){
+      const el = document.getElementById("status");
+      if (!el) return;
+      if (!msg){
+        el.className = "status";
+        el.textContent = "";
+        return;
+      }
+      el.className = "status show " + (kind || "");
+      el.textContent = msg;
+    }
+
+    function safeText(s){
+      return (s == null) ? "" : String(s);
+    }
+
+    function stripHtml(s){
+      // FB ICS descriptions are plain-ish, but keep safe anyway.
+      return safeText(s).replace(/<[^>]*>/g, "");
+    }
+
+    function formatLocal(dt){
+      // dt is a Date
+      return dt.toLocaleString(undefined, {
+        weekday: "short",
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit"
+      });
+    }
+
+    function formatLocalDate(dt){
+      return dt.toLocaleDateString(undefined, {
+        weekday: "short",
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      });
+    }
+
+    function isAllDayEvent(e){
+      return !!e.allDay;
+    }
+
+    async function loadOrgColors(){
+      try{
+        const res = await fetch(SOURCES_URL + "?v=" + Date.now(), { cache: "no-store" });
+        if (!res.ok) return;
+
+        const data = await res.json();
+        if (!Array.isArray(data)) return;
+
+        ORG_COLORS = {};
+        ORG_LIST = [];
+        for (const org of data){
+          const name = (org?.name || "").trim();
+          if (!name) continue;
+          ORG_LIST.push(name);
+
+          const color = (org?.color || "").trim();
+          if (color) ORG_COLORS[name] = color;
+        }
+      } catch {
+        // ignore if missing
+      }
+    }
+
+    function populateOrgDropdown(){
+      const sel = document.getElementById("orgSelect");
+      if (!sel) return;
+
+      // Preserve "All organizations" option
+      const current = sel.value;
+      sel.querySelectorAll('option:not([value=""])').forEach(o => o.remove());
+
+      const uniq = Array.from(new Set(ORG_LIST)).sort((a,b) => a.localeCompare(b));
+      for (const name of uniq){
+        const opt = document.createElement("option");
+        opt.value = name;
+        opt.textContent = name;
+        sel.appendChild(opt);
+      }
+
+      sel.value = current || "";
+    }
+
+    // --- Minimal ICS parser (good enough for FB + basic public ICS) ---
+    // Handles folding lines (RFC5545)
+    function unfoldICS(text){
+      return text.replace(/\r?\n[ \t]/g, "");
+    }
+
+    function parseICS(text){
+      const unfolded = unfoldICS(text);
+      const lines = unfolded.split(/\r?\n/);
+
+      const events = [];
+      let cur = null;
+
+      for (const line of lines){
+        if (line === "BEGIN:VEVENT"){
+          cur = {};
+          continue;
+        }
+        if (line === "END:VEVENT"){
+          if (cur) events.push(cur);
+          cur = null;
+          continue;
+        }
+        if (!cur) continue;
+
+        const idx = line.indexOf(":");
+        if (idx === -1) continue;
+
+        const left = line.slice(0, idx);
+        const value = line.slice(idx + 1);
+
+        // left can include params: DTSTART;TZID=America/Chicago
+        const [prop, ...paramParts] = left.split(";");
+        const key = prop.toUpperCase();
+
+        const params = {};
+        for (const p of paramParts){
+          const eq = p.indexOf("=");
+          if (eq !== -1){
+            params[p.slice(0, eq).toUpperCase()] = p.slice(eq + 1);
+          }
+        }
+
+        // Store with params if needed
+        if (!cur[key]) cur[key] = [];
+        cur[key].push({ value, params });
+      }
+
+      return events;
+    }
+
+    function parseICSTime(node){
+      // node is {value, params}
+      if (!node || !node.value) return { date: null, allDay: false };
+
+      const v = node.value.trim();
+      const tzid = node.params?.TZID ? node.params.TZID.trim() : null;
+
+      // All-day DATE: YYYYMMDD
+      if (/^\d{8}$/.test(v)){
+        const y = Number(v.slice(0,4));
+        const m = Number(v.slice(4,6)) - 1;
+        const d = Number(v.slice(6,8));
+        return { date: new Date(y, m, d), allDay: true };
+      }
+
+      // DATE-TIME: 20260301T040000Z or 20260301T040000
+      if (/^\d{8}T\d{6}Z$/.test(v)){
+        // UTC
+        const y = Number(v.slice(0,4));
+        const m = Number(v.slice(4,6)) - 1;
+        const d = Number(v.slice(6,8));
+        const hh = Number(v.slice(9,11));
+        const mm = Number(v.slice(11,13));
+        const ss = Number(v.slice(13,15));
+        return { date: new Date(Date.UTC(y,m,d,hh,mm,ss)), allDay: false };
+      }
+
+      if (/^\d{8}T\d{6}$/.test(v)){
+        // Floating/local or TZID – we treat as local time (browser)
+        const y = Number(v.slice(0,4));
+        const m = Number(v.slice(4,6)) - 1;
+        const d = Number(v.slice(6,8));
+        const hh = Number(v.slice(9,11));
+        const mm = Number(v.slice(11,13));
+        const ss = Number(v.slice(13,15));
+
+        // If TZID exists, we still can’t correctly shift without a tz lib.
+        // But most of your combined feed is FB Zulu, so this is mostly for external ICS.
+        // We'll interpret as local time.
+        return { date: new Date(y,m,d,hh,mm,ss), allDay: false };
+      }
+
+      // Fallback
+      return { date: null, allDay: false };
+    }
+
+    function firstProp(e, key){
+      const arr = e[key];
+      if (!arr || !arr.length) return null;
+      return arr[0].value || "";
+    }
+
+    function inferHostOrg(e){
+      // Primary: ORGANIZER;CN=...
+      const organizer = e["ORGANIZER"];
+      if (organizer && organizer.length){
+        const cn = organizer[0].params?.CN;
+        if (cn) return cn;
+      }
+
+      // Secondary: X-WR-CALNAME (rare) or other X props
+      const xcal = firstProp(e, "X-WR-CALNAME");
+      if (xcal) return xcal.trim();
+
+      // Otherwise unknown
+      return "Unknown";
+    }
+
+    function buildFullCalendarEvent(e){
+      const dtStartNode = e["DTSTART"]?.[0];
+      const dtEndNode = e["DTEND"]?.[0];
+
+      const startParsed = parseICSTime(dtStartNode);
+      const endParsed = parseICSTime(dtEndNode);
+
+      const allDay = startParsed.allDay;
+
+      const uid = firstProp(e, "UID") || "";
+      const title = firstProp(e, "SUMMARY") || "Untitled";
+      const location = firstProp(e, "LOCATION") || "";
+      const url = firstProp(e, "URL") || "";
+      const description = firstProp(e, "DESCRIPTION") || "";
+
+      const hostOrg = inferHostOrg(e).trim() || "Unknown";
+      const orgColor = ORG_COLORS[hostOrg] || DEFAULT_COLOR;
+
+      // FullCalendar expects end date for allDay to be exclusive; many ICS already do that properly.
+      return {
+        id: uid || (title + "|" + (startParsed.date ? startParsed.date.toISOString() : Math.random())),
+        title,
+        start: startParsed.date ? startParsed.date.toISOString() : null,
+        end: endParsed.date ? endParsed.date.toISOString() : null,
+        allDay: !!allDay,
+
+        extendedProps: {
+          hostOrg,
+          location,
+          url,
+          description,
+          uid,
+          _raw: e
+        },
+
+        backgroundColor: orgColor || undefined,
+        borderColor: orgColor || undefined
+      };
+    }
+
+    function refreshCalendar(){
+      if (!CAL) return;
+
+      const search = (document.getElementById("searchInput")?.value || "").trim().toLowerCase();
+      const org = (document.getElementById("orgSelect")?.value || "").trim();
+
+      const filtered = ALL_EVENTS.filter(ev => {
+        const p = ev.extendedProps || {};
+        if (org && p.hostOrg !== org) return false;
+
+        if (search){
+          const hay = [
+            ev.title,
+            p.location,
+            p.description,
+            p.hostOrg
+          ].map(x => safeText(x).toLowerCase()).join(" | ");
+          if (!hay.includes(search)) return false;
+        }
+
+        return true;
+      });
+
+      CAL.removeAllEvents();
+      CAL.addEventSource(filtered);
+    }
+
+    function openEventModal(fcEvent){
+      const backdrop = document.getElementById("eventModalBackdrop");
+      const titleEl = document.getElementById("eventModalTitle");
+      const metaEl = document.getElementById("eventModalMeta");
+      const descEl = document.getElementById("eventModalDesc");
+      const pillsEl = document.getElementById("eventModalPills");
+      const uidEl = document.getElementById("eventModalUid");
+      const openLink = document.getElementById("eventModalOpenLink");
+      const dlBtn = document.getElementById("eventModalDownloadBtn");
+
+      const p = fcEvent.extendedProps || {};
+      const hostOrg = p.hostOrg || "Unknown";
+      const orgColor = ORG_COLORS[hostOrg] || "";
+
+      titleEl.textContent = fcEvent.title || "Untitled";
+
+      // Time display
+      let timeLine = "";
+      if (isAllDayEvent(fcEvent)){
+        const d = fcEvent.start ? formatLocalDate(fcEvent.start) : "";
+        timeLine = d ? `All-day • ${d}` : "All-day";
+      } else {
+        const s = fcEvent.start ? formatLocal(fcEvent.start) : "";
+        const e = fcEvent.end ? formatLocal(fcEvent.end) : "";
+        timeLine = e ? `${s} → ${e}` : s;
+      }
+
+      const loc = (p.location || "").trim();
+      metaEl.textContent = loc ? `${timeLine} • ${loc}` : timeLine;
+
+      // Pills
+      pillsEl.innerHTML = "";
+      const pill = document.createElement("span");
+      pill.className = "pill";
+      const dot = document.createElement("span");
+      dot.className = "pillDot";
+      if (orgColor) dot.style.background = orgColor;
+      pill.appendChild(dot);
+      pill.appendChild(document.createTextNode(hostOrg));
+      pillsEl.appendChild(pill);
+
+      const desc = stripHtml(p.description || "").trim();
+      if (desc){
+        descEl.textContent = desc;
+        descEl.style.display = "block";
+      } else {
+        descEl.style.display = "none";
+      }
+
+      const uid = (p.uid || "").trim();
+      uidEl.textContent = uid || "(none)";
+
+      const url = (p.url || "").trim();
+      if (url){
+        openLink.href = url;
+        openLink.style.display = "inline-flex";
+      } else {
+        openLink.style.display = "none";
+      }
+
+      dlBtn.onclick = () => downloadSingleEventICS(fcEvent);
+
+      EVENT_MODAL_STATE.snapshot = null; EVENT_MODAL_STATE.currentOrg = null;
+      // Ensure host pill is wired after pills are rendered
+      wireHostOrgPill();
+
+      backdrop.classList.add("show");
+      backdrop.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeEventModal(){
+      const backdrop = document.getElementById("eventModalBackdrop");
+      // Prevent aria-hidden + focused descendant warnings
+      if (backdrop && backdrop.contains(document.activeElement)) {
+        document.activeElement.blur();
+        document.body.focus && document.body.focus();
+      }
+      backdrop.classList.remove("show");
+      backdrop.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    // --- "Flip" event modal into an org linktree view ---
+    const EVENT_MODAL_STATE = { snapshot: null, currentOrg: null };
+
+    function snapshotEventModal(){
+      const titleEl = document.getElementById("eventModalTitle");
+      const metaEl = document.getElementById("eventModalMeta");
+      const pillsEl = document.getElementById("eventModalPills");
+      const descEl = document.getElementById("eventModalDesc");
+      const linkEl = document.getElementById("eventModalLink");
+      const uidEl  = document.getElementById("eventModalUid");
+      EVENT_MODAL_STATE.snapshot = {
+        title: titleEl ? titleEl.textContent : "",
+        meta:  metaEl ? metaEl.textContent : "",
+        pillsHTML: pillsEl ? pillsEl.innerHTML : "",
+        descText: (descEl && descEl.style.display !== "none") ? descEl.textContent : "",
+        linkHref: linkEl ? linkEl.href : "#",
+        uidText:  uidEl ? uidEl.textContent : ""
+      };
+    }
+
+    function restoreEventModal(){
+      const snap = EVENT_MODAL_STATE.snapshot;
+      if (!snap) return;
+
+      const titleEl = document.getElementById("eventModalTitle");
+      const metaEl  = document.getElementById("eventModalMeta");
+      const pillsEl = document.getElementById("eventModalPills");
+      const descEl  = document.getElementById("eventModalDesc");
+      const linkEl  = document.getElementById("eventModalLink");
+      const uidEl   = document.getElementById("eventModalUid");
+
+      if (titleEl) titleEl.textContent = snap.title || "";
+      if (metaEl)  metaEl.textContent  = snap.meta || "";
+      if (pillsEl) pillsEl.innerHTML   = snap.pillsHTML || "";
+
+      if (descEl) {
+        const t = (snap.descText || "").trim();
+        descEl.textContent = t;
+        descEl.style.display = t ? "block" : "none";
+      }
+
+      if (linkEl) linkEl.href = snap.linkHref || "#";
+      if (uidEl)  uidEl.textContent = snap.uidText || "";
+
+      // Toggle panels
+      const eventPanel = document.getElementById("eventPanel");
+      const orgPanel = document.getElementById("orgPanel");
+      if (eventPanel) eventPanel.style.display = "block";
+      if (orgPanel) orgPanel.style.display = "none";
+
+      // Back button
+      const backBtn = document.getElementById("eventModalBack");
+      if (backBtn) backBtn.style.display = "none";
+
+      EVENT_MODAL_STATE.currentOrg = null;
+
+      // Re-wire host pill (since pills HTML was restored)
+      wireHostOrgPill();
+    }
+
+    function showOrgInEventModal(orgName){
+      const name = (orgName || "").trim();
+      if (!name) return;
+
+      const org = ORG_BY_NAME[name];
+      if (!org) {
+        alert("Could not find organization details for: " + name);
+        return;
+      }
+
+      // Snapshot the event view once
+      if (!EVENT_MODAL_STATE.snapshot) snapshotEventModal();
+      EVENT_MODAL_STATE.currentOrg = name;
+
+      // Header becomes org header
+      const titleEl = document.getElementById("eventModalTitle");
+      const metaEl  = document.getElementById("eventModalMeta");
+      const pillsEl = document.getElementById("eventModalPills");
+      const iconEl  = document.getElementById("eventModalIcon");
+
+      if (titleEl) titleEl.textContent = org.name || "Organization";
+      if (metaEl)  metaEl.textContent  = "Organization";
+      if (pillsEl) pillsEl.innerHTML   = "";
+
+      const iconUrl = (org.icon || "").trim();
+      if (iconEl) {
+        iconEl.src = iconUrl || "";
+        iconEl.style.display = iconUrl ? "block" : "none";
+      }
+
+      // Populate org panel
+      const orgPanel = document.getElementById("orgPanel");
+      const eventPanel = document.getElementById("eventPanel");
+      const descEl = document.getElementById("orgPanelDesc");
+      const linksEl = document.getElementById("orgPanelLinks");
+
+      const d = (org.description || "").trim();
+      if (descEl) {
+        descEl.textContent = d;
+        descEl.style.display = d ? "block" : "none";
+      }
+
+      if (linksEl) {
+        linksEl.innerHTML = "";
+        const items = Array.isArray(org.links) ? org.links : [];
+        const usable = items.filter(x => x && x.url);
+        if (usable.length === 0) {
+          linksEl.innerHTML = '<div class="pill" style="justify-content:center; opacity:0.85;">No links provided</div>';
+        } else {
+          for (const l of usable) {
+            const label = (l.label || "Link").trim();
+            const url = (l.url || "").trim();
+            linksEl.insertAdjacentHTML("beforeend", `
+              <a href="${url}" target="_blank" rel="noopener">
+                <div style="min-width:0;">
+                  <div class="label">${label}</div>
+                  <div class="urlhint">${url}</div>
+                </div>
+                <div class="right">↗</div>
+              </a>
+            `);
+          }
+        }
+      }
+
+      if (eventPanel) eventPanel.style.display = "none";
+      if (orgPanel) orgPanel.style.display = "block";
+
+      // Show back button
+      const backBtn = document.getElementById("eventModalBack");
+      if (backBtn) {
+        backBtn.style.display = "grid";
+        backBtn.onclick = () => restoreEventModal();
+        backBtn.focus();
+      }
+    }
+
+    function wireHostOrgPill(){
+      const pillsEl = document.getElementById("eventModalPills");
+      if (!pillsEl) return;
+      const hostPill = pillsEl.querySelector('.pill[data-host-org]');
+      if (!hostPill) return;
+      const hostOrg = hostPill.getAttribute("data-host-org") || "";
+      hostPill.classList.add("clickable");
+      hostPill.setAttribute("role","button");
+      hostPill.setAttribute("tabindex","0");
+      hostPill.addEventListener("click", (e)=>{ e.preventDefault(); showOrgInEventModal(hostOrg); });
+      hostPill.addEventListener("keydown", (e)=>{
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showOrgInEventModal(hostOrg); }
+      });
+    }
+
+
+    function icsEscapeText(s){
+      // Minimal escaping + folding later
+      return safeText(s)
+        .replace(/\\/g, "\\\\")
+        .replace(/\n/g, "\\n")
+        .replace(/,/g, "\\,")
+        .replace(/;/g, "\\;");
+    }
+
+    function foldLine(line){
+      // RFC5545: fold at 75 octets; we’ll approximate with 73 chars to be safe
+      const max = 73;
+      if (line.length <= max) return line;
+      let out = "";
+      let i = 0;
+      while (i < line.length){
+        const chunk = line.slice(i, i + max);
+        out += (i === 0) ? chunk : ("\r\n " + chunk);
+        i += max;
+      }
+      return out;
+    }
+
+    function formatICSDateUTC(d){
+      // d is Date, output UTC in YYYYMMDDTHHMMSSZ
+      const pad = (n) => String(n).padStart(2, "0");
+      return (
+        d.getUTCFullYear() +
+        pad(d.getUTCMonth()+1) +
+        pad(d.getUTCDate()) + "T" +
+        pad(d.getUTCHours()) +
+        pad(d.getUTCMinutes()) +
+        pad(d.getUTCSeconds()) + "Z"
+      );
+    }
+
+    function formatICSDateLocalAllDay(d){
+      // d is Date; for all-day, use local date YYYYMMDD
+      const pad = (n) => String(n).padStart(2, "0");
+      return (
+        d.getFullYear() +
+        pad(d.getMonth()+1) +
+        pad(d.getDate())
+      );
+    }
+
+    function downloadSingleEventICS(fcEvent){
+      const p = fcEvent.extendedProps || {};
+      const uid = (p.uid || fcEvent.id || "").trim() || ("hkc-" + Date.now());
+      const summary = icsEscapeText(fcEvent.title || "Untitled");
+      const location = icsEscapeText(p.location || "");
+      const description = icsEscapeText(stripHtml(p.description || "") || "");
+      const url = safeText(p.url || "").trim();
+
+      const now = new Date();
+
+      let dtStartLine = "";
+      let dtEndLine = "";
+
+      if (fcEvent.allDay){
+        const s = fcEvent.start ? formatICSDateLocalAllDay(fcEvent.start) : "";
+        // For all-day, FullCalendar stores end as exclusive (often next day). If missing, omit.
+        const e = fcEvent.end ? formatICSDateLocalAllDay(fcEvent.end) : "";
+
+        if (s) dtStartLine = `DTSTART;VALUE=DATE:${s}`;
+        if (e) dtEndLine = `DTEND;VALUE=DATE:${e}`;
+      } else {
+        const s = fcEvent.start ? formatICSDateUTC(fcEvent.start) : "";
+        const e = fcEvent.end ? formatICSDateUTC(fcEvent.end) : "";
+
+        if (s) dtStartLine = `DTSTART:${s}`;
+        if (e) dtEndLine = `DTEND:${e}`;
+      }
+
+      const lines = [];
+      lines.push("BEGIN:VCALENDAR");
+      lines.push("VERSION:2.0");
+      lines.push("CALSCALE:GREGORIAN");
+      lines.push("PRODID:-//Houston Kink Cal//Single Event Export//EN");
+      lines.push("METHOD:PUBLISH");
+      lines.push("BEGIN:VEVENT");
+      lines.push(`UID:${icsEscapeText(uid)}`);
+      lines.push(`DTSTAMP:${formatICSDateUTC(now)}`);
+      if (dtStartLine) lines.push(dtStartLine);
+      if (dtEndLine) lines.push(dtEndLine);
+      lines.push(`SUMMARY:${summary}`);
+      if (location) lines.push(`LOCATION:${location}`);
+      if (description) lines.push(`DESCRIPTION:${description}`);
+      if (url) lines.push(`URL:${url}`);
+      lines.push("STATUS:CONFIRMED");
+      lines.push("CLASS:PUBLIC");
+      lines.push("END:VEVENT");
+      lines.push("END:VCALENDAR");
+
+      const folded = lines.map(foldLine).join("\r\n") + "\r\n";
+      const blob = new Blob([folded], { type: "text/calendar;charset=utf-8" });
+
+      const filenameSafe = (fcEvent.title || "event").toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+        .slice(0, 60) || "event";
+
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = `${filenameSafe}.ics`;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        URL.revokeObjectURL(a.href);
+        a.remove();
+      }, 150);
+    }
+
+    async function loadICS(){
+      setStatus("warn", "Loading calendar…");
+
+      const res = await fetch(ICS_URL + "?v=" + Date.now(), { cache: "no-store" });
+      if (!res.ok) throw new Error("Failed to fetch ICS");
+
+      const text = await res.text();
+      const vevents = parseICS(text);
+
+      const events = [];
+      for (const e of vevents){
+        // Skip canceled
+        const status = (firstProp(e, "STATUS") || "").toUpperCase();
+        if (status === "CANCELLED") continue;
+
+        const ev = buildFullCalendarEvent(e);
+        if (!ev.start) continue;
+        events.push(ev);
+
+        // If host org isn't in sources.json but appears in ICS, keep it for dropdown
+        const hostOrg = ev.extendedProps?.hostOrg;
+        if (hostOrg && !ORG_LIST.includes(hostOrg)) ORG_LIST.push(hostOrg);
+      }
+
+      ALL_EVENTS = events;
+
+      populateOrgDropdown();
+      refreshCalendar();
+
+      setStatus("ok", `Loaded ${ALL_EVENTS.length} events.`);
+      setTimeout(() => setStatus("", ""), 2200);
+    }
+
+    function initCalendar(){
+      const calEl = document.getElementById("calendar");
+
+      CAL = new FullCalendar.Calendar(calEl, {
+        initialView: "timeGridWeek",   // ✅ default to week view
+        height: "auto",
+        headerToolbar: {
+        left: "prev,next today",
+        center: "title",
+        right: "timeGridWeek,timeGridDay"  // ✅ remove month
+      },
+      navLinks: true,
+      nowIndicator: true,
+      eventDisplay: "block",
+      dayMaxEvents: true,
+      expandRows: true,
+
+      height: "calc(100vh - 220px)",
+      expandRows: false,
+
+      slotMinTime: "00:00:00",
+      slotMaxTime: "24:00:00",
+      scrollTime: "08:00:00",
+
+      slotDuration: "00:30:00",
+      slotLabelInterval: "01:00",
+      slotMinHeight: 42,
+
+      eventClick: function(info){
+        info.jsEvent.preventDefault();
+        openEventModal(info.event);
+      }
+    });
+      CAL.render();
+    }
+
+    function wireUI(){
+      const search = document.getElementById("searchInput");
+      const orgSel = document.getElementById("orgSelect");
+      const clearBtn = document.getElementById("clearFiltersBtn");
+      const todayBtn = document.getElementById("todayBtn");
+
+      search.addEventListener("input", () => refreshCalendar());
+      orgSel.addEventListener("change", () => refreshCalendar());
+
+      clearBtn.addEventListener("click", () => {
+        search.value = "";
+        orgSel.value = "";
+        refreshCalendar();
+      });
+
+      todayBtn.addEventListener("click", () => {
+        if (CAL) CAL.today();
+      });
+
+      // Modal close
+      document.getElementById("eventModalClose").addEventListener("click", closeEventModal);
+      document.getElementById("eventModalBackdrop").addEventListener("click", (e) => {
+        if (e.target.id === "eventModalBackdrop") closeEventModal();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeEventModal();
+      });
+    }
+
+    async function init(){
+      try{
+        initCalendar();
+        wireUI();
+
+        // Load org colors (from sources.json) before ICS parsing
+        await loadOrgColors();
+
+        // Load ICS and render events
+        await loadICS();
+      } catch (err){
+        console.error(err);
+        setStatus("err", "Could not load the calendar. Check that houston-kink-cal.ics and sources.json are in /docs.");
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
