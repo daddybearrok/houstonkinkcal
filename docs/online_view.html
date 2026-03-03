@@ -339,6 +339,32 @@
     .mono{
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
+
+    /* Linktree list (org modal) */
+    .linktree { display: grid; gap: 10px; }
+
+    .linktree a {
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      text-decoration:none;
+      color:#fff;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.08);
+      transition: transform .18s ease, background .18s ease;
+    }
+
+    .linktree a:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.12);
+    }
+
+    .linktree .label { font-weight: 900; letter-spacing: 0.2px; }
+    .linktree .urlhint { opacity: 0.80; font-size: 12px; word-break: break-all; }
+    .linktree .right { opacity: 0.9; flex: 0 0 auto; }
   </style>
 
   <script data-goatcounter="https://houstonkinkcal.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -421,6 +447,25 @@
     </div>
   </div>
 
+  <!-- Org modal (linktree style) -->
+  <div class="modal-backdrop" id="orgModalBackdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="orgModalTitle">
+      <div class="modal-header">
+        <div class="modal-title" style="display:flex; align-items:center; gap:12px; min-width:0;">
+          <img id="orgModalIcon" alt="" style="width:44px;height:44px;border-radius:12px;object-fit:cover;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.06);display:none;" />
+          <div style="min-width:0;">
+            <h3 id="orgModalTitle" style="margin:0;font-size:1.15rem;letter-spacing:0.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></h3>
+          </div>
+        </div>
+        <button class="modal-close" id="orgModalClose" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc" id="orgModalDesc" style="display:none;"></p>
+        <div class="linktree" id="orgModalLinks"></div>
+      </div>
+    </div>
+  </div>
+
   <script>
     // CONFIG
     const ICS_URL = "./houston-kink-cal.ics";
@@ -432,6 +477,7 @@
     let ALL_EVENTS = [];
     let ORG_COLORS = {};
     let ORG_LIST = [];
+    let ORG_BY_NAME = {};
 
     function setStatus(kind, msg){
       const el = document.getElementById("status");
@@ -631,6 +677,10 @@
       const hostOrg = inferHostOrg(e).trim() || "Unknown";
       const orgColor = ORG_COLORS[hostOrg] || DEFAULT_COLOR;
 
+      pill.addEventListener("click", () => {
+        openOrgFromHostName(hostOrg);
+      });
+
       return {
         id: uid || (title + "|" + (startParsed.date ? startParsed.date.toISOString() : Math.random())),
         title,
@@ -669,6 +719,99 @@
 
     function isAllDayEvent(e){ return !!e.allDay; }
 
+    async function loadOrgsForModal() {
+      try {
+        const res = await fetch(SOURCES_URL + "?v=" + Date.now(), { cache: "no-store" });
+        if (!res.ok) return;
+
+        const data = await res.json();
+        if (!Array.isArray(data)) return;
+
+        ORG_BY_NAME = {};
+        for (const org of data) {
+          const name = (org?.name || "").trim();
+          if (!name) continue;
+          ORG_BY_NAME[name] = org;
+        }
+      } catch {
+        // ignore
+      }
+    }
+
+    function openOrgModal(org) {
+      const backdrop = document.getElementById("orgModalBackdrop");
+      const title = document.getElementById("orgModalTitle");
+      const icon = document.getElementById("orgModalIcon");
+      const desc = document.getElementById("orgModalDesc");
+      const links = document.getElementById("orgModalLinks");
+
+      title.textContent = org?.name || "Organization";
+
+      const iconUrl = (org?.icon || "").trim();
+      if (iconUrl) {
+        icon.src = iconUrl;
+        icon.style.display = "block";
+      } else {
+        icon.style.display = "none";
+      }
+
+      const d = (org?.description || "").trim();
+      if (d) {
+        desc.textContent = d;
+        desc.style.display = "block";
+      } else {
+        desc.style.display = "none";
+      }
+
+      links.innerHTML = "";
+
+      const items = Array.isArray(org?.links) ? org.links : [];
+      const usable = items.filter(x => x && x.url);
+
+      if (usable.length === 0) {
+        links.insertAdjacentHTML("beforeend",
+          `<div class="status show warn">No links have been provided for this organization.</div>`
+        );
+      } else {
+        for (const l of usable) {
+          const label = (l.label || "Link").trim();
+          const url = String(l.url || "").trim();
+          links.insertAdjacentHTML("beforeend", `
+            <a href="${url}" target="_blank" rel="noopener">
+              <div>
+                <div class="label">${label}</div>
+                <div class="urlhint">${url}</div>
+              </div>
+              <div class="right">↗</div>
+            </a>
+          `);
+        }
+      }
+
+      backdrop.classList.add("show");
+      backdrop.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeOrgModal() {
+      const backdrop = document.getElementById("orgModalBackdrop");
+      backdrop.classList.remove("show");
+      backdrop.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    function openOrgFromHostName(hostOrg) {
+      // Ensure we have the org data loaded
+      const org = ORG_BY_NAME[hostOrg];
+      if (org) {
+        openOrgModal(org);
+        return;
+      }
+      // graceful fallback if not found
+      setStatus("warn", `No org profile found for "${hostOrg}" in sources.json.`);
+      setTimeout(() => setStatus("", ""), 2200);
+    }
+
     function openEventModal(fcEvent){
       const backdrop = document.getElementById("eventModalBackdrop");
       const titleEl = document.getElementById("eventModalTitle");
@@ -699,8 +842,13 @@
       metaEl.textContent = loc ? `${timeLine} • ${loc}` : timeLine;
 
       pillsEl.innerHTML = "";
-      const pill = document.createElement("span");
+      const pill = document.createElement("button");
+      pill.type = "button";
       pill.className = "pill";
+      pill.style.cursor = "pointer";
+      pill.style.userSelect = "none";
+      pill.style.border = "1px solid rgba(255,255,255,0.14)";
+      pill.style.background = "rgba(255,255,255,0.07)";
       const dot = document.createElement("span");
       dot.className = "pillDot";
       if (orgColor) dot.style.background = orgColor;
@@ -943,6 +1091,12 @@
         refreshCalendar();
       });
 
+      // Org modal close wiring
+      document.getElementById("orgModalClose")?.addEventListener("click", closeOrgModal);
+      document.getElementById("orgModalBackdrop")?.addEventListener("click", (e) => {
+        if (e.target.id === "orgModalBackdrop") closeOrgModal();
+      });
+
       document.getElementById("eventModalClose").addEventListener("click", closeEventModal);
       document.getElementById("eventModalBackdrop").addEventListener("click", (e) => {
         if (e.target.id === "eventModalBackdrop") closeEventModal();
@@ -959,6 +1113,7 @@
 
         await loadOrgColors();
         await loadICS();
+        await loadOrgsForModal();
       } catch (err){
         console.error(err);
         setStatus("err", "Could not load the calendar. Check that houston-kink-cal.ics and sources.json are in /docs.");
