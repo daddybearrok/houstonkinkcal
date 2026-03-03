@@ -1152,6 +1152,17 @@
       setTimeout(() => setStatus("", ""), 2200);
     }
 
+    function scrollToHourBeforeNow(calendar){
+      const now = new Date();
+      const h = Math.max(0, now.getHours() - 1);      // hour just before current hour
+      const timeStr = String(h).padStart(2, "0") + ":00:00";
+
+      // wait a tick so FullCalendar's scroller exists/sized
+      requestAnimationFrame(() => {
+        calendar.scrollToTime(timeStr);
+      });
+    }
+
     function initCalendar(){
       const calEl = document.getElementById("calendar");
 
@@ -1174,7 +1185,18 @@
 
       slotMinTime: "00:00:00",
       slotMaxTime: "24:00:00",
-      scrollTime: "08:00:00",
+      scrollTime: () => {
+        const now = new Date();
+        const h = Math.max(0, now.getHours() - 1);
+        return String(h).padStart(2, "0") + ":00:00";
+      },
+
+      datesSet: (info) => {
+        // fires on view switch + prev/next + today
+        if (info.view.type && info.view.type.startsWith("timeGrid")) {
+          scrollToHourBeforeNow(info.view.calendar);
+        }
+      },
 
       slotDuration: "00:30:00",
       slotLabelInterval: "01:00",
@@ -1186,6 +1208,7 @@
       }
     });
       CAL.render();
+      scrollToHourBeforeNow(CAL);
     }
 
     function wireUI(){
