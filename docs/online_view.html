@@ -942,13 +942,17 @@
       const backdrop = document.getElementById("orgModalBackdrop");
       const title = document.getElementById("orgModalTitle");
       const icon = document.getElementById("orgModalIcon");
-      const meta = document.getElementById("orgModalMeta");
+      const meta = document.getElementById("orgModalMeta"); // may not exist now
       const desc = document.getElementById("orgModalDesc");
       const links = document.getElementById("orgModalLinks");
 
       title.textContent = org.name || "Organization";
-      meta.textContent = "";
-      meta.style.display = "none";
+
+      // ✅ guard it so we don't crash if the element was removed
+      if (meta){
+        meta.textContent = "";
+        meta.style.display = "none";
+      }
 
       const iconUrl = (org.icon || "").trim();
       if (iconUrl) {
