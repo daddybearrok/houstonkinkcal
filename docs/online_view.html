@@ -12,11 +12,6 @@
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/rrule@2.7.1/dist/es5/rrule.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/rrule@6.1.15/index.global.min.js"></script>
-  <script>
-    // rrule.js ES5 build exposes window.rrule.RRule (not always window.RRule)
-    window.RRule = window.RRule || (window.rrule && window.rrule.RRule);
-  </script>
-
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     :root{
@@ -771,13 +766,13 @@
       const uid = firstProp(e, "UID") || "";
       const rid = firstProp(e, "RECURRENCE-ID") || "";
       const dtStartRaw = e["DTSTART"]?.[0]?.value || "";
-
-      const title = firstProp(e, "SUMMARY") || "Untitled";
-
       const uniqueId =
         (uid ? uid : title) +
         "|" +
         (rid ? ("RID:" + rid) : ("DTSTART:" + dtStartRaw));
+
+
+      const title = firstProp(e, "SUMMARY") || "Untitled";
       const location = firstProp(e, "LOCATION") || "";
       const url = firstProp(e, "URL") || "";
       const description = firstProp(e, "DESCRIPTION") || "";
@@ -793,23 +788,24 @@
           durationMs = Math.max(0, endParsed.date - startParsed.date);
         }
 
-        // EXDATE support (optional but nice)
-        const exdates = getAllProps(e, "EXDATE")
-          .flatMap(v => String(v).split(","))
+        // Build an RRULE string that also includes DTSTART so the plugin
+        // can keep the correct local wall-clock time.
+        // (If DTSTART has no timezone suffix like "Z", FullCalendar will assume the calendar's timeZone.)
+        const dtStartVal = (dtStartNode && dtStartNode.value) ? String(dtStartNode.value).trim() : "";
+        const rruleFull = (dtStartVal && !/DTSTART=/i.test(rruleStr))
+          ? (rruleStr + ";DTSTART=" + dtStartVal)
+          : rruleStr;
+
+        // EXDATE support: keep raw iCal datetime strings (no conversion to ISO/Z)
+        const exdates = (e["EXDATE"] || [])
+          .flatMap(n => String(n.value || "").split(","))
           .map(s => s.trim())
-          .filter(Boolean)
-          .map(s => {
-            const parsed = parseICSTime({ value: s, params: {} });
-            return parsed.date ? parsed.date.toISOString() : null;
-          })
           .filter(Boolean);
 
         return {
-          id: uniqueId || uid || (title + "|" + (e["DTSTART"]?.[0]?.value || "")),
+          id: uniqueId || uid || (title + "|" + (dtStartVal || "")),
           title,
-          rrule: Object.assign((window.RRule || (window.rrule && window.rrule.RRule)).parseString(rruleStr), {
-            dtstart: startParsed.date || undefined
-          }),
+          rrule: rruleFull,
           duration: durationMs,
           exdate: exdates.length ? exdates : undefined,
           allDay: !!startParsed.allDay,
@@ -819,7 +815,7 @@
         };
       }
 
-      // FullCalendar expects end date for allDay to be exclusive; many ICS already do that properly.
+// FullCalendar expects end date for allDay to be exclusive; many ICS already do that properly.
       return {
         id: uniqueId || (title + "|" + (startParsed.date ? startParsed.date.toISOString() : Math.random())),
         title,
