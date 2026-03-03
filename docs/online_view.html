@@ -361,7 +361,6 @@
 
         <div class="btnRow">
           <a class="btn secondary" href="./index.html">Back to Subscribe</a>
-          <a class="btn" href="./houston-kink-cal.ics" download>Download Full ICS</a>
         </div>
       </div>
 
@@ -381,10 +380,8 @@
         </div>
 
         <div class="field">
-          <label>Quick actions</label>
           <div class="btnRow" style="margin-top:0;">
-            <button class="btn secondary" id="clearFiltersBtn" type="button">Clear</button>
-            <button class="btn secondary" id="todayBtn" type="button">Today</button>
+            <button class="btn secondary" id="clearFiltersBtn" type="button">Clear Filters</button>
           </div>
           <div class="hint">Use the calendar header for day/week/month + arrows.</div>
         </div>
@@ -963,12 +960,6 @@
       slotDuration: "00:30:00",
       slotLabelInterval: "01:00",
       slotMinHeight: 42,
-
-      businessHours: {
-        daysOfWeek: [0,1,2,3,4,5,6],
-        startTime: "08:00",
-        endTime: "22:00"
-      },
 
       eventClick: function(info){
         info.jsEvent.preventDefault();
