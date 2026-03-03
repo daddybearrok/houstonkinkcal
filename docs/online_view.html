@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -161,29 +161,6 @@
     }
     .btn:active{ transform: translateY(-1px); }
 
-    /* Linktree-style org modal */
-    .linktree{ display:grid; gap:10px; }
-    .linktree a{
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      text-decoration:none;
-      color:#fff;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.08);
-      transition: transform .18s ease, background .18s ease;
-    }
-    .linktree a:hover{
-      transform: translateY(-2px);
-      background: rgba(255,255,255,0.12);
-    }
-    .linktree .label{ font-weight: 900; letter-spacing: 0.2px; }
-    .linktree .urlhint{ opacity: 0.78; font-size: 12px; overflow:hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .linktree .right{ opacity: 0.9; flex: 0 0 auto; }
-
     .btn.secondary{
       background: rgba(255,255,255,0.10);
       border: 1px solid rgba(255,255,255,0.16);
@@ -207,7 +184,6 @@
     .status.warn{ background: var(--warn); border-color: var(--warnBorder); }
     .status.err{ background: var(--err); border-color: var(--errBorder); }
 
-    /* Calendar panel */
     .calWrap{
       margin-top: 18px;
       background: rgba(255,255,255,0.04);
@@ -220,7 +196,6 @@
       padding: 12px 12px 16px;
     }
 
-    /* FullCalendar dark-ish tune */
     .fc{
       --fc-page-bg-color: transparent;
       --fc-border-color: rgba(255,255,255,0.08);
@@ -259,7 +234,6 @@
       letter-spacing: .2px;
     }
 
-    /* Modal */
     .modal-backdrop{
       position: fixed;
       inset: 0;
@@ -322,19 +296,6 @@
       margin-right: 8px;
       margin-top: 8px;
     }
-
-  /* Make host org pill feel like a button when it can open org info */
-  .pill.clickable{
-    cursor: pointer;
-    transition: transform .14s ease, background .14s ease, border-color .14s ease;
-  }
-  .pill.clickable:hover{
-    transform: translateY(-1px);
-    background: rgba(255,255,255,0.12);
-    border-color: rgba(255,255,255,0.22);
-  }
-  .pill.clickable:active{ transform: translateY(0); }
-  .pill.clickable:focus-visible{ outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,0.18); }
     .pillDot{
       width: 10px;
       height: 10px;
@@ -378,6 +339,32 @@
     .mono{
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
+
+    /* Linktree list (org modal) */
+    .linktree { display: grid; gap: 10px; }
+
+    .linktree a {
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      text-decoration:none;
+      color:#fff;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.08);
+      transition: transform .18s ease, background .18s ease;
+    }
+
+    .linktree a:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.12);
+    }
+
+    .linktree .label { font-weight: 900; letter-spacing: 0.2px; }
+    .linktree .urlhint { opacity: 0.80; font-size: 12px; word-break: break-all; }
+    .linktree .right { opacity: 0.9; flex: 0 0 auto; }
   </style>
 
   <script data-goatcounter="https://houstonkinkcal.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -404,7 +391,6 @@
         <div class="field">
           <label for="searchInput">Search</label>
           <input id="searchInput" type="text" placeholder="Search titles, location, description..." />
-          <div class="hint">Tip: search is instant (client-side). Clear to show everything.</div>
         </div>
 
         <div class="field">
@@ -412,14 +398,13 @@
           <select id="orgSelect">
             <option value="">All organizations</option>
           </select>
-          <div class="hint">Host org is inferred from the ICS.</div>
         </div>
 
         <div class="field">
+          <label for="clearFiltersBtn">Quick Actions</label>
           <div class="btnRow" style="margin-top:0;">
             <button class="btn secondary" id="clearFiltersBtn" type="button">Clear Filters</button>
           </div>
-          <div class="hint">Use the calendar header for day/week/month + arrows.</div>
         </div>
       </div>
 
@@ -462,21 +447,20 @@
     </div>
   </div>
 
-  <!-- Organization (linktree) modal -->
+  <!-- Org modal (linktree style) -->
   <div class="modal-backdrop" id="orgModalBackdrop" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="orgModalTitle">
       <div class="modal-header">
-        <div class="modal-title">
+        <div class="modal-title" style="display:flex; align-items:center; gap:12px; min-width:0;">
           <img id="orgModalIcon" alt="" style="width:44px;height:44px;border-radius:12px;object-fit:cover;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.06);display:none;" />
           <div style="min-width:0;">
-            <h3 id="orgModalTitle"></h3>
-            <div class="modal-meta" id="orgModalMeta" style="opacity:0.85;"></div>
+            <h3 id="orgModalTitle" style="margin:0;font-size:1.15rem;letter-spacing:0.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></h3>
           </div>
         </div>
         <button class="modal-close" id="orgModalClose" aria-label="Close">✕</button>
       </div>
       <div class="modal-body">
-        <div class="modal-desc" id="orgModalDesc" style="display:none;"></div>
+        <p class="modal-desc" id="orgModalDesc" style="display:none;"></p>
         <div class="linktree" id="orgModalLinks"></div>
       </div>
     </div>
@@ -490,12 +474,11 @@
 
     // State
     let CAL = null;
-    let ALL_EVENTS = [];          // raw parsed events (JS objects)
-    let ORG_COLORS = {};          // name -> "#RRGGBB"
-    let ORG_LIST = [];            // list of org names
-    let ORG_BY_NAME = {};         // name -> {name, icon, description, links, color}
+    let ALL_EVENTS = [];
+    let ORG_COLORS = {};
+    let ORG_LIST = [];
+    let ORG_BY_NAME = {};
 
-    // Helpers
     function setStatus(kind, msg){
       const el = document.getElementById("status");
       if (!el) return;
@@ -508,38 +491,48 @@
       el.textContent = msg;
     }
 
-    function safeText(s){
-      return (s == null) ? "" : String(s);
-    }
-
-    function stripHtml(s){
-      // FB ICS descriptions are plain-ish, but keep safe anyway.
-      return safeText(s).replace(/<[^>]*>/g, "");
-    }
+    function safeText(s){ return (s == null) ? "" : String(s); }
+    function stripHtml(s){ return safeText(s).replace(/<[^>]*>/g, ""); }
 
     function formatLocal(dt){
-      // dt is a Date
       return dt.toLocaleString(undefined, {
-        weekday: "short",
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-        hour: "numeric",
-        minute: "2-digit"
+        weekday: "short", year: "numeric", month: "short", day: "numeric",
+        hour: "numeric", minute: "2-digit"
       });
     }
-
     function formatLocalDate(dt){
       return dt.toLocaleDateString(undefined, {
-        weekday: "short",
-        year: "numeric",
-        month: "short",
-        day: "numeric"
+        weekday: "short", year: "numeric", month: "short", day: "numeric"
       });
     }
 
-    function isAllDayEvent(e){
-      return !!e.allDay;
+    function loadScrollTimeNowMinus1h(){
+      const now = new Date();
+      const h = Math.max(0, now.getHours() - 1);
+      return String(h).padStart(2, "0") + ":00:00";
+    }
+
+    // Autoscroll: run once per "date range" (so prev/next triggers it again)
+    let lastAutoScrollKey = "";
+    function autoScrollCalendar(calendar){
+      if (!calendar) return;
+
+      const v = calendar.view;
+      const key = `${v.type}|${v.currentStart?.toISOString?.() || ""}`;
+
+      // allow re-run when you move to a new range, but don't spam in the same range
+      if (key === lastAutoScrollKey) return;
+      lastAutoScrollKey = key;
+
+      const timeStr = loadScrollTimeNowMinus1h();
+
+      // Needs to happen after layout is ready
+      requestAnimationFrame(() => {
+        try { calendar.scrollToTime(timeStr); } catch {}
+      });
+      setTimeout(() => {
+        try { calendar.scrollToTime(timeStr); } catch {}
+      }, 60);
     }
 
     async function loadOrgColors(){
@@ -552,33 +545,22 @@
 
         ORG_COLORS = {};
         ORG_LIST = [];
-        ORG_BY_NAME = {};
+
         for (const org of data){
           const name = (org?.name || "").trim();
           if (!name) continue;
-          ORG_LIST.push(name);
 
+          ORG_LIST.push(name);
           const color = (org?.color || "").trim();
           if (color) ORG_COLORS[name] = color;
-
-          ORG_BY_NAME[name] = {
-            name,
-            icon: (org?.icon || "").trim(),
-            description: (org?.description || "").trim(),
-            links: Array.isArray(org?.links) ? org.links.filter(x => x && x.url) : [],
-            color
-          };
         }
-      } catch {
-        // ignore if missing
-      }
+      } catch {}
     }
 
     function populateOrgDropdown(){
       const sel = document.getElementById("orgSelect");
       if (!sel) return;
 
-      // Preserve "All organizations" option
       const current = sel.value;
       sel.querySelectorAll('option:not([value=""])').forEach(o => o.remove());
 
@@ -589,15 +571,11 @@
         opt.textContent = name;
         sel.appendChild(opt);
       }
-
       sel.value = current || "";
     }
 
-    // --- Minimal ICS parser (good enough for FB + basic public ICS) ---
-    // Handles folding lines (RFC5545)
-    function unfoldICS(text){
-      return text.replace(/\r?\n[ \t]/g, "");
-    }
+    // --- Minimal ICS parser ---
+    function unfoldICS(text){ return text.replace(/\r?\n[ \t]/g, ""); }
 
     function parseICS(text){
       const unfolded = unfoldICS(text);
@@ -607,15 +585,8 @@
       let cur = null;
 
       for (const line of lines){
-        if (line === "BEGIN:VEVENT"){
-          cur = {};
-          continue;
-        }
-        if (line === "END:VEVENT"){
-          if (cur) events.push(cur);
-          cur = null;
-          continue;
-        }
+        if (line === "BEGIN:VEVENT"){ cur = {}; continue; }
+        if (line === "END:VEVENT"){ if (cur) events.push(cur); cur = null; continue; }
         if (!cur) continue;
 
         const idx = line.indexOf(":");
@@ -624,7 +595,6 @@
         const left = line.slice(0, idx);
         const value = line.slice(idx + 1);
 
-        // left can include params: DTSTART;TZID=America/Chicago
         const [prop, ...paramParts] = left.split(";");
         const key = prop.toUpperCase();
 
@@ -636,7 +606,6 @@
           }
         }
 
-        // Store with params if needed
         if (!cur[key]) cur[key] = [];
         cur[key].push({ value, params });
       }
@@ -645,13 +614,9 @@
     }
 
     function parseICSTime(node){
-      // node is {value, params}
       if (!node || !node.value) return { date: null, allDay: false };
-
       const v = node.value.trim();
-      const tzid = node.params?.TZID ? node.params.TZID.trim() : null;
 
-      // All-day DATE: YYYYMMDD
       if (/^\d{8}$/.test(v)){
         const y = Number(v.slice(0,4));
         const m = Number(v.slice(4,6)) - 1;
@@ -659,9 +624,7 @@
         return { date: new Date(y, m, d), allDay: true };
       }
 
-      // DATE-TIME: 20260301T040000Z or 20260301T040000
       if (/^\d{8}T\d{6}Z$/.test(v)){
-        // UTC
         const y = Number(v.slice(0,4));
         const m = Number(v.slice(4,6)) - 1;
         const d = Number(v.slice(6,8));
@@ -672,54 +635,38 @@
       }
 
       if (/^\d{8}T\d{6}$/.test(v)){
-        // Floating/local or TZID – we treat as local time (browser)
         const y = Number(v.slice(0,4));
         const m = Number(v.slice(4,6)) - 1;
         const d = Number(v.slice(6,8));
         const hh = Number(v.slice(9,11));
         const mm = Number(v.slice(11,13));
         const ss = Number(v.slice(13,15));
-
-        // If TZID exists, we still can’t correctly shift without a tz lib.
-        // But most of your combined feed is FB Zulu, so this is mostly for external ICS.
-        // We'll interpret as local time.
         return { date: new Date(y,m,d,hh,mm,ss), allDay: false };
       }
 
-      // Fallback
       return { date: null, allDay: false };
     }
 
     function firstProp(e, key){
       const arr = e[key];
-      if (!arr || !arr.length) return null;
+      if (!arr || !arr.length) return "";
       return arr[0].value || "";
     }
 
     function inferHostOrg(e){
-      // Primary: ORGANIZER;CN=...
       const organizer = e["ORGANIZER"];
       if (organizer && organizer.length){
         const cn = organizer[0].params?.CN;
         if (cn) return cn;
       }
-
-      // Secondary: X-WR-CALNAME (rare) or other X props
       const xcal = firstProp(e, "X-WR-CALNAME");
       if (xcal) return xcal.trim();
-
-      // Otherwise unknown
       return "Unknown";
     }
 
     function buildFullCalendarEvent(e){
-      const dtStartNode = e["DTSTART"]?.[0];
-      const dtEndNode = e["DTEND"]?.[0];
-
-      const startParsed = parseICSTime(dtStartNode);
-      const endParsed = parseICSTime(dtEndNode);
-
-      const allDay = startParsed.allDay;
+      const startParsed = parseICSTime(e["DTSTART"]?.[0]);
+      const endParsed = parseICSTime(e["DTEND"]?.[0]);
 
       const uid = firstProp(e, "UID") || "";
       const title = firstProp(e, "SUMMARY") || "Untitled";
@@ -730,23 +677,14 @@
       const hostOrg = inferHostOrg(e).trim() || "Unknown";
       const orgColor = ORG_COLORS[hostOrg] || DEFAULT_COLOR;
 
-      // FullCalendar expects end date for allDay to be exclusive; many ICS already do that properly.
       return {
         id: uid || (title + "|" + (startParsed.date ? startParsed.date.toISOString() : Math.random())),
         title,
         start: startParsed.date ? startParsed.date.toISOString() : null,
         end: endParsed.date ? endParsed.date.toISOString() : null,
-        allDay: !!allDay,
+        allDay: !!startParsed.allDay,
 
-        extendedProps: {
-          hostOrg,
-          location,
-          url,
-          description,
-          uid,
-          _raw: e
-        },
-
+        extendedProps: { hostOrg, location, url, description, uid, _raw: e },
         backgroundColor: orgColor || undefined,
         borderColor: orgColor || undefined
       };
@@ -763,15 +701,11 @@
         if (org && p.hostOrg !== org) return false;
 
         if (search){
-          const hay = [
-            ev.title,
-            p.location,
-            p.description,
-            p.hostOrg
-          ].map(x => safeText(x).toLowerCase()).join(" | ");
+          const hay = [ev.title, p.location, p.description, p.hostOrg]
+            .map(x => safeText(x).toLowerCase())
+            .join(" | ");
           if (!hay.includes(search)) return false;
         }
-
         return true;
       });
 
@@ -779,10 +713,102 @@
       CAL.addEventSource(filtered);
     }
 
-    let LAST_FOCUS = null;
+    function isAllDayEvent(e){ return !!e.allDay; }
+
+    async function loadOrgsForModal() {
+      try {
+        const res = await fetch(SOURCES_URL + "?v=" + Date.now(), { cache: "no-store" });
+        if (!res.ok) return;
+
+        const data = await res.json();
+        if (!Array.isArray(data)) return;
+
+        ORG_BY_NAME = {};
+        for (const org of data) {
+          const name = (org?.name || "").trim();
+          if (!name) continue;
+          ORG_BY_NAME[name] = org;
+        }
+      } catch {
+        // ignore
+      }
+    }
+
+    function openOrgModal(org) {
+      const backdrop = document.getElementById("orgModalBackdrop");
+      const title = document.getElementById("orgModalTitle");
+      const icon = document.getElementById("orgModalIcon");
+      const desc = document.getElementById("orgModalDesc");
+      const links = document.getElementById("orgModalLinks");
+
+      title.textContent = org?.name || "Organization";
+
+      const iconUrl = (org?.icon || "").trim();
+      if (iconUrl) {
+        icon.src = iconUrl;
+        icon.style.display = "block";
+      } else {
+        icon.style.display = "none";
+      }
+
+      const d = (org?.description || "").trim();
+      if (d) {
+        desc.textContent = d;
+        desc.style.display = "block";
+      } else {
+        desc.style.display = "none";
+      }
+
+      links.innerHTML = "";
+
+      const items = Array.isArray(org?.links) ? org.links : [];
+      const usable = items.filter(x => x && x.url);
+
+      if (usable.length === 0) {
+        links.insertAdjacentHTML("beforeend",
+          `<div class="status show warn">No links have been provided for this organization.</div>`
+        );
+      } else {
+        for (const l of usable) {
+          const label = (l.label || "Link").trim();
+          const url = String(l.url || "").trim();
+          links.insertAdjacentHTML("beforeend", `
+            <a href="${url}" target="_blank" rel="noopener">
+              <div>
+                <div class="label">${label}</div>
+                <div class="urlhint">${url}</div>
+              </div>
+              <div class="right">↗</div>
+            </a>
+          `);
+        }
+      }
+
+      backdrop.classList.add("show");
+      backdrop.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeOrgModal() {
+      const backdrop = document.getElementById("orgModalBackdrop");
+      backdrop.classList.remove("show");
+      backdrop.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    function openOrgFromHostName(hostOrg) {
+      // Ensure we have the org data loaded
+      const org = ORG_BY_NAME[hostOrg];
+      if (org) {
+        openOrgModal(org);
+        return;
+      }
+      // graceful fallback if not found
+      setStatus("warn", `No org profile found for "${hostOrg}" in sources.json.`);
+      setTimeout(() => setStatus("", ""), 2200);
+    }
 
     function openEventModal(fcEvent){
-      LAST_FOCUS = document.activeElement;
       const backdrop = document.getElementById("eventModalBackdrop");
       const titleEl = document.getElementById("eventModalTitle");
       const metaEl = document.getElementById("eventModalMeta");
@@ -798,7 +824,6 @@
 
       titleEl.textContent = fcEvent.title || "Untitled";
 
-      // Time display
       let timeLine = "";
       if (isAllDayEvent(fcEvent)){
         const d = fcEvent.start ? formatLocalDate(fcEvent.start) : "";
@@ -812,33 +837,20 @@
       const loc = (p.location || "").trim();
       metaEl.textContent = loc ? `${timeLine} • ${loc}` : timeLine;
 
-      // Pills (host org)
       pillsEl.innerHTML = "";
-      const pill = document.createElement("span");
+      const pill = document.createElement("button");
+      pill.type = "button";
       pill.className = "pill";
+      pill.style.cursor = "pointer";
+      pill.style.userSelect = "none";
+      pill.style.border = "1px solid rgba(255,255,255,0.14)";
+      pill.style.background = "rgba(255,255,255,0.07)";
       const dot = document.createElement("span");
       dot.className = "pillDot";
       if (orgColor) dot.style.background = orgColor;
       pill.appendChild(dot);
       pill.appendChild(document.createTextNode(hostOrg));
       pillsEl.appendChild(pill);
-
-      // Make the host org pill clickable if we have org details in sources.json
-      if (ORG_BY_NAME && ORG_BY_NAME[hostOrg]){
-        pill.classList.add("clickable");
-        pill.setAttribute("role", "button");
-        pill.setAttribute("tabindex", "0");
-        pill.setAttribute("title", "View organization links");
-        const openOrg = (e) => {
-          if (e) e.preventDefault();
-          closeEventModal();
-          openOrgModal(hostOrg);
-        };
-        pill.addEventListener("click", openOrg);
-        pill.addEventListener("keydown", (e) => {
-          if (e.key === "Enter" || e.key === " ") openOrg(e);
-        });
-      }
 
       const desc = stripHtml(p.description || "").trim();
       if (desc){
@@ -863,93 +875,17 @@
 
       backdrop.classList.add("show");
       backdrop.setAttribute("aria-hidden", "false");
-      backdrop.inert = false;
       document.body.style.overflow = "hidden";
     }
 
     function closeEventModal(){
       const backdrop = document.getElementById("eventModalBackdrop");
       backdrop.classList.remove("show");
-
-      // Move focus out BEFORE hiding from assistive tech
-      if (LAST_FOCUS && typeof LAST_FOCUS.focus === "function") {
-        try { LAST_FOCUS.focus(); } catch {}
-      }
-
       backdrop.setAttribute("aria-hidden", "true");
-      backdrop.inert = true;
-      document.body.style.overflow = "";
-    }
-
-    // --- Org (linktree) modal ---
-    function openOrgModal(orgName){
-      const org = ORG_BY_NAME ? ORG_BY_NAME[orgName] : null;
-      if (!org) return;
-
-      const backdrop = document.getElementById("orgModalBackdrop");
-      const title = document.getElementById("orgModalTitle");
-      const icon = document.getElementById("orgModalIcon");
-      const meta = document.getElementById("orgModalMeta");
-      const desc = document.getElementById("orgModalDesc");
-      const links = document.getElementById("orgModalLinks");
-
-      title.textContent = org.name || "Organization";
-      meta.textContent = org.color ? ("Calendar color: " + org.color) : "";
-
-      const iconUrl = (org.icon || "").trim();
-      if (iconUrl) {
-        icon.src = iconUrl;
-        icon.style.display = "block";
-      } else {
-        icon.style.display = "none";
-      }
-
-      const d = (org.description || "").trim();
-      if (d) {
-        desc.textContent = d;
-        desc.style.display = "block";
-      } else {
-        desc.style.display = "none";
-      }
-
-      links.innerHTML = "";
-      const items = Array.isArray(org.links) ? org.links : [];
-      const usable = items.filter(x => x && x.url);
-
-      if (usable.length === 0) {
-        links.innerHTML = `<div class="status warn">No links have been provided for this organization.</div>`;
-      } else {
-        for (const l of usable) {
-          const label = (l.label || "Link").trim();
-          const url = (l.url || "").trim();
-          links.insertAdjacentHTML("beforeend", `
-            <a href="${url}" target="_blank" rel="noopener">
-              <div>
-                <div class="label">${label}</div>
-                <div class="urlhint">${url}</div>
-              </div>
-              <div class="right">↗</div>
-            </a>
-          `);
-        }
-      }
-
-      backdrop.classList.add("show");
-      backdrop.setAttribute("aria-hidden", "false");
-      backdrop.inert = false;
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeOrgModal(){
-      const backdrop = document.getElementById("orgModalBackdrop");
-      backdrop.classList.remove("show");
-      backdrop.setAttribute("aria-hidden", "true");
-      backdrop.inert = true;
       document.body.style.overflow = "";
     }
 
     function icsEscapeText(s){
-      // Minimal escaping + folding later
       return safeText(s)
         .replace(/\\/g, "\\\\")
         .replace(/\n/g, "\\n")
@@ -958,7 +894,6 @@
     }
 
     function foldLine(line){
-      // RFC5545: fold at 75 octets; we’ll approximate with 73 chars to be safe
       const max = 73;
       if (line.length <= max) return line;
       let out = "";
@@ -972,7 +907,6 @@
     }
 
     function formatICSDateUTC(d){
-      // d is Date, output UTC in YYYYMMDDTHHMMSSZ
       const pad = (n) => String(n).padStart(2, "0");
       return (
         d.getUTCFullYear() +
@@ -985,7 +919,6 @@
     }
 
     function formatICSDateLocalAllDay(d){
-      // d is Date; for all-day, use local date YYYYMMDD
       const pad = (n) => String(n).padStart(2, "0");
       return (
         d.getFullYear() +
@@ -1009,15 +942,12 @@
 
       if (fcEvent.allDay){
         const s = fcEvent.start ? formatICSDateLocalAllDay(fcEvent.start) : "";
-        // For all-day, FullCalendar stores end as exclusive (often next day). If missing, omit.
         const e = fcEvent.end ? formatICSDateLocalAllDay(fcEvent.end) : "";
-
         if (s) dtStartLine = `DTSTART;VALUE=DATE:${s}`;
         if (e) dtEndLine = `DTEND;VALUE=DATE:${e}`;
       } else {
         const s = fcEvent.start ? formatICSDateUTC(fcEvent.start) : "";
         const e = fcEvent.end ? formatICSDateUTC(fcEvent.end) : "";
-
         if (s) dtStartLine = `DTSTART:${s}`;
         if (e) dtEndLine = `DTEND:${e}`;
       }
@@ -1072,15 +1002,14 @@
 
       const events = [];
       for (const e of vevents){
-        // Skip canceled
         const status = (firstProp(e, "STATUS") || "").toUpperCase();
         if (status === "CANCELLED") continue;
 
         const ev = buildFullCalendarEvent(e);
         if (!ev.start) continue;
+
         events.push(ev);
 
-        // If host org isn't in sources.json but appears in ICS, keep it for dropdown
         const hostOrg = ev.extendedProps?.hostOrg;
         if (hostOrg && !ORG_LIST.includes(hostOrg)) ORG_LIST.push(hostOrg);
       }
@@ -1092,49 +1021,62 @@
 
       setStatus("ok", `Loaded ${ALL_EVENTS.length} events.`);
       setTimeout(() => setStatus("", ""), 2200);
+
+      // after events load, ensure scroll is where you expect
+      autoScrollCalendar(CAL);
     }
 
     function initCalendar(){
       const calEl = document.getElementById("calendar");
 
       CAL = new FullCalendar.Calendar(calEl, {
-        initialView: "timeGridWeek",   // ✅ default to week view
-        height: "auto",
+        initialView: "timeGridWeek",
         headerToolbar: {
-        left: "prev,next today",
-        center: "title",
-        right: "timeGridWeek,timeGridDay"  // ✅ remove month
-      },
-      navLinks: true,
-      nowIndicator: true,
-      eventDisplay: "block",
-      dayMaxEvents: true,
-      expandRows: true,
+          left: "prev,next today",
+          center: "title",
+          right: "timeGridWeek,timeGridDay"
+        },
 
-      height: "calc(100vh - 220px)",
-      expandRows: false,
+        navLinks: true,
+        nowIndicator: true,
+        eventDisplay: "block",
+        dayMaxEvents: true,
 
-      slotMinTime: "00:00:00",
-      slotMaxTime: "24:00:00",
-      scrollTime: "08:00:00",
+        // Your “show ~6 hours” size: 6 hours * 2 slots/hr * 42px = 504px
+        height: 504,
+        expandRows: false,
 
-      slotDuration: "00:30:00",
-      slotLabelInterval: "01:00",
-      slotMinHeight: 42,
+        // Allow full-day scrolling (not locked to 8–22)
+        slotMinTime: "00:00:00",
+        slotMaxTime: "24:00:00",
 
-      eventClick: function(info){
-        info.jsEvent.preventDefault();
-        openEventModal(info.event);
-      }
-    });
+        // Initial scroll position (works on first render; we also force it in datesSet)
+        scrollTime: loadScrollTimeNowMinus1h,
+
+        slotDuration: "00:30:00",
+        slotLabelInterval: "01:00",
+        slotMinHeight: 42,
+
+        datesSet: function(){
+          autoScrollCalendar(CAL);
+        },
+
+        eventClick: function(info){
+          info.jsEvent.preventDefault();
+          openEventModal(info.event);
+        }
+      });
+
       CAL.render();
+
+      // One more nudge after render (some browsers need it)
+      setTimeout(() => autoScrollCalendar(CAL), 80);
     }
 
     function wireUI(){
       const search = document.getElementById("searchInput");
       const orgSel = document.getElementById("orgSelect");
       const clearBtn = document.getElementById("clearFiltersBtn");
-      const todayBtn = document.getElementById("todayBtn");
 
       search.addEventListener("input", () => refreshCalendar());
       orgSel.addEventListener("change", () => refreshCalendar());
@@ -1145,23 +1087,18 @@
         refreshCalendar();
       });
 
-      // Modal close
+      // Org modal close wiring
+      document.getElementById("orgModalClose")?.addEventListener("click", closeOrgModal);
+      document.getElementById("orgModalBackdrop")?.addEventListener("click", (e) => {
+        if (e.target.id === "orgModalBackdrop") closeOrgModal();
+      });
+
       document.getElementById("eventModalClose").addEventListener("click", closeEventModal);
       document.getElementById("eventModalBackdrop").addEventListener("click", (e) => {
         if (e.target.id === "eventModalBackdrop") closeEventModal();
       });
-
-      document.getElementById("orgModalClose").addEventListener("click", closeOrgModal);
-      document.getElementById("orgModalBackdrop").addEventListener("click", (e) => {
-        if (e.target.id === "orgModalBackdrop") closeOrgModal();
-      });
-
       document.addEventListener("keydown", (e) => {
-        if (e.key !== "Escape") return;
-        const orgBd = document.getElementById("orgModalBackdrop");
-        const evBd = document.getElementById("eventModalBackdrop");
-        if (orgBd && orgBd.classList.contains("show")) return closeOrgModal();
-        if (evBd && evBd.classList.contains("show")) return closeEventModal();
+        if (e.key === "Escape") closeEventModal();
       });
     }
 
@@ -1170,11 +1107,9 @@
         initCalendar();
         wireUI();
 
-        // Load org colors (from sources.json) before ICS parsing
         await loadOrgColors();
-
-        // Load ICS and render events
         await loadICS();
+        await loadOrgsForModal();
       } catch (err){
         console.error(err);
         setStatus("err", "Could not load the calendar. Check that houston-kink-cal.ics and sources.json are in /docs.");
