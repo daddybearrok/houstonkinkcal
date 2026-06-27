@@ -57,5 +57,15 @@
     "event_sources": [
       { "type": "ics", "url": "https://calendar.google.com/calendar/ical/c_09a89d1a923a7f22ee35f2e11daae3f62a48998f3cfaf07f764977b318bd624f%40group.calendar.google.com/public/basic.ics" }
     ]
+  },
+  {
+    "name": "Brandon Outterson - Mr. Space City Leather 2026",
+    "color": "#CCCCCC",
+    "links": [
+      { "label": "Facebook", "url": "https://www.facebook.com/brandon.outterson" }
+    ],
+    "event_sources": [
+      { "type": "fb_single_event", "url": "https://www.facebook.com/events/2497900580681616/" }
+    ]
   }
 ]
