@@ -24,95 +24,32 @@ END:VTIMEZONE
 BEGIN:VEVENT
 ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
 X-HKC-HOST:Houston Gaymers
-DTSTART;TZID=America/Chicago:20250823T180000
-DTEND;TZID=America/Chicago:20250823T220000
-RRULE:FREQ=MONTHLY;COUNT=6;BYDAY=4SA
-DTSTAMP:20260719T091327Z
-UID:5v616itn0a8a179lqd2gl5e3q0@google.com
-CREATED:20250424T000247Z
-LAST-MODIFIED:20260101T162450Z
-LOCATION:RIPCORD\, 715 Fairview St\, Houston\, TX 77006\, USA
-SEQUENCE:0
+DTSTART:20250214T020000Z
+DTEND:20250214T040000Z
+DTSTAMP:20260719T140002Z
+UID:3cumpdga1csdmkho7qb6up15qm@google.com
+CREATED:20250106T002830Z
+LAST-MODIFIED:20250109T011606Z
+LOCATION:Dairy Ashford Roller Rink\, 1820 S Dairy Ashford Rd St\, Houston\,
+  TX 77077\, USA
+SEQUENCE:1
 STATUS:CONFIRMED
-SUMMARY:HG Main Meetup
+SUMMARY:HG Skate Night
 TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
 X-HKC-HOST:Houston Gaymers
-DTSTART:20260222T210000Z
-DTEND:20260222T230000Z
-DTSTAMP:20260719T091327Z
-UID:07btfbe0vtm42q8knm5oreld47@google.com
-CREATED:20260205T183915Z
-DESCRIPTION:Theme:  Kujichagulia (Self-Determination)
-LAST-MODIFIED:20260205T183915Z
-LOCATION:Gulf Coast Cosmos Comics\, 2408 Wheeler Ave\, Houston\, TX 77004\,
-  USA
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:Chat Box
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
-ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
-X-HKC-HOST:Houston Gaymers
-DTSTART;TZID=America/Chicago:20251227T180000
-DTEND;TZID=America/Chicago:20251227T220000
-DTSTAMP:20260719T091327Z
-UID:5v616itn0a8a179lqd2gl5e3q0@google.com
-RECURRENCE-ID;TZID=America/Chicago:20251227T180000
-CREATED:20250424T000247Z
-LAST-MODIFIED:20260101T162450Z
-LOCATION:RIPCORD\, 715 Fairview St\, Houston\, TX 77006\, USA
-SEQUENCE:2
-STATUS:CONFIRMED
-SUMMARY:HG Main Meetup
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
-ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
-X-HKC-HOST:Houston Gaymers
-DTSTART:20250126T000000Z
-DTEND:20250126T040000Z
-DTSTAMP:20260719T091327Z
-UID:2qmt2g72o84t5gru7hfabfmhm7@google.com
-CREATED:20250106T002821Z
-LAST-MODIFIED:20250106T002821Z
-LOCATION:RIPCORD\, 715 Fairview St\, Houston\, TX 77006\, USA
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:HG Main Meetup
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
-ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
-X-HKC-HOST:Houston Gaymers
-DTSTART:20251220T230000Z
-DTEND:20251221T040000Z
-DTSTAMP:20260719T091327Z
-UID:599pbni1ggch2bec7qeiiecq7q@google.com
-CREATED:20251203T014516Z
-LAST-MODIFIED:20251203T014516Z
-LOCATION:Dragon's Lair Comics and Fantasy\, 21155A Tomball Pkwy\, Houston\,
-  TX 77070\, USA
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:Houston Gaymers D20 Day
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
-ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
-X-HKC-HOST:Houston Gaymers
-DTSTART;TZID=America/Chicago:20250419T180000
-DTEND;TZID=America/Chicago:20250419T220000
-DTSTAMP:20260719T091327Z
+DTSTART;TZID=America/Chicago:20250222T180000
+DTEND;TZID=America/Chicago:20250222T220000
+RRULE:FREQ=MONTHLY;COUNT=5;BYDAY=4SA
+EXDATE;TZID=America/Chicago:20250628T180000
+DTSTAMP:20260719T140002Z
 UID:3fgqnjdp6p5v9k8d12rh466hgg@google.com
-RECURRENCE-ID;TZID=America/Chicago:20250426T180000
 CREATED:20250106T003011Z
 LAST-MODIFIED:20250106T003054Z
 LOCATION:RIPCORD\, 715 Fairview St\, Houston\, TX 77006\, USA
-SEQUENCE:1
+SEQUENCE:0
 STATUS:CONFIRMED
 SUMMARY:HG Main Meetup
 TRANSP:OPAQUE
@@ -120,65 +57,19 @@ END:VEVENT
 BEGIN:VEVENT
 ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
 X-HKC-HOST:Houston Gaymers
-DTSTART;TZID=America/Chicago:20260131T190000
-DTEND;TZID=America/Chicago:20260131T230000
-DTSTAMP:20260719T091327Z
-UID:5v616itn0a8a179lqd2gl5e3q0@google.com
-RECURRENCE-ID;TZID=America/Chicago:20260124T180000
-CREATED:20250424T000247Z
-LAST-MODIFIED:20260124T131332Z
-LOCATION:RIPCORD\, 715 Fairview St\, Houston\, TX 77006\, USA
-SEQUENCE:2
-STATUS:CONFIRMED
-SUMMARY:Gaymers Takeover
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
-ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
-X-HKC-HOST:Houston Gaymers
-DTSTART;TZID=America/Chicago:20260105T190000
-DTEND;TZID=America/Chicago:20260105T220000
-RRULE:FREQ=MONTHLY;COUNT=12;BYDAY=1MO
-DTSTAMP:20260719T091327Z
-UID:6ne3nfk8nfq9b8t5838p4bvged@google.com
-CREATED:20260101T162501Z
-LAST-MODIFIED:20260101T162501Z
-LOCATION:Dragon's Lair Comics and Fantasy\, 21155A Tomball Pkwy\, Houston\,
-  TX 77070\, USA
+DTSTART:20260502T150000Z
+DTEND:20260502T190000Z
+DTSTAMP:20260719T140002Z
+UID:7qchmu9hh64rfa8kn36qetmas9@google.com
+CREATED:20260429T144302Z
+DESCRIPTION:Please see instagram post for a map to exact meeting location!\
+ n\nJoin us for a hike through memorial park followed by a picnic (weather p
+ ending)
+LAST-MODIFIED:20260429T144302Z
+LOCATION:South Picnic Lane\, S Picnic Ln\, Houston\, TX 77007\, USA
 SEQUENCE:0
 STATUS:CONFIRMED
-SUMMARY:Tabletop Together
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
-ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
-X-HKC-HOST:Houston Gaymers
-DTSTART:20250406T000000Z
-DTEND:20250406T030000Z
-DTSTAMP:20260719T091327Z
-UID:23lrpnj4b2o378k7ob992k140q@google.com
-CREATED:20250106T003034Z
-LAST-MODIFIED:20250106T003034Z
-LOCATION:Pearl Bar\, 4216 Washington Ave\, Houston\, TX 77007\, USA
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:HG Charity Drag Show
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
-ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
-X-HKC-HOST:Houston Gaymers
-DTSTART;TZID=America/Chicago:20260228T190000
-DTEND;TZID=America/Chicago:20260228T230000
-RRULE:FREQ=MONTHLY;COUNT=11;BYDAY=4SA
-DTSTAMP:20260719T091327Z
-UID:7f7g5lgcva98c8k7e3e3k5st3i@google.com
-CREATED:20260101T162509Z
-LAST-MODIFIED:20260429T144534Z
-LOCATION:RIPCORD\, 715 Fairview St\, Houston\, TX 77006\, USA
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:Gaymers Takeover
+SUMMARY:Gaymers Touch Grass
 TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
@@ -186,7 +77,7 @@ ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
 X-HKC-HOST:Houston Gaymers
 DTSTART:20250322T200000Z
 DTEND:20250323T040000Z
-DTSTAMP:20260719T091327Z
+DTSTAMP:20260719T140002Z
 UID:352vjui3nj1rgqkdmn84cf4h65@google.com
 CREATED:20250307T032019Z
 DESCRIPTION:This inclusive event invites the vibrant LGBT+ community to gat
@@ -201,9 +92,105 @@ END:VEVENT
 BEGIN:VEVENT
 ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
 X-HKC-HOST:Houston Gaymers
+DTSTART;TZID=America/Chicago:20260131T190000
+DTEND;TZID=America/Chicago:20260131T230000
+DTSTAMP:20260719T140002Z
+UID:5v616itn0a8a179lqd2gl5e3q0@google.com
+RECURRENCE-ID;TZID=America/Chicago:20260124T180000
+CREATED:20250424T000247Z
+LAST-MODIFIED:20260124T131332Z
+LOCATION:RIPCORD\, 715 Fairview St\, Houston\, TX 77006\, USA
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Gaymers Takeover
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
+X-HKC-HOST:Houston Gaymers
+DTSTART:20260322T200000Z
+DTEND:20260322T220000Z
+DTSTAMP:20260719T140002Z
+UID:60o3fqb9hgcsl0j2186si2d7ad@google.com
+CREATED:20260311T235325Z
+LAST-MODIFIED:20260311T235326Z
+LOCATION:Gulf Coast Cosmos Comics\, 2408 Wheeler Ave\, Houston\, TX 77004\,
+  USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Chat Box
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
+X-HKC-HOST:Houston Gaymers
+DTSTART:20260516T170000Z
+DTEND:20260516T210000Z
+DTSTAMP:20260719T140002Z
+UID:39l0sfchvo768jobmfri70j04r@google.com
+CREATED:20260429T144440Z
+LAST-MODIFIED:20260429T144440Z
+LOCATION:Tony's Corner Pocket\, 817 W Dallas St\, Houston\, TX 77019\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Gaymers Get Wet (charity carwash)
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
+X-HKC-HOST:Houston Gaymers
+DTSTART:20250817T170000Z
+DTEND:20250817T190000Z
+DTSTAMP:20260719T140002Z
+UID:usvvfcd91vbj3nq6pvnj455fl8@google.com
+CREATED:20250815T091227Z
+DESCRIPTION:Room 114\n\nDuring this Level Up session\, we’ll be discussing 
+ inverse thinking and mindfulness.
+LAST-MODIFIED:20250815T091227Z
+LOCATION:The Montrose Center\, 401 Branard St 2nd Floor\, Houston\, TX 7700
+ 6\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:LVL Up! IRL: it’s Okay to Crash Out
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
+X-HKC-HOST:Houston Gaymers
+DTSTART:20250126T000000Z
+DTEND:20250126T040000Z
+DTSTAMP:20260719T140002Z
+UID:2qmt2g72o84t5gru7hfabfmhm7@google.com
+CREATED:20250106T002821Z
+LAST-MODIFIED:20250106T002821Z
+LOCATION:RIPCORD\, 715 Fairview St\, Houston\, TX 77006\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:HG Main Meetup
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
+X-HKC-HOST:Houston Gaymers
+DTSTART;TZID=America/Chicago:20250419T180000
+DTEND;TZID=America/Chicago:20250419T220000
+DTSTAMP:20260719T140002Z
+UID:3fgqnjdp6p5v9k8d12rh466hgg@google.com
+RECURRENCE-ID;TZID=America/Chicago:20250426T180000
+CREATED:20250106T003011Z
+LAST-MODIFIED:20250106T003054Z
+LOCATION:RIPCORD\, 715 Fairview St\, Houston\, TX 77006\, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:HG Main Meetup
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
+X-HKC-HOST:Houston Gaymers
 DTSTART:20260419T200000Z
 DTEND:20260419T220000Z
-DTSTAMP:20260719T091327Z
+DTSTAMP:20260719T140002Z
 UID:1hbl77h6odng9ogdlmf3a85eti@google.com
 CREATED:20260401T155219Z
 DESCRIPTION:Theme: Ujamaa (cooperative economics)
@@ -218,34 +205,173 @@ END:VEVENT
 BEGIN:VEVENT
 ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
 X-HKC-HOST:Houston Gaymers
-DTSTART:20260322T200000Z
-DTEND:20260322T220000Z
-DTSTAMP:20260719T091327Z
-UID:60o3fqb9hgcsl0j2186si2d7ad@google.com
-CREATED:20260311T235325Z
-LAST-MODIFIED:20260311T235326Z
-LOCATION:Gulf Coast Cosmos Comics\, 2408 Wheeler Ave\, Houston\, TX 77004\,
-  USA
+DTSTART;TZID=America/Chicago:20260105T190000
+DTEND;TZID=America/Chicago:20260105T220000
+RRULE:FREQ=MONTHLY;COUNT=12;BYDAY=1MO
+DTSTAMP:20260719T140002Z
+UID:6ne3nfk8nfq9b8t5838p4bvged@google.com
+CREATED:20260101T162501Z
+LAST-MODIFIED:20260101T162501Z
+LOCATION:Dragon's Lair Comics and Fantasy\, 21155A Tomball Pkwy\, Houston\,
+  TX 77070\, USA
 SEQUENCE:0
 STATUS:CONFIRMED
-SUMMARY:Chat Box
+SUMMARY:Tabletop Together
 TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
 X-HKC-HOST:Houston Gaymers
-DTSTART;TZID=America/Chicago:20250407T190000
-DTEND;TZID=America/Chicago:20250407T220000
-RRULE:FREQ=MONTHLY;COUNT=9;BYDAY=1MO
-DTSTAMP:20260719T091327Z
-UID:aqmj6j2a2rrke77vabaq2hl4a2@google.com
-CREATED:20250106T002810Z
-LAST-MODIFIED:20250327T011714Z
+DTSTART:20250615T170000Z
+DTEND:20250615T230000Z
+DTSTAMP:20260719T140002Z
+UID:6mpr9htl6si807mof094be2h1i@google.com
+CREATED:20250604T180722Z
+LAST-MODIFIED:20250622T112421Z
 LOCATION:Dragon's Lair Comics and Fantasy\, 21155A Tomball Pkwy\, Houston\,
   TX 77070\, USA
-SEQUENCE:1
+SEQUENCE:0
 STATUS:CONFIRMED
-SUMMARY:Handhelds
+SUMMARY:Dragon's Lair Pride Event
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
+X-HKC-HOST:Houston Gaymers
+DTSTART;TZID=America/Chicago:20250823T180000
+DTEND;TZID=America/Chicago:20250823T220000
+RRULE:FREQ=MONTHLY;COUNT=6;BYDAY=4SA
+DTSTAMP:20260719T140002Z
+UID:5v616itn0a8a179lqd2gl5e3q0@google.com
+CREATED:20250424T000247Z
+LAST-MODIFIED:20260101T162450Z
+LOCATION:RIPCORD\, 715 Fairview St\, Houston\, TX 77006\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:HG Main Meetup
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
+X-HKC-HOST:Houston Gaymers
+DTSTART;TZID=America/Chicago:20260610T190000
+DTEND;TZID=America/Chicago:20260610T220000
+RRULE:FREQ=MONTHLY;COUNT=6;BYDAY=2WE
+DTSTAMP:20260719T140002Z
+UID:3mvf59lq43g45v1k4hgshsb5j0@google.com
+CREATED:20260521T130648Z
+LAST-MODIFIED:20260521T130649Z
+LOCATION:RIPCORD\, 715 Fairview St\, Houston\, TX 77006\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Critical Misbehavior
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
+X-HKC-HOST:Houston Gaymers
+DTSTART;TZID=America/Chicago:20260523T190000
+DTEND;TZID=America/Chicago:20260523T230000
+DTSTAMP:20260719T140002Z
+UID:7f7g5lgcva98c8k7e3e3k5st3i@google.com
+RECURRENCE-ID;TZID=America/Chicago:20260523T190000
+CREATED:20260101T162509Z
+LAST-MODIFIED:20260429T151619Z
+LOCATION:RIPCORD\, 715 Fairview St\, Houston\, TX 77006\, USA
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Gaymers Takeover
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
+X-HKC-HOST:Houston Gaymers
+DTSTART:20251213T150000Z
+DTEND:20251213T190000Z
+DTSTAMP:20260719T140002Z
+UID:0b85m3v4fg06opuu5sbui7nk8e@google.com
+CREATED:20251203T014430Z
+LAST-MODIFIED:20251203T014430Z
+LOCATION:North Picnic Lane\, N Picnic Ln\, Houston\, TX 77007\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Gaymers Touch Grass
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
+X-HKC-HOST:Houston Gaymers
+DTSTART;TZID=America/Chicago:20251227T180000
+DTEND;TZID=America/Chicago:20251227T220000
+DTSTAMP:20260719T140002Z
+UID:5v616itn0a8a179lqd2gl5e3q0@google.com
+RECURRENCE-ID;TZID=America/Chicago:20251227T180000
+CREATED:20250424T000247Z
+LAST-MODIFIED:20260101T162450Z
+LOCATION:RIPCORD\, 715 Fairview St\, Houston\, TX 77006\, USA
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:HG Main Meetup
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
+X-HKC-HOST:Houston Gaymers
+DTSTART:20250912T230000Z
+DTEND:20250913T030000Z
+DTSTAMP:20260719T140002Z
+UID:1splgcc9unvkaltkcstip01oeh@google.com
+CREATED:20250907T184422Z
+LAST-MODIFIED:20250907T184422Z
+LOCATION:Ripcord
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:HG @ Pup Weekend Kickoff
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
+X-HKC-HOST:Houston Gaymers
+DTSTART:20250913T170000Z
+DTEND:20250913T210000Z
+DTSTAMP:20260719T140002Z
+UID:5ip8mk4qg0814990325mbkrs6v@google.com
+CREATED:20250907T184522Z
+LAST-MODIFIED:20250907T184522Z
+LOCATION:The Montrose Center
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:HG @ Pup Vendor Market
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
+X-HKC-HOST:Houston Gaymers
+DTSTART:20260514T000000Z
+DTEND:20260514T030000Z
+DTSTAMP:20260719T140002Z
+UID:6l0bidesukavmf9j217j2mdejq@google.com
+CREATED:20260429T144406Z
+LAST-MODIFIED:20260429T144406Z
+LOCATION:RIPCORD\, 715 Fairview St\, Houston\, TX 77006\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Critical Misbehavior
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
+X-HKC-HOST:Houston Gaymers
+DTSTART:20250406T000000Z
+DTEND:20250406T030000Z
+DTSTAMP:20260719T140002Z
+UID:23lrpnj4b2o378k7ob992k140q@google.com
+CREATED:20250106T003034Z
+LAST-MODIFIED:20250106T003034Z
+LOCATION:Pearl Bar\, 4216 Washington Ave\, Houston\, TX 77007\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:HG Charity Drag Show
 TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
@@ -254,7 +380,7 @@ X-HKC-HOST:Houston Gaymers
 DTSTART;TZID=America/Chicago:20260211T190000
 DTEND;TZID=America/Chicago:20260211T220000
 RRULE:FREQ=WEEKLY;WKST=SU;COUNT=4;BYDAY=WE
-DTSTAMP:20260719T091327Z
+DTSTAMP:20260719T140002Z
 UID:6a5401sljq2mv2da4mbkh8tqh4@google.com
 CREATED:20260205T184110Z
 DESCRIPTION:Build your party\, win the contests\, defeat the BBLG (Big Bad 
@@ -280,7 +406,7 @@ ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
 X-HKC-HOST:Houston Gaymers
 DTSTART;TZID=America/Chicago:20250112T180000
 DTEND;TZID=America/Chicago:20250112T220000
-DTSTAMP:20260719T091327Z
+DTSTAMP:20260719T140002Z
 UID:22omd53g29hsvtfrpt4dac6omc@google.com
 RECURRENCE-ID;TZID=America/Chicago:20250106T180000
 CREATED:20250106T002810Z
@@ -296,7 +422,7 @@ ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
 X-HKC-HOST:Houston Gaymers
 DTSTART:20260118T210000Z
 DTEND:20260118T230000Z
-DTSTAMP:20260719T091327Z
+DTSTAMP:20260719T140002Z
 UID:1815k3maol9lppj49390pd9eh6@google.com
 CREATED:20260101T174815Z
 DESCRIPTION:Details coming soon...
@@ -311,13 +437,29 @@ END:VEVENT
 BEGIN:VEVENT
 ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
 X-HKC-HOST:Houston Gaymers
-DTSTART:20260517T200000Z
-DTEND:20260517T220000Z
-DTSTAMP:20260719T091327Z
-UID:7b9td8rr09urvm2t0acap23gu0@google.com
-CREATED:20260429T144518Z
-DESCRIPTION:(this month's theme coming soon)
-LAST-MODIFIED:20260429T144518Z
+DTSTART:20251220T230000Z
+DTEND:20251221T040000Z
+DTSTAMP:20260719T140002Z
+UID:599pbni1ggch2bec7qeiiecq7q@google.com
+CREATED:20251203T014516Z
+LAST-MODIFIED:20251203T014516Z
+LOCATION:Dragon's Lair Comics and Fantasy\, 21155A Tomball Pkwy\, Houston\,
+  TX 77070\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Houston Gaymers D20 Day
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
+X-HKC-HOST:Houston Gaymers
+DTSTART:20260222T210000Z
+DTEND:20260222T230000Z
+DTSTAMP:20260719T140002Z
+UID:07btfbe0vtm42q8knm5oreld47@google.com
+CREATED:20260205T183915Z
+DESCRIPTION:Theme:  Kujichagulia (Self-Determination)
+LAST-MODIFIED:20260205T183915Z
 LOCATION:Gulf Coast Cosmos Comics\, 2408 Wheeler Ave\, Houston\, TX 77004\,
   USA
 SEQUENCE:0
@@ -328,92 +470,15 @@ END:VEVENT
 BEGIN:VEVENT
 ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
 X-HKC-HOST:Houston Gaymers
-DTSTART:20250615T170000Z
-DTEND:20250615T230000Z
-DTSTAMP:20260719T091327Z
-UID:6mpr9htl6si807mof094be2h1i@google.com
-CREATED:20250604T180722Z
-LAST-MODIFIED:20250622T112421Z
-LOCATION:Dragon's Lair Comics and Fantasy\, 21155A Tomball Pkwy\, Houston\,
-  TX 77070\, USA
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:Dragon's Lair Pride Event
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
-ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
-X-HKC-HOST:Houston Gaymers
-DTSTART:20260514T000000Z
-DTEND:20260514T030000Z
-DTSTAMP:20260719T091327Z
-UID:6l0bidesukavmf9j217j2mdejq@google.com
-CREATED:20260429T144406Z
-LAST-MODIFIED:20260429T144406Z
-LOCATION:RIPCORD\, 715 Fairview St\, Houston\, TX 77006\, USA
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:Critical Misbehavior
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
-ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
-X-HKC-HOST:Houston Gaymers
-DTSTART:20250629T010000Z
-DTEND:20250629T050000Z
-DTSTAMP:20260719T091327Z
-UID:5tq24pfb4be7n0c9eqagp0ksfn@google.com
-CREATED:20250604T180834Z
-LAST-MODIFIED:20250613T031325Z
-LOCATION:RIPCORD
-SEQUENCE:1
-STATUS:CONFIRMED
-SUMMARY:Houston Gaymers @  Ripcord Block Party
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
-X-HKC-HOST:Houston Gaymers
-DTSTART:20250913T170000Z
-DTEND:20250913T210000Z
-DTSTAMP:20260719T091327Z
-UID:5ip8mk4qg0814990325mbkrs6v@google.com
-CREATED:20250907T184522Z
-LAST-MODIFIED:20250907T184522Z
-LOCATION:The Montrose Center
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:HG @ Pup Vendor Market
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
-ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
-X-HKC-HOST:Houston Gaymers
-DTSTART:20250214T020000Z
-DTEND:20250214T040000Z
-DTSTAMP:20260719T091327Z
-UID:3cumpdga1csdmkho7qb6up15qm@google.com
-CREATED:20250106T002830Z
-LAST-MODIFIED:20250109T011606Z
-LOCATION:Dairy Ashford Roller Rink\, 1820 S Dairy Ashford Rd St\, Houston\,
-  TX 77077\, USA
-SEQUENCE:1
-STATUS:CONFIRMED
-SUMMARY:HG Skate Night
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
-ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
-X-HKC-HOST:Houston Gaymers
-DTSTART;TZID=America/Chicago:20260523T190000
-DTEND;TZID=America/Chicago:20260523T230000
-DTSTAMP:20260719T091327Z
+DTSTART;TZID=America/Chicago:20260228T190000
+DTEND;TZID=America/Chicago:20260228T230000
+RRULE:FREQ=MONTHLY;COUNT=11;BYDAY=4SA
+DTSTAMP:20260719T140002Z
 UID:7f7g5lgcva98c8k7e3e3k5st3i@google.com
-RECURRENCE-ID;TZID=America/Chicago:20260523T190000
 CREATED:20260101T162509Z
-LAST-MODIFIED:20260429T151619Z
+LAST-MODIFIED:20260429T144534Z
 LOCATION:RIPCORD\, 715 Fairview St\, Houston\, TX 77006\, USA
-SEQUENCE:2
+SEQUENCE:0
 STATUS:CONFIRMED
 SUMMARY:Gaymers Takeover
 TRANSP:OPAQUE
@@ -421,154 +486,9 @@ END:VEVENT
 BEGIN:VEVENT
 ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
 X-HKC-HOST:Houston Gaymers
-DTSTART;TZID=America/Chicago:20250222T180000
-DTEND;TZID=America/Chicago:20250222T220000
-RRULE:FREQ=MONTHLY;COUNT=5;BYDAY=4SA
-EXDATE;TZID=America/Chicago:20250628T180000
-DTSTAMP:20260719T091327Z
-UID:3fgqnjdp6p5v9k8d12rh466hgg@google.com
-CREATED:20250106T003011Z
-LAST-MODIFIED:20250106T003054Z
-LOCATION:RIPCORD\, 715 Fairview St\, Houston\, TX 77006\, USA
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:HG Main Meetup
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
-ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
-X-HKC-HOST:Houston Gaymers
-DTSTART:20250726T230000Z
-DTEND:20250727T030000Z
-DTSTAMP:20260719T091327Z
-UID:444t8hv4jnc2nqr6lkrhljl351@google.com
-CREATED:20250106T003107Z
-LAST-MODIFIED:20250106T003107Z
-LOCATION:RIPCORD\, 715 Fairview St\, Houston\, TX 77006\, USA
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:HG Main Meetup
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
-ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
-X-HKC-HOST:Houston Gaymers
-DTSTART:20260502T150000Z
-DTEND:20260502T190000Z
-DTSTAMP:20260719T091327Z
-UID:7qchmu9hh64rfa8kn36qetmas9@google.com
-CREATED:20260429T144302Z
-DESCRIPTION:Please see instagram post for a map to exact meeting location!\
- n\nJoin us for a hike through memorial park followed by a picnic (weather p
- ending)
-LAST-MODIFIED:20260429T144302Z
-LOCATION:South Picnic Lane\, S Picnic Ln\, Houston\, TX 77007\, USA
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:Gaymers Touch Grass
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
-ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
-X-HKC-HOST:Houston Gaymers
-DTSTART;TZID=America/Chicago:20250329T180000
-DTEND;TZID=America/Chicago:20250329T220000
-DTSTAMP:20260719T091327Z
-UID:3fgqnjdp6p5v9k8d12rh466hgg@google.com
-RECURRENCE-ID;TZID=America/Chicago:20250322T180000
-CREATED:20250106T003011Z
-LAST-MODIFIED:20250106T003054Z
-LOCATION:RIPCORD\, 715 Fairview St\, Houston\, TX 77006\, USA
-SEQUENCE:1
-STATUS:CONFIRMED
-SUMMARY:HG Main Meetup
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
-ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
-X-HKC-HOST:Houston Gaymers
-DTSTART:20250817T170000Z
-DTEND:20250817T190000Z
-DTSTAMP:20260719T091327Z
-UID:usvvfcd91vbj3nq6pvnj455fl8@google.com
-CREATED:20250815T091227Z
-DESCRIPTION:Room 114\n\nDuring this Level Up session\, we’ll be discussing 
- inverse thinking and mindfulness.
-LAST-MODIFIED:20250815T091227Z
-LOCATION:The Montrose Center\, 401 Branard St 2nd Floor\, Houston\, TX 7700
- 6\, USA
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:LVL Up! IRL: it’s Okay to Crash Out
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
-X-HKC-HOST:Houston Gaymers
-DTSTART:20260516T170000Z
-DTEND:20260516T210000Z
-DTSTAMP:20260719T091327Z
-UID:39l0sfchvo768jobmfri70j04r@google.com
-CREATED:20260429T144440Z
-LAST-MODIFIED:20260429T144440Z
-LOCATION:Tony's Corner Pocket\, 817 W Dallas St\, Houston\, TX 77019\, USA
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:Gaymers Get Wet (charity carwash)
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
-ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
-X-HKC-HOST:Houston Gaymers
-DTSTART:20250912T230000Z
-DTEND:20250913T030000Z
-DTSTAMP:20260719T091327Z
-UID:1splgcc9unvkaltkcstip01oeh@google.com
-CREATED:20250907T184422Z
-LAST-MODIFIED:20250907T184422Z
-LOCATION:Ripcord
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:HG @ Pup Weekend Kickoff
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
-ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
-X-HKC-HOST:Houston Gaymers
-DTSTART;TZID=America/Chicago:20250106T180000
-DTEND;TZID=America/Chicago:20250106T220000
-RRULE:FREQ=MONTHLY;UNTIL=20250407T045959Z;BYDAY=1MO
-DTSTAMP:20260719T091327Z
-UID:22omd53g29hsvtfrpt4dac6omc@google.com
-CREATED:20250106T002810Z
-LAST-MODIFIED:20250327T011714Z
-LOCATION:Star Sailor\, 1710 W 18th St\, Houston\, TX 77008\, USA
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:Handhelds
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
-ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
-X-HKC-HOST:Houston Gaymers
-DTSTART:20251213T150000Z
-DTEND:20251213T190000Z
-DTSTAMP:20260719T091327Z
-UID:0b85m3v4fg06opuu5sbui7nk8e@google.com
-CREATED:20251203T014430Z
-LAST-MODIFIED:20251203T014430Z
-LOCATION:North Picnic Lane\, N Picnic Ln\, Houston\, TX 77007\, USA
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:Gaymers Touch Grass
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
-X-HKC-HOST:Houston Gaymers
 DTSTART:20251017T000000Z
 DTEND:20251017T030000Z
-DTSTAMP:20260719T091327Z
+DTSTAMP:20260719T140002Z
 UID:66nev0na1lg0u7vd1b2a21ek6m@google.com
 CREATED:20251008T234855Z
 DESCRIPTION:$12 for all-you-can-play
@@ -583,9 +503,90 @@ END:VEVENT
 BEGIN:VEVENT
 ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
 X-HKC-HOST:Houston Gaymers
+DTSTART:20250629T010000Z
+DTEND:20250629T050000Z
+DTSTAMP:20260719T140002Z
+UID:5tq24pfb4be7n0c9eqagp0ksfn@google.com
+CREATED:20250604T180834Z
+LAST-MODIFIED:20250613T031325Z
+LOCATION:RIPCORD
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Houston Gaymers @  Ripcord Block Party
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
+X-HKC-HOST:Houston Gaymers
+DTSTART;TZID=America/Chicago:20250329T180000
+DTEND;TZID=America/Chicago:20250329T220000
+DTSTAMP:20260719T140002Z
+UID:3fgqnjdp6p5v9k8d12rh466hgg@google.com
+RECURRENCE-ID;TZID=America/Chicago:20250322T180000
+CREATED:20250106T003011Z
+LAST-MODIFIED:20250106T003054Z
+LOCATION:RIPCORD\, 715 Fairview St\, Houston\, TX 77006\, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:HG Main Meetup
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
+X-HKC-HOST:Houston Gaymers
+DTSTART:20260517T200000Z
+DTEND:20260517T220000Z
+DTSTAMP:20260719T140002Z
+UID:7b9td8rr09urvm2t0acap23gu0@google.com
+CREATED:20260429T144518Z
+DESCRIPTION:(this month's theme coming soon)
+LAST-MODIFIED:20260429T144518Z
+LOCATION:Gulf Coast Cosmos Comics\, 2408 Wheeler Ave\, Houston\, TX 77004\,
+  USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Chat Box
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
+X-HKC-HOST:Houston Gaymers
+DTSTART;TZID=America/Chicago:20250106T180000
+DTEND;TZID=America/Chicago:20250106T220000
+RRULE:FREQ=MONTHLY;UNTIL=20250407T045959Z;BYDAY=1MO
+DTSTAMP:20260719T140002Z
+UID:22omd53g29hsvtfrpt4dac6omc@google.com
+CREATED:20250106T002810Z
+LAST-MODIFIED:20250327T011714Z
+LOCATION:Star Sailor\, 1710 W 18th St\, Houston\, TX 77008\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Handhelds
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
+X-HKC-HOST:Houston Gaymers
+DTSTART;TZID=America/Chicago:20250407T190000
+DTEND;TZID=America/Chicago:20250407T220000
+RRULE:FREQ=MONTHLY;COUNT=9;BYDAY=1MO
+DTSTAMP:20260719T140002Z
+UID:aqmj6j2a2rrke77vabaq2hl4a2@google.com
+CREATED:20250106T002810Z
+LAST-MODIFIED:20250327T011714Z
+LOCATION:Dragon's Lair Comics and Fantasy\, 21155A Tomball Pkwy\, Houston\,
+  TX 77070\, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Handhelds
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
+X-HKC-HOST:Houston Gaymers
 DTSTART:20260416T000000Z
 DTEND:20260416T030000Z
-DTSTAMP:20260719T091327Z
+DTSTAMP:20260719T140002Z
 UID:1opnc2reli668cannd0h05erbp@google.com
 CREATED:20260401T155238Z
 LAST-MODIFIED:20260401T155238Z
@@ -598,17 +599,545 @@ END:VEVENT
 BEGIN:VEVENT
 ORGANIZER;CN=Houston Gaymers:mailto:noreply@houstonkinkcal.local
 X-HKC-HOST:Houston Gaymers
-DTSTART;TZID=America/Chicago:20260610T190000
-DTEND;TZID=America/Chicago:20260610T220000
-RRULE:FREQ=MONTHLY;COUNT=6;BYDAY=2WE
-DTSTAMP:20260719T091327Z
-UID:3mvf59lq43g45v1k4hgshsb5j0@google.com
-CREATED:20260521T130648Z
-LAST-MODIFIED:20260521T130649Z
+DTSTART:20250726T230000Z
+DTEND:20250727T030000Z
+DTSTAMP:20260719T140002Z
+UID:444t8hv4jnc2nqr6lkrhljl351@google.com
+CREATED:20250106T003107Z
+LAST-MODIFIED:20250106T003107Z
 LOCATION:RIPCORD\, 715 Fairview St\, Houston\, TX 77006\, USA
 SEQUENCE:0
 STATUS:CONFIRMED
-SUMMARY:Critical Misbehavior
+SUMMARY:HG Main Meetup
 TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+X-HKC-HOST:Brandon Outterson - Mr. Space City Leather 2026
+DTSTAMP:20260715T161126Z
+LAST-MODIFIED:20260715T161126Z
+CREATED:20260617T003013Z
+SEQUENCE:2475673
+ORGANIZER;CN=Brandon Outterson - Mr. Space City Leather 2026:mailto:noreply@houstonkinkcal.local
+DTSTART:20260919T230000Z
+DTEND:20260920T020000Z
+UID:e2497900580681616@facebook.com
+SUMMARY:CommUnity presented by Mr. Space City Leather 26
+LOCATION:2409 Grant St Ste d\, Houston\, TX 7
+ 7006
+URL:https://www.facebook.com/events/2497900580681616/
+DESCRIPTION:Join us this September for a one-o
+ f-a-kind fundraising event celebra
+ ting the incredible diversity of o
+ ur community!\n\nRepresentatives fro
+ m a variety of community groups\, i
+ ncluding drag\, leather/kink\, pagea
+ ntry\, and more\, will come together
+  for an evening of entertainment\, 
+ creativity\, and charitable giving.
+  Each team will support a charity 
+ of their choice while showcasing t
+ heir talents through performances\,
+  comedy\, art\, storytelling\, and ot
+ her unique acts.\n\nThis isn't just 
+ a competition\, it's an opportunity
+  to build connections\, break down 
+ barriers\, and demonstrate what our
+  community can accomplish when we 
+ work together. Throughout the even
+ ing\, teams will raise funds for th
+ eir chosen causes\, with donations 
+ helping determine the final standi
+ ngs and the distribution of the fu
+ ndraising pot.\n\nExpect:\n- Live per
+ formances and entertainment\n- Comm
+ unity leaders and personalities\n- 
+ Fundraising for worthy causes\n- Su
+ rprises throughout the evening\n- A
+  celebration of collaboration\, cre
+ ativity\, and unity\n\nWhether you're
+  coming to cheer on your favorite 
+ performers\, support a great cause\,
+  or simply enjoy a night of incred
+ ible talent\, we invite you to be p
+ art of something special.\n\nTogethe
+ r\, we're stronger. Together\, we ma
+ ke a difference.\n\nhttps://www.face
+ book.com/events/2497900580681616/
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+X-HKC-HOST:Bayou City Pups
+DTSTAMP:20260125T204422Z
+LAST-MODIFIED:20260125T204422Z
+CREATED:20260124T023151Z
+SEQUENCE:151951
+ORGANIZER;CN=Bayou City Pups:mailto:noreply@houstonkinkcal.local
+DTSTART:20261226T020000Z
+DTEND:20261226T040000Z
+UID:e1835925893721749@facebook.com
+SUMMARY:H-Town Puppy Mosh
+LOCATION:the Montrose Center
+URL:https://www.facebook.com/events/1834415490539456/?event_time_id=1835925893721749
+DESCRIPTION:Join us for a wagging good time wi
+ th Houston Puppys enjoying a safe 
+ space while exploring the pup side
+  you always wanted to experience. 
+ \n\nHosted by the Bayou City Pups ev
+ ery 4th Friday of the Month from 8
+ pm-10pm. Always findable-just look
+  for the door with the pup flag or
+  message any member of the BCP boa
+ rd\, and/or ask questions in this p
+ ost! \n\nhttps://www.facebook.com/ev
+ ents/1834415490539456/?event_time_
+ id=1835925893721749
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+X-HKC-HOST:Bayou City Pups
+DTSTAMP:20260125T204422Z
+LAST-MODIFIED:20260125T204422Z
+CREATED:20260124T023151Z
+SEQUENCE:151951
+ORGANIZER;CN=Bayou City Pups:mailto:noreply@houstonkinkcal.local
+DTSTART:20261128T020000Z
+DTEND:20261128T040000Z
+UID:e1835925897055082@facebook.com
+SUMMARY:H-Town Puppy Mosh
+LOCATION:the Montrose Center
+URL:https://www.facebook.com/events/1834415490539456/?event_time_id=1835925897055082
+DESCRIPTION:Join us for a wagging good time wi
+ th Houston Puppys enjoying a safe 
+ space while exploring the pup side
+  you always wanted to experience. 
+ \n\nHosted by the Bayou City Pups ev
+ ery 4th Friday of the Month from 8
+ pm-10pm. Always findable-just look
+  for the door with the pup flag or
+  message any member of the BCP boa
+ rd\, and/or ask questions in this p
+ ost! \n\nhttps://www.facebook.com/ev
+ ents/1834415490539456/?event_time_
+ id=1835925897055082
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+X-HKC-HOST:Bayou City Pups
+DTSTAMP:20260125T204422Z
+LAST-MODIFIED:20260125T204422Z
+CREATED:20260124T023151Z
+SEQUENCE:151951
+ORGANIZER;CN=Bayou City Pups:mailto:noreply@houstonkinkcal.local
+DTSTART:20261024T010000Z
+DTEND:20261024T030000Z
+UID:e1835925900388415@facebook.com
+SUMMARY:H-Town Puppy Mosh
+LOCATION:the Montrose Center
+URL:https://www.facebook.com/events/1834415490539456/?event_time_id=1835925900388415
+DESCRIPTION:Join us for a wagging good time wi
+ th Houston Puppys enjoying a safe 
+ space while exploring the pup side
+  you always wanted to experience. 
+ \n\nHosted by the Bayou City Pups ev
+ ery 4th Friday of the Month from 8
+ pm-10pm. Always findable-just look
+  for the door with the pup flag or
+  message any member of the BCP boa
+ rd\, and/or ask questions in this p
+ ost! \n\nhttps://www.facebook.com/ev
+ ents/1834415490539456/?event_time_
+ id=1835925900388415
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+X-HKC-HOST:Bayou City Pups
+DTSTAMP:20260125T204422Z
+LAST-MODIFIED:20260125T204422Z
+CREATED:20260124T023151Z
+SEQUENCE:151951
+ORGANIZER;CN=Bayou City Pups:mailto:noreply@houstonkinkcal.local
+DTSTART:20260926T010000Z
+DTEND:20260926T030000Z
+UID:e1835925903721748@facebook.com
+SUMMARY:H-Town Puppy Mosh
+LOCATION:the Montrose Center
+URL:https://www.facebook.com/events/1834415490539456/?event_time_id=1835925903721748
+DESCRIPTION:Join us for a wagging good time wi
+ th Houston Puppys enjoying a safe 
+ space while exploring the pup side
+  you always wanted to experience. 
+ \n\nHosted by the Bayou City Pups ev
+ ery 4th Friday of the Month from 8
+ pm-10pm. Always findable-just look
+  for the door with the pup flag or
+  message any member of the BCP boa
+ rd\, and/or ask questions in this p
+ ost! \n\nhttps://www.facebook.com/ev
+ ents/1834415490539456/?event_time_
+ id=1835925903721748
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+X-HKC-HOST:Bayou City Pups
+DTSTAMP:20260125T204422Z
+LAST-MODIFIED:20260125T204422Z
+CREATED:20260124T023151Z
+SEQUENCE:151951
+ORGANIZER;CN=Bayou City Pups:mailto:noreply@houstonkinkcal.local
+DTSTART:20260829T010000Z
+DTEND:20260829T030000Z
+UID:e1835925907055081@facebook.com
+SUMMARY:H-Town Puppy Mosh
+LOCATION:the Montrose Center
+URL:https://www.facebook.com/events/1834415490539456/?event_time_id=1835925907055081
+DESCRIPTION:Join us for a wagging good time wi
+ th Houston Puppys enjoying a safe 
+ space while exploring the pup side
+  you always wanted to experience. 
+ \n\nHosted by the Bayou City Pups ev
+ ery 4th Friday of the Month from 8
+ pm-10pm. Always findable-just look
+  for the door with the pup flag or
+  message any member of the BCP boa
+ rd\, and/or ask questions in this p
+ ost! \n\nhttps://www.facebook.com/ev
+ ents/1834415490539456/?event_time_
+ id=1835925907055081
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+X-HKC-HOST:Bayou City Pups
+DTSTAMP:20260125T204422Z
+LAST-MODIFIED:20260125T204422Z
+CREATED:20260124T023151Z
+SEQUENCE:151951
+ORGANIZER;CN=Bayou City Pups:mailto:noreply@houstonkinkcal.local
+DTSTART:20260725T010000Z
+DTEND:20260725T030000Z
+UID:e1835925910388414@facebook.com
+SUMMARY:H-Town Puppy Mosh
+LOCATION:the Montrose Center
+URL:https://www.facebook.com/events/1834415490539456/?event_time_id=1835925910388414
+DESCRIPTION:Join us for a wagging good time wi
+ th Houston Puppys enjoying a safe 
+ space while exploring the pup side
+  you always wanted to experience. 
+ \n\nHosted by the Bayou City Pups ev
+ ery 4th Friday of the Month from 8
+ pm-10pm. Always findable-just look
+  for the door with the pup flag or
+  message any member of the BCP boa
+ rd\, and/or ask questions in this p
+ ost! \n\nhttps://www.facebook.com/ev
+ ents/1834415490539456/?event_time_
+ id=1835925910388414
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+X-HKC-HOST:Bayou City Pups
+DTSTAMP:20260525T213657Z
+LAST-MODIFIED:20260525T213657Z
+CREATED:20260525T213406Z
+SEQUENCE:171
+ORGANIZER;CN=Bayou City Pups:mailto:noreply@houstonkinkcal.local
+DTSTART:20260911T200000Z
+DTEND:20260913T200000Z
+UID:e4372714852973165@facebook.com
+SUMMARY:Houston Pup Weekend
+LOCATION:Crown Plaza Hotel. Houston Texas
+URL:https://www.facebook.com/events/4372714852973165/
+DESCRIPTION:Come and join us for a puptastic t
+ ime as we mosh\, educate\, and meet 
+ pups\, pets\, and critters and their
+  handlers/supporters throughout Te
+ xas! \n\nhttps://www.facebook.com/ev
+ ents/4372714852973165/
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+X-HKC-HOST:Houston Bears
+DTSTAMP:20260701T181951Z
+LAST-MODIFIED:20260701T181951Z
+CREATED:20260503T231116Z
+SEQUENCE:5080115
+ORGANIZER;CN=Houston Bears:mailto:noreply@houstonkinkcal.local
+DTSTART:20260913T160000Z
+DTEND:20260913T180000Z
+UID:e1153668460223160@facebook.com
+SUMMARY:Houston Bears Brunch Club - District 7 EaDo
+LOCATION:District 7 Grill EaDo
+URL:https://www.facebook.com/events/1153668450223161/?event_time_id=1153668460223160
+DESCRIPTION:District 7 has a wonderful brunch 
+ menu. Hope to see many of you ther
+ e!\n\n***********\nYou MUST RSVP at h
+ ttps://houstonbears.org/houston-be
+ ars-brunch-club/\n\nhttps://www.face
+ book.com/events/1153668450223161/?
+ event_time_id=1153668460223160
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+X-HKC-HOST:Houston Bears
+DTSTAMP:20260701T181951Z
+LAST-MODIFIED:20260701T181951Z
+CREATED:20260503T231116Z
+SEQUENCE:5080115
+ORGANIZER;CN=Houston Bears:mailto:noreply@houstonkinkcal.local
+DTSTART:20260809T160000Z
+DTEND:20260809T180000Z
+UID:e1153668466889826@facebook.com
+SUMMARY:Houston Bears Brunch Club - District 7 EaDo
+LOCATION:District 7 Grill EaDo
+URL:https://www.facebook.com/events/1153668450223161/?event_time_id=1153668466889826
+DESCRIPTION:District 7 has a wonderful brunch 
+ menu. Hope to see many of you ther
+ e!\n\n***********\nYou MUST RSVP at h
+ ttps://houstonbears.org/houston-be
+ ars-brunch-club/\n\nhttps://www.face
+ book.com/events/1153668450223161/?
+ event_time_id=1153668466889826
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+X-HKC-HOST:Houston Bears
+DTSTAMP:20260701T181951Z
+LAST-MODIFIED:20260701T181951Z
+CREATED:20260503T231116Z
+SEQUENCE:5080115
+ORGANIZER;CN=Houston Bears:mailto:noreply@houstonkinkcal.local
+DTSTART:20261011T160000Z
+DTEND:20261011T180000Z
+UID:e1153668470223159@facebook.com
+SUMMARY:Houston Bears Brunch Club - District 7 EaDo
+LOCATION:District 7 Grill EaDo
+URL:https://www.facebook.com/events/1153668450223161/?event_time_id=1153668470223159
+DESCRIPTION:District 7 has a wonderful brunch 
+ menu. Hope to see many of you ther
+ e!\n\n***********\nYou MUST RSVP at h
+ ttps://houstonbears.org/houston-be
+ ars-brunch-club/\n\nhttps://www.face
+ book.com/events/1153668450223161/?
+ event_time_id=1153668470223159
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+X-HKC-HOST:Houston Bears
+DTSTAMP:20260701T181951Z
+LAST-MODIFIED:20260701T181951Z
+CREATED:20260503T231116Z
+SEQUENCE:5080115
+ORGANIZER;CN=Houston Bears:mailto:noreply@houstonkinkcal.local
+DTSTART:20261108T170000Z
+DTEND:20261108T190000Z
+UID:e1153668473556492@facebook.com
+SUMMARY:Houston Bears Brunch Club - District 7 EaDo
+LOCATION:District 7 Grill EaDo
+URL:https://www.facebook.com/events/1153668450223161/?event_time_id=1153668473556492
+DESCRIPTION:District 7 has a wonderful brunch 
+ menu. Hope to see many of you ther
+ e!\n\n***********\nYou MUST RSVP at h
+ ttps://houstonbears.org/houston-be
+ ars-brunch-club/\n\nhttps://www.face
+ book.com/events/1153668450223161/?
+ event_time_id=1153668473556492
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+X-HKC-HOST:Houston Bears
+DTSTAMP:20260701T181951Z
+LAST-MODIFIED:20260701T181951Z
+CREATED:20260503T231116Z
+SEQUENCE:5080115
+ORGANIZER;CN=Houston Bears:mailto:noreply@houstonkinkcal.local
+DTSTART:20261213T170000Z
+DTEND:20261213T190000Z
+UID:e1153668476889825@facebook.com
+SUMMARY:Houston Bears Brunch Club - District 7 EaDo
+LOCATION:District 7 Grill EaDo
+URL:https://www.facebook.com/events/1153668450223161/?event_time_id=1153668476889825
+DESCRIPTION:District 7 has a wonderful brunch 
+ menu. Hope to see many of you ther
+ e!\n\n***********\nYou MUST RSVP at h
+ ttps://houstonbears.org/houston-be
+ ars-brunch-club/\n\nhttps://www.face
+ book.com/events/1153668450223161/?
+ event_time_id=1153668476889825
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+X-HKC-HOST:Houston Bears
+DTSTAMP:20260710T134927Z
+LAST-MODIFIED:20260710T134927Z
+CREATED:20250828T232130Z
+SEQUENCE:27268077
+ORGANIZER;CN=Houston Bears:mailto:noreply@houstonkinkcal.local
+DTSTART:20261210T000000Z
+DTEND:20261210T020000Z
+UID:e1443480373978005@facebook.com
+SUMMARY:Houston Bears General Meeting- Central Texas Style BBQ
+LOCATION:Central Texas Style BBQ
+URL:https://www.facebook.com/events/1293562838969760/?event_time_id=1443480373978005
+DESCRIPTION:Join us for our monthly meeting of
+  the Houston Bears.  Enjoy some gr
+ eat food\, good friends\, and keep u
+ p to date on all the latest happen
+ ings with the Houston Bears.\n\nhttp
+ s://www.facebook.com/events/129356
+ 2838969760/?event_time_id=14434803
+ 73978005
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+X-HKC-HOST:Houston Bears
+DTSTAMP:20260710T134927Z
+LAST-MODIFIED:20260710T134927Z
+CREATED:20250828T232130Z
+SEQUENCE:27268077
+ORGANIZER;CN=Houston Bears:mailto:noreply@houstonkinkcal.local
+DTSTART:20261112T000000Z
+DTEND:20261112T020000Z
+UID:e1443480377311338@facebook.com
+SUMMARY:Houston Bears General Meeting- Central Texas Style BBQ
+LOCATION:Central Texas Style BBQ
+URL:https://www.facebook.com/events/1293562838969760/?event_time_id=1443480377311338
+DESCRIPTION:Join us for our monthly meeting of
+  the Houston Bears.  Enjoy some gr
+ eat food\, good friends\, and keep u
+ p to date on all the latest happen
+ ings with the Houston Bears.\n\nhttp
+ s://www.facebook.com/events/129356
+ 2838969760/?event_time_id=14434803
+ 77311338
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+X-HKC-HOST:Houston Bears
+DTSTAMP:20260710T134927Z
+LAST-MODIFIED:20260710T134927Z
+CREATED:20250828T232130Z
+SEQUENCE:27268077
+ORGANIZER;CN=Houston Bears:mailto:noreply@houstonkinkcal.local
+DTSTART:20261014T230000Z
+DTEND:20261015T010000Z
+UID:e1443480383978004@facebook.com
+SUMMARY:Houston Bears General Meeting- Central Texas Style BBQ
+LOCATION:Central Texas Style BBQ
+URL:https://www.facebook.com/events/1293562838969760/?event_time_id=1443480383978004
+DESCRIPTION:Join us for our monthly meeting of
+  the Houston Bears.  Enjoy some gr
+ eat food\, good friends\, and keep u
+ p to date on all the latest happen
+ ings with the Houston Bears.\n\nhttp
+ s://www.facebook.com/events/129356
+ 2838969760/?event_time_id=14434803
+ 83978004
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+X-HKC-HOST:Houston Bears
+DTSTAMP:20260710T134927Z
+LAST-MODIFIED:20260710T134927Z
+CREATED:20250828T232130Z
+SEQUENCE:27268077
+ORGANIZER;CN=Houston Bears:mailto:noreply@houstonkinkcal.local
+DTSTART:20260909T230000Z
+DTEND:20260910T010000Z
+UID:e1443480390644670@facebook.com
+SUMMARY:Houston Bears General Meeting- Central Texas Style BBQ
+LOCATION:Central Texas Style BBQ
+URL:https://www.facebook.com/events/1293562838969760/?event_time_id=1443480390644670
+DESCRIPTION:Join us for our monthly meeting of
+  the Houston Bears.  Enjoy some gr
+ eat food\, good friends\, and keep u
+ p to date on all the latest happen
+ ings with the Houston Bears.\n\nhttp
+ s://www.facebook.com/events/129356
+ 2838969760/?event_time_id=14434803
+ 90644670
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+X-HKC-HOST:Houston Bears
+DTSTAMP:20260710T134927Z
+LAST-MODIFIED:20260710T134927Z
+CREATED:20250828T232130Z
+SEQUENCE:27268077
+ORGANIZER;CN=Houston Bears:mailto:noreply@houstonkinkcal.local
+DTSTART:20260812T230000Z
+DTEND:20260813T010000Z
+UID:e1443480393978003@facebook.com
+SUMMARY:Houston Bears General Meeting- Central Texas Style BBQ
+LOCATION:Central Texas Style BBQ
+URL:https://www.facebook.com/events/1293562838969760/?event_time_id=1443480393978003
+DESCRIPTION:Join us for our monthly meeting of
+  the Houston Bears.  Enjoy some gr
+ eat food\, good friends\, and keep u
+ p to date on all the latest happen
+ ings with the Houston Bears.\n\nhttp
+ s://www.facebook.com/events/129356
+ 2838969760/?event_time_id=14434803
+ 93978003
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
+END:VEVENT
+BEGIN:VEVENT
+X-HKC-HOST:Houston Bears
+DTSTAMP:20260701T183242Z
+LAST-MODIFIED:20260701T183242Z
+CREATED:20260701T183242Z
+SEQUENCE:0
+ORGANIZER;CN=Houston Bears:mailto:noreply@houstonkinkcal.local
+DTSTART:20260725T230000Z
+DTEND:20260726T020000Z
+UID:e1735047004610246@facebook.com
+SUMMARY:Bear Bust @ Pause/Play
+LOCATION:2409 Grant St\, Houston\, TX 77006-2
+ 858\, United States
+URL:https://www.facebook.com/events/1735047004610246/
+DESCRIPTION:Come on out for our monthly Bear B
+ ust at our new home bar-Pause/Play
+ . Each month will have a theme\, so
+  watch for monthly updates as the 
+ theme is announced. \n\nhttps://www.
+ facebook.com/events/17350470046102
+ 46/
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:NEEDS-ACTION
 END:VEVENT
 END:VCALENDAR
